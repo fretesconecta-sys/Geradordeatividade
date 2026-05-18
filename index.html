@@ -69,6 +69,7 @@ header p{font-size:11.5px;color:rgba(255,255,255,.92);font-weight:600}
 .btn-x:hover{background:#E57373;color:#fff}
 .pdf-wrap{padding:16px}
 
+/* letterhead */
 .lh{width:100%;border-collapse:collapse;border:2.5px solid #444}
 .lh td{padding:0;vertical-align:middle}
 .lh-logo-td{width:106px;border-right:2px solid #444;text-align:center;padding:9px;background:#FFF5F8}
@@ -103,7 +104,6 @@ header p{font-size:11.5px;color:rgba(255,255,255,.92);font-weight:600}
 @keyframes sp{to{transform:rotate(360deg)}}
 .ltxt{font-family:'Baloo 2',cursive;font-size:17px;font-weight:700;color:var(--pk);animation:pu 1.5s ease-in-out infinite}
 @keyframes pu{0%,100%{opacity:1}50%{opacity:.55}}
-.lsub{font-size:12px;color:var(--pk5);font-weight:700;text-align:center;max-width:260px}
 
 .toast{position:fixed;bottom:18px;right:18px;padding:11px 17px;border-radius:var(--rsm);font-weight:700;font-size:13px;color:#fff;z-index:1000;transform:translateY(70px);opacity:0;transition:all .38s;max-width:320px}
 .toast.on{transform:translateY(0);opacity:1}
@@ -127,8 +127,8 @@ header p{font-size:11.5px;color:rgba(255,255,255,.92);font-weight:600}
 <div class="loader" id="loader">
   <div style="font-size:46px;animation:fl 1s ease-in-out infinite">🌸</div>
   <div class="spin"></div>
-  <div class="ltxt" id="loaderTxt">Criando atividade especial...</div>
-  <div class="lsub" id="loaderSub">Com muito carinho 💕</div>
+  <div class="ltxt">Preparando atividade...</div>
+  <div style="font-size:12px;color:var(--pk5);font-weight:700">Com muito carinho 💕</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -143,7 +143,6 @@ header p{font-size:11.5px;color:rgba(255,255,255,.92);font-weight:600}
 
 <div class="wrap">
   <aside class="bar">
-
     <div class="sec">
       <div class="lbl">📸 Logo da Escola</div>
       <div class="logo-area" id="logoArea" onclick="document.getElementById('logoIn').click()">
@@ -153,7 +152,6 @@ header p{font-size:11.5px;color:rgba(255,255,255,.92);font-weight:600}
       <input type="file" id="logoIn" accept="image/*" onchange="handleLogo(event)">
       <button class="remlogo" id="remBtn" onclick="remLogo()">✕ Remover logo</button>
     </div>
-
     <div class="sec">
       <div class="lbl">🏫 Nome da Escola</div>
       <input class="inp" id="school" placeholder="Ex: Escola Especial Flores" maxlength="70">
@@ -190,7 +188,6 @@ header p{font-size:11.5px;color:rgba(255,255,255,.92);font-weight:600}
     <div class="sec">
       <button class="btn-gen" id="genBtn" onclick="generate()">✨ Gerar Atividade</button>
     </div>
-
   </aside>
 
   <main class="main">
@@ -205,35 +202,218 @@ header p{font-size:11.5px;color:rgba(255,255,255,.92);font-weight:600}
 </div>
 
 <script>
-/* ─── state ─── */
-let disc = null, logo = null, acts = [];
-try { acts = JSON.parse(localStorage.getItem('adap_v7') || '[]'); } catch(e) {}
+/* ══════════════════════════════════════════
+   GERADOR LOCAL — sem API, sem internet
+   Gera atividades pedagógicas adaptadas
+   com base no tema e disciplina informados
+══════════════════════════════════════════ */
 
-const DM = {
-  matematica: { name:'Matemática', deco:['🔢','➕','✖️','📐','🔵'] },
-  portugues:  { name:'Português',  deco:['📖','✏️','🔤','📝','🌿'] },
-  ciencias:   { name:'Ciências',   deco:['🔬','🧪','🌱','🦋','⚗️'] },
-  arte:       { name:'Arte',       deco:['🎨','🖌️','🌈','✏️','🖍️'] },
-  edfisica:   { name:'Ed. Física', deco:['⚽','🏃','💪','🏅','🤸'] },
-  geografia:  { name:'Geografia',  deco:['🌎','🗺️','🧭','🌊','⛰️'] },
-  historia:   { name:'História',   deco:['🏛️','📜','⚔️','👑','🗿'] },
-  musica:     { name:'Música',     deco:['🎵','🎶','🎸','🎹','🥁'] },
+const DISC_CONFIG = {
+  matematica: {
+    name: 'Matemática', deco: ['🔢','➕','✖️','📐','🔵'],
+    verbos: ['Contar','Identificar','Ligar','Colorir','Marcar'],
+    suporte: ['use os dedos para contar','use objetos reais para ajudar','aponte com o dedo','peça ajuda se precisar'],
+    titulos: ['Contando com {tema}!','Matemática com {tema}','Números e {tema}','Aprendendo a contar com {tema}','Brincando de Matemática: {tema}'],
+    instrucoes: [
+      'Vamos aprender matemática usando {tema} como exemplo! Faça as atividades com calma, uma de cada vez.',
+      'Hoje vamos praticar números com {tema}. Leia cada tarefa com atenção e tente fazer do seu jeito!'
+    ],
+    tarefas: [
+      { texto: 'Olhe para as imagens de {tema} e {verbo} quantos existem. Escreva o número ao lado.', dica: 'Use seus dedos ou palitos para contar — pode contar em voz alta!' },
+      { texto: '{Verbo} os números de 1 a 5 na sequência certa. Você pode usar pontinhos para ajudar.', dica: 'Tente escrever devagar. Se errar, apague e tente de novo — sem pressa!' },
+      { texto: 'Desenhe {tema} na caixinha: 2 de um lado e 3 do outro. Quantos têm ao todo?', dica: 'Conte os desenhos com o dedo antes de escrever o número!' },
+    ],
+    encorajamentos: [
+      'Você é incrível com os números! Continue assim, campeão! 🌟',
+      'Que orgulho! Você conseguiu! A matemática fica mais fácil a cada dia! 💪',
+      'Parabéns, você arrasou! Cada número aprendido é uma vitória! 🏆',
+    ]
+  },
+  portugues: {
+    name: 'Português', deco: ['📖','✏️','🔤','📝','🌿'],
+    verbos: ['Escrever','Ligar','Circular','Completar','Copiar'],
+    suporte: ['fale em voz alta antes de escrever','aponte com o dedo enquanto lê','use o dicionário de figuras','peça para alguém ler junto'],
+    titulos: ['Lendo e Escrevendo: {tema}!','Palavras de {tema}','Português com {tema}','Aprendendo a escrever com {tema}','As letras de {tema}'],
+    instrucoes: [
+      'Hoje vamos trabalhar com palavras sobre {tema}. Faça cada tarefa com cuidado e sem pressa!',
+      'Vamos praticar a leitura e a escrita com {tema}. Você consegue, vai devagar e com atenção!'
+    ],
+    tarefas: [
+      { texto: 'Observe a figura de {tema} e escreva o nome abaixo dela. Use as letras que você já conhece.', dica: 'Fale o nome em voz alta primeiro, depois escreva som por som!' },
+      { texto: 'Complete as letras que faltam na palavra {tema}: _ _ _ _ _. As letras estão no quadro ao lado.', dica: 'Olhe com calma para cada espaço. Use o lápis devagar!' },
+      { texto: 'Desenhe um {tema} e escreva uma frase simples sobre ele. Ex: "O {tema} é bonito."', dica: 'Copie do quadro se precisar. O importante é tentar!' },
+    ],
+    encorajamentos: [
+      'Você leu e escreveu muito bem hoje! As palavras são seus superpoderes! ✨',
+      'Que letra bonita! Você está crescendo muito no Português! 📖',
+      'Incrível! Cada letra que você aprende abre uma porta nova no mundo! 🌈',
+    ]
+  },
+  ciencias: {
+    name: 'Ciências', deco: ['🔬','🧪','🌱','🦋','⚗️'],
+    verbos: ['Observar','Desenhar','Identificar','Colorir','Ligar'],
+    suporte: ['olhe bem antes de responder','use as cores certas','toque no objeto real se possível','pergunte ao professor'],
+    titulos: ['Descobrindo {tema}!','Ciências com {tema}','Explorando {tema}','Vamos conhecer {tema}?','Cientistas estudam {tema}'],
+    instrucoes: [
+      'Hoje somos cientistas e vamos estudar {tema}! Observe tudo com atenção e faça as atividades com cuidado.',
+      'Vamos descobrir coisas incríveis sobre {tema}! Olhe, pense e faça cada tarefa do seu jeito.'
+    ],
+    tarefas: [
+      { texto: 'Olhe a figura de {tema} e identifique 2 partes que você conhece. Escreva ou desenhe ao lado.', dica: 'Observe bem a figura antes de responder — não tem resposta errada!' },
+      { texto: 'Desenhe {tema} no espaço abaixo e use as cores corretas. Tente deixar parecido com a realidade.', dica: 'Use lápis de cor ou canetinha. Comece pelo contorno e depois pinte!' },
+      { texto: 'Complete a frase: "{tema} vive _________ e come _________." Use as palavras do quadro de apoio.', dica: 'Se não souber, olhe as figuras da página anterior ou pergunte ao professor!' },
+    ],
+    encorajamentos: [
+      'Você é um cientista incrível! A natureza guarda muitos segredos esperando por você! 🔬',
+      'Que descoberta fantástica! Você aprendeu muito sobre {tema} hoje! 🌱',
+      'Parabéns, pesquisador! Cada pergunta que você faz é o começo de uma grande descoberta! 🦋',
+    ]
+  },
+  arte: {
+    name: 'Arte', deco: ['🎨','🖌️','🌈','✏️','🖍️'],
+    verbos: ['Desenhar','Colorir','Criar','Pintar','Recortar'],
+    suporte: ['use as cores que preferir','não precisa ficar perfeito','expresse o que sentir','use bastante cor'],
+    titulos: ['Arte com {tema}!','Criando {tema} com arte','Pintando {tema}','Minha obra: {tema}','Arte e {tema} juntos'],
+    instrucoes: [
+      'Hoje vamos criar arte com o tema {tema}! Use sua imaginação e seja livre para criar do seu jeito.',
+      'Hora de ser artista! Vamos criar algo lindo com {tema}. Não existe certo ou errado na arte!'
+    ],
+    tarefas: [
+      { texto: 'Desenhe livremente {tema} no espaço em branco. Use o lápis primeiro, depois colora.', dica: 'Não precisa ficar igual ao original — o importante é criar com alegria!' },
+      { texto: 'Escolha 3 cores que combinam com {tema} e pinte o contorno abaixo usando essas cores.', dica: 'Pinte devagar para não sair fora do espaço. Respire fundo e divirta-se!' },
+      { texto: 'Crie um fundo para o seu desenho de {tema}. Pode ser o céu, a floresta, o mar — o que quiser!', dica: 'Use movimentos grandes de cima para baixo ao colorir o fundo!' },
+    ],
+    encorajamentos: [
+      'Sua arte é única e especial, assim como você! Continue criando! 🎨',
+      'Que obra de arte incrível! O mundo fica mais bonito com sua criatividade! 🌈',
+      'Você é um artista nato! Cada traço seu conta uma história linda! ✨',
+    ]
+  },
+  edfisica: {
+    name: 'Ed. Física', deco: ['⚽','🏃','💪','🏅','🤸'],
+    verbos: ['Realizar','Praticar','Tentar','Executar','Fazer'],
+    suporte: ['faça no seu ritmo','descanse quando precisar','peça ajuda ao professor','repita quantas vezes quiser'],
+    titulos: ['Movimentando com {tema}!','Ed. Física e {tema}','Brincando com {tema}','Corpo em movimento: {tema}','Vamos nos mover com {tema}!'],
+    instrucoes: [
+      'Hoje vamos movimentar o corpo com atividades sobre {tema}! Faça tudo no seu ritmo e com segurança.',
+      'Hora de se movimentar! As atividades de hoje são inspiradas em {tema}. Faça o que conseguir!'
+    ],
+    tarefas: [
+      { texto: 'Imite o movimento de {tema}: ande pelo espaço como se você fosse um {tema}. Faça por 1 minuto.', dica: 'Pode ir devagar! O importante é tentar e se divertir.' },
+      { texto: 'Faça 5 pulos no lugar e depois descanse. Repita isso 3 vezes. Conte em voz alta!', dica: 'Se cansar, pare e respire. Descanse antes de continuar!' },
+      { texto: 'Desenhe no papel como é o movimento de {tema}. Mostre com setas como o corpo se move.', dica: 'Observe o professor fazer antes. Depois copie no papel com setas!' },
+    ],
+    encorajamentos: [
+      'Seu corpo é forte e capaz! Você se movimentou muito bem hoje! 💪',
+      'Incrível! Você completou todos os movimentos! Cada esforço faz seu corpo ficar mais saudável! 🏅',
+      'Parabéns, atleta! Você mostrou garra e dedicação hoje! Continue assim! ⭐',
+    ]
+  },
+  geografia: {
+    name: 'Geografia', deco: ['🌎','🗺️','🧭','🌊','⛰️'],
+    verbos: ['Identificar','Colorir','Marcar','Desenhar','Ligar'],
+    suporte: ['olhe o mapa com atenção','use régua para ajudar','pergunte o que não entender','olhe as legendas'],
+    titulos: ['Explorando {tema}!','Geografia: {tema}','Conhecendo {tema}','Viajando por {tema}','O mundo de {tema}'],
+    instrucoes: [
+      'Hoje vamos conhecer mais sobre {tema} na aula de Geografia! Olhe os mapas e figuras com atenção.',
+      'Vamos explorar {tema} juntos! Observe as imagens, faça as atividades e descubra o mundo!'
+    ],
+    tarefas: [
+      { texto: 'Olhe o mapa/figura de {tema} e marque com um X o lugar que estamos estudando hoje.', dica: 'Procure o nome no mapa com calma. Passe o dedo até encontrar!' },
+      { texto: 'Desenhe 2 coisas que existem em {tema}: pode ser um animal, uma planta ou um lugar.', dica: 'Pense: o que você já viu ou ouviu falar sobre {tema}? Desenhe isso!' },
+      { texto: 'Complete: "{tema} fica no _________ do Brasil e é conhecido por _________ ."', dica: 'Use o mapa ou o livro para encontrar as respostas. Pode ser em dupla!' },
+    ],
+    encorajamentos: [
+      'Você conheceu o mundo um pouquinho mais hoje! Continue explorando! 🌎',
+      'Que viagem incrível pelo conhecimento! Você foi um explorador incrível! 🗺️',
+      'Parabéns! A Geografia nos mostra como o mundo é diverso e bonito, assim como você! 🌈',
+    ]
+  },
+  historia: {
+    name: 'História', deco: ['🏛️','📜','⚔️','👑','🗿'],
+    verbos: ['Conhecer','Identificar','Ligar','Ordenar','Desenhar'],
+    suporte: ['leia com calma','olhe as figuras para ajudar','faça uma coisa de cada vez','pergunte ao professor'],
+    titulos: ['Viajando no Tempo: {tema}!','História de {tema}','Conhecendo {tema}','Era uma vez: {tema}','O passado de {tema}'],
+    instrucoes: [
+      'Hoje vamos viajar no tempo e aprender sobre {tema}! Preste atenção nas imagens e nas histórias.',
+      'A História nos conta o passado! Vamos descobrir mais sobre {tema} juntos, com calma e atenção.'
+    ],
+    tarefas: [
+      { texto: 'Olhe a imagem de {tema} e diga: isso aconteceu há muito tempo ou pouco tempo? Escreva ou desenhe sua resposta.', dica: 'Olhe as roupas, os objetos e os lugares da imagem para descobrir!' },
+      { texto: 'Ligue os nomes às figuras sobre {tema}. Observe bem antes de ligar.', dica: 'Faça uma de cada vez. Se errar, apague e tente novamente!' },
+      { texto: 'Desenhe como era {tema} antigamente e como é hoje. Use 2 quadros: "Antes" e "Agora".', dica: 'Não precisa ser perfeito! Pense no que mudou e desenhe do seu jeito.' },
+    ],
+    encorajamentos: [
+      'Você é um verdadeiro historiador! O passado nos ensina muito! 📜',
+      'Incrível! Você aprendeu sobre {tema} e isso é história na sua vida! 🏛️',
+      'Parabéns! Conhecer o passado nos ajuda a construir um futuro melhor! ⭐',
+    ]
+  },
+  musica: {
+    name: 'Música', deco: ['🎵','🎶','🎸','🎹','🥁'],
+    verbos: ['Ouvir','Cantar','Bater','Criar','Descobrir'],
+    suporte: ['faça no seu ritmo','pode usar palmas','cante baixinho se preferir','repita quantas vezes quiser'],
+    titulos: ['Música e {tema}!','Sons de {tema}','Cantando com {tema}','Ritmo de {tema}','A melodia de {tema}'],
+    instrucoes: [
+      'Hoje vamos explorar a música com o tema {tema}! Use seu corpo e sua voz para sentir o ritmo.',
+      'A música está em todo lugar, até em {tema}! Vamos ouvir, sentir e criar sons juntos!'
+    ],
+    tarefas: [
+      { texto: 'Bata palmas no ritmo: 1-2-3 pausar, 1-2-3 pausar. Repita 5 vezes pensando em {tema}.', dica: 'Comece devagar. Quando pegar o ritmo, tente um pouco mais rápido!' },
+      { texto: 'Crie uma frase musical sobre {tema}. Ex: "O {tema} vai e vem, tum tum tum!" Cante para a turma.', dica: 'Não precisa ser bonita — só precisa ser sua! Qualquer frase vale!' },
+      { texto: 'Desenhe um instrumento que combina com {tema} e explique por que escolheu esse instrumento.', dica: 'Pense no som do instrumento: é forte, fraco, alegre ou calmo?' },
+    ],
+    encorajamentos: [
+      'Você tem um ritmo incrível! A música fica mais bonita com você! 🎵',
+      'Que talento! Você criou sua própria música hoje — isso é incrível! 🎶',
+      'Parabéns! A música é um presente e você sabe muito bem usá-la! ⭐',
+    ]
+  }
 };
+
+/* ── helpers ── */
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function cap(s)    { return s.charAt(0).toUpperCase() + s.slice(1); }
+function fill(s, tema) {
+  return s
+    .replace(/\{tema\}/gi, tema)
+    .replace(/\{Tema\}/g, cap(tema))
+    .replace(/\{verbo\}/gi, () => pick(DISC_CONFIG[currentDisc]?.verbos || ['Fazer']).toLowerCase())
+    .replace(/\{Verbo\}/g, () => pick(DISC_CONFIG[currentDisc]?.verbos || ['Fazer']));
+}
+
+/* ── local activity generator ── */
+function generateActivity(tema, disc) {
+  const cfg = DISC_CONFIG[disc];
+  // Shuffle tasks so it's different each time
+  const taskPool = [...cfg.tarefas].sort(() => Math.random() - .5);
+  const tarefas  = taskPool.slice(0, 3).map(t => ({
+    texto: fill(t.texto, tema),
+    dica:  fill(t.dica, tema)
+  }));
+  return {
+    titulo:        fill(pick(cfg.titulos), tema),
+    instrucoes:    fill(pick(cfg.instrucoes), tema),
+    tarefas,
+    encorajamento: fill(pick(cfg.encorajamentos), tema)
+  };
+}
+
+/* ─── state ─── */
+let currentDisc = null, logo = null, acts = [];
+try { acts = JSON.parse(localStorage.getItem('adap_v8') || '[]'); } catch(e) {}
+
+const DM = Object.fromEntries(Object.entries(DISC_CONFIG).map(([k,v]) => [k, {name:v.name, deco:v.deco}]));
 const TC = ['#E75480','#F06292','#FF8A65','#66BB6A'];
 
-/* ─── ui helpers ─── */
 function toast(m, t='ok') {
   const el = document.getElementById('toast');
   el.textContent = m; el.className = `toast ${t} on`;
-  setTimeout(() => el.classList.remove('on'), 5000);
-}
-function setLoader(txt, sub) {
-  document.getElementById('loaderTxt').textContent = txt;
-  document.getElementById('loaderSub').textContent = sub;
+  setTimeout(() => el.classList.remove('on'), 4000);
 }
 function sel(b) {
   document.querySelectorAll('.db').forEach(x => x.classList.remove('on'));
-  b.classList.add('on'); disc = b.dataset.d;
+  b.classList.add('on'); currentDisc = b.dataset.d;
 }
 function handleLogo(e) {
   const f = e.target.files[0]; if (!f) return;
@@ -255,110 +435,40 @@ function remLogo() {
   document.getElementById('logoIn').value = '';
 }
 
-/* ─── extract JSON robustly from any string ─── */
-function extractJSON(text) {
-  if (!text || !text.trim()) throw new Error('Resposta vazia da IA.');
-
-  // Try direct parse first
-  try { return JSON.parse(text.trim()); } catch(_) {}
-
-  // Strip markdown fences
-  const stripped = text.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
-  try { return JSON.parse(stripped); } catch(_) {}
-
-  // Find first { ... } block
-  const start = text.indexOf('{');
-  const end   = text.lastIndexOf('}');
-  if (start !== -1 && end !== -1 && end > start) {
-    try { return JSON.parse(text.slice(start, end + 1)); } catch(_) {}
-  }
-
-  throw new Error('A IA retornou resposta em formato inesperado. Tente novamente.');
-}
-
-/* ─── AI call with retry ─── */
-async function callAI(theme, dName, attempt = 1) {
-  const prompt = `Você é especialista em educação especial. Crie atividade pedagógica ADAPTADA para criança com TDAH, Déficit Intelectual e Dificuldade de Atenção.
-Tema: "${theme}" | Disciplina: ${dName}
-Regras: linguagem muito simples, máximo 3 tarefas curtas de até 2 frases, dica concreta por tarefa.
-IMPORTANTE: responda SOMENTE com o JSON abaixo, sem nenhum texto antes ou depois:
-{"titulo":"título divertido","instrucoes":"orientação em 2 frases","tarefas":[{"texto":"tarefa 1","dica":"dica 1"},{"texto":"tarefa 2","dica":"dica 2"},{"texto":"tarefa 3","dica":"dica 3"}],"encorajamento":"mensagem carinhosa para a criança"}`;
-
-  // Use OpenAI-compatible Pollinations endpoint — more stable
-  const res = await fetch('https://api.pollinations.ai/v1/chat/completions', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'openai-large',
-      messages: [
-        {
-          role: 'system',
-          content: 'Você é um assistente de educação especial. Responda SEMPRE e SOMENTE com JSON válido, sem texto extra, sem markdown.'
-        },
-        { role: 'user', content: prompt }
-      ],
-      temperature: 0.7,
-      seed: Math.floor(Math.random() * 99999)
-    })
-  });
-
-  if (!res.ok) {
-    const body = await res.text().catch(() => '');
-    throw new Error(`Serviço indisponível (${res.status}). Verifique sua internet e tente novamente.`);
-  }
-
-  const data = await res.json();
-  const raw  = data?.choices?.[0]?.message?.content || '';
-
-  try {
-    return extractJSON(raw);
-  } catch(parseErr) {
-    // Retry up to 3 times
-    if (attempt < 3) {
-      setLoader(`Tentativa ${attempt + 1} de 3...`, 'A IA está refinando a resposta 💕');
-      await new Promise(r => setTimeout(r, 1200));
-      return callAI(theme, dName, attempt + 1);
-    }
-    throw new Error('A IA não conseguiu gerar a atividade após 3 tentativas. Tente um tema diferente.');
-  }
-}
-
-/* ─── generate ─── */
-async function generate() {
+function generate() {
   const theme   = document.getElementById('theme').value.trim();
   const school  = document.getElementById('school').value.trim()  || 'Escola Especial';
   const teacher = document.getElementById('teacher').value.trim();
   const student = document.getElementById('student').value.trim();
   const turma   = document.getElementById('turma').value.trim();
 
-  if (!theme) { toast('⚠️ Escreva um tema!', 'warn'); return; }
-  if (!disc)  { toast('⚠️ Escolha uma disciplina!', 'warn'); return; }
+  if (!theme)       { toast('⚠️ Escreva um tema!', 'warn'); return; }
+  if (!currentDisc) { toast('⚠️ Escolha uma disciplina!', 'warn'); return; }
 
-  const dName = DM[disc].name;
-  setLoader('Criando atividade especial...', 'Com muito carinho 💕');
+  // Show loader briefly for feel
   document.getElementById('loader').classList.add('on');
   document.getElementById('genBtn').disabled = true;
 
-  try {
-    const activity = await callAI(theme, dName);
-    const now  = new Date();
-    const date = `${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}/${now.getFullYear()}`;
-    acts.unshift({ id: Date.now(), disc, dName, theme, school, teacher, student, turma, logo, act: activity, date });
-    save(); render();
-    toast('🎉 Atividade criada com sucesso!');
-  } catch(err) {
-    console.error(err);
-    toast('❌ ' + (err.message || 'Erro inesperado. Tente novamente.'), 'err');
-  } finally {
-    document.getElementById('loader').classList.remove('on');
-    document.getElementById('genBtn').disabled = false;
-  }
+  setTimeout(() => {
+    try {
+      const activity = generateActivity(theme, currentDisc);
+      const now  = new Date();
+      const date = `${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}/${now.getFullYear()}`;
+      acts.unshift({ id: Date.now(), disc: currentDisc, dName: DM[currentDisc].name, theme, school, teacher, student, turma, logo, act: activity, date });
+      save(); render();
+      toast('🎉 Atividade criada com sucesso!');
+    } catch(err) {
+      toast('❌ Erro ao gerar. Tente novamente.', 'err');
+    } finally {
+      document.getElementById('loader').classList.remove('on');
+      document.getElementById('genBtn').disabled = false;
+    }
+  }, 900); // small delay for UX
 }
 
-/* ─── storage ─── */
 function save() {
   try {
-    localStorage.setItem('adap_v7', JSON.stringify(
+    localStorage.setItem('adap_v8', JSON.stringify(
       acts.map(a => ({ ...a, logo: a.logo ? '__logo__' : null }))
     ));
   } catch(e) {}
@@ -369,7 +479,6 @@ function del(id) {
   toast('🗑️ Removida!');
 }
 
-/* ─── render ─── */
 function render() {
   const g = document.getElementById('grid');
   const e = document.getElementById('emptyState');
@@ -458,12 +567,11 @@ function buildBody(a) {
   </div>`;
 }
 
-/* ─── PDF ─── */
 function printPDF(id) {
   const a = acts.find(x => x.id === id); if (!a) return;
   const body = buildBody(a);
   const w = window.open('', '_blank', 'width=860,height=1100');
-  if (!w) { toast('⚠️ Permita pop-ups neste site para gerar o PDF!', 'warn'); return; }
+  if (!w) { toast('⚠️ Libere os pop-ups deste site para gerar o PDF!', 'warn'); return; }
   w.document.write(`<!DOCTYPE html><html><head>
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
@@ -507,7 +615,6 @@ ${body}
   toast('✅ Clique em "Imprimir / Salvar PDF" na nova janela!');
 }
 
-/* ─── init ─── */
 render();
 </script>
 </body>
