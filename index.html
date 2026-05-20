@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Atividades Adaptadas 🌸</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--pk:#E75480;--pk2:#F48FB1;--pk3:#FCE4EC;--pk4:#FFF0F5;--pk5:#C2185B;--text:#2D2D2D;--radius:14px;--rsm:9px;--shadow:0 3px 16px rgba(231,84,128,.13)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--pk4);color:var(--text);min-height:100vh}
+header{background:linear-gradient(135deg,var(--pk),var(--pk2));padding:15px 26px;display:flex;align-items:center;gap:13px;box-shadow:0 3px 14px rgba(231,84,128,.3)}
+.hico{width:42px;height:42px;background:rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;animation:fl 3s ease-in-out infinite;flex-shrink:0}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+header h1{font-family:'Baloo 2',cursive;font-size:21px;font-weight:800;color:#fff}
+header p{font-size:11.5px;color:rgba(255,255,255,.92);font-weight:600}
+.wrap{display:grid;grid-template-columns:310px 1fr;min-height:calc(100vh - 74px)}
+.bar{background:var(--pk3);padding:18px;border-right:3px dashed var(--pk2);overflow-y:auto;max-height:calc(100vh - 74px)}
+.lbl{font-family:'Baloo 2',cursive;font-size:12.5px;font-weight:700;color:var(--pk5);margin-bottom:7px;display:flex;align-items:center;gap:4px}
+.sec{margin-bottom:15px}
+.logo-area{width:100%;height:86px;border:3px dashed var(--pk2);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:#fff;transition:all .25s;overflow:hidden;gap:4px}
+.logo-area:hover{border-color:var(--pk);background:var(--pk4)}
+.logo-area img{max-width:100%;max-height:76px;object-fit:contain}
+#logoIn{display:none}
+.remlogo{display:none;margin-top:5px;font-size:11px;color:var(--pk);background:none;border:none;cursor:pointer;font-weight:800}
+.inp{width:100%;padding:10px 13px;border:2px solid var(--pk2);border-radius:var(--rsm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:var(--text);background:#fff;outline:none;transition:border-color .25s}
+.inp:focus{border-color:var(--pk)}
+.disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.db{padding:9px 5px;border:2px solid var(--pk2);border-radius:var(--rsm);cursor:pointer;font-family:'Nunito',sans-serif;font-size:11.5px;font-weight:700;text-align:center;background:#fff;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .22s;box-shadow:0 1px 5px rgba(231,84,128,.08)}
+.db span{font-size:17px}
+.db:hover{transform:translateY(-2px);border-color:var(--pk)}
+.db.on{border-color:var(--pk);background:var(--pk3);transform:scale(1.03)}
+.qty-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.qb{padding:9px 4px;border:2px solid var(--pk2);border-radius:var(--rsm);cursor:pointer;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;background:#fff;transition:all .22s;color:var(--text)}
+.qb:hover{border-color:var(--pk);transform:translateY(-1px)}
+.qb.on{border-color:var(--pk);background:var(--pk3);color:var(--pk5)}
+.btn-gen{width:100%;padding:14px;border:none;border-radius:var(--radius);background:linear-gradient(135deg,var(--pk),var(--pk5));font-family:'Baloo 2',cursive;font-size:17px;font-weight:800;color:#fff;cursor:pointer;transition:all .28s;box-shadow:0 4px 14px rgba(231,84,128,.38)}
+.btn-gen:hover{transform:translateY(-2px)}
+.btn-gen:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.main{padding:22px;overflow-y:auto;max-height:calc(100vh - 74px)}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:380px;gap:13px;opacity:.5}
+.empty .big{font-size:68px;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.empty h2{font-family:'Baloo 2',cursive;font-size:19px;color:#bbb;text-align:center}
+.empty p{font-size:13px;color:#ccc;text-align:center;max-width:270px}
+.grid{display:grid;gap:20px}
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border:2px solid #FCD2E2;animation:si .38s ease-out}
+@keyframes si{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.card-top{padding:13px 17px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--pk),var(--pk2));gap:10px}
+.card-meta{display:flex;align-items:center;gap:9px;min-width:0}
+.badge{padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(0,0,0,.18);white-space:nowrap;flex-shrink:0}
+.ctitle{font-family:'Baloo 2',cursive;font-size:14.5px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-btns{display:flex;gap:6px;flex-shrink:0}
+.btn-dl{padding:6px 13px;border:none;border-radius:var(--rsm);background:linear-gradient(135deg,#43A047,#2E7D32);color:#fff;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all .22s;white-space:nowrap}
+.btn-dl:hover{transform:translateY(-1px)}
+.btn-x{width:30px;height:30px;background:#FFF0F0;color:#E57373;border:2px solid #FFCDD2;border-radius:var(--rsm);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.btn-x:hover{background:#E57373;color:#fff}
+.pdf-wrap{padding:16px}
+.loader{display:none;position:fixed;inset:0;background:rgba(252,228,236,.88);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:13px;backdrop-filter:blur(3px)}
+.loader.on{display:flex}
+.spin{width:56px;height:56px;border:5px solid var(--pk2);border-top-color:var(--pk);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.ltxt{font-family:'Baloo 2',cursive;font-size:17px;font-weight:700;color:var(--pk);animation:pu 1.5s ease-in-out infinite}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.55}}
+.toast{position:fixed;bottom:18px;right:18px;padding:11px 17px;border-radius:var(--rsm);font-weight:700;font-size:13px;color:#fff;z-index:1000;transform:translateY(70px);opacity:0;transition:all .38s;max-width:320px}
+.toast.on{transform:translateY(0);opacity:1}
+.ok{background:linear-gradient(135deg,#43A047,#2E7D32)}
+.err{background:linear-gradient(135deg,#E53935,#B71C1C)}
+.warn{background:linear-gradient(135deg,#FB8C00,#E65100)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--pk2);border-radius:8px}
+@media(max-width:700px){.wrap{grid-template-columns:1fr}.bar{max-height:none;border-right:none;border-bottom:3px dashed var(--pk2)}.main{max-height:none}header h1{font-size:17px}.card-top{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="loader" id="loader"><div style="font-size:46px;animation:fl 1s ease-in-out infinite">🌸</div><div class="spin"></div><div class="ltxt" id="loaderTxt">Gerando atividade...</div><div style="font-size:12px;color:var(--pk5);font-weight:700">Com muito carinho 💕</div></div>
+<div class="toast" id="toast"></div>
+<header>
+  <div class="hico">🌸</div>
+  <div><h1>Gerador de Atividades Adaptadas</h1><p>TDAH · Déficit Intelectual · Necessidades Especiais · 100% Gratuito · Offline</p></div>
+</header>
+<div class="wrap">
+  <aside class="bar">
+    <div class="sec"><div class="lbl">📸 Logo da Escola</div>
+      <div class="logo-area" id="logoArea" onclick="document.getElementById('logoIn').click()"><span style="font-size:24px">🏫</span><span style="font-size:11px;color:#bbb;font-weight:700">Clique para enviar</span></div>
+      <input type="file" id="logoIn" accept="image/*" onchange="handleLogo(event)">
+      <button class="remlogo" id="remBtn" onclick="remLogo()">✕ Remover logo</button>
+    </div>
+    <div class="sec"><div class="lbl">🏫 Nome da Escola</div><input class="inp" id="school" placeholder="Ex: Escola Especial Flores" maxlength="80"></div>
+    <div class="sec"><div class="lbl">👩‍🏫 Professor(a)</div><input class="inp" id="teacher" placeholder="Ex: Professora Maria" maxlength="50"></div>
+    <div class="sec"><div class="lbl">👤 Aluno(a)</div><input class="inp" id="student" placeholder="Ex: João Pedro" maxlength="50"></div>
+    <div class="sec"><div class="lbl">🎓 Turma / Ano</div><input class="inp" id="turma" placeholder="Ex: 2º Ano" maxlength="30"></div>
+    <div class="sec"><div class="lbl">🎯 Tema da Atividade</div><input class="inp" id="theme" placeholder="Ex: Animais da Floresta" maxlength="80"></div>
+    <div class="sec"><div class="lbl">📚 Disciplina</div>
+      <div class="disc-grid">
+        <button class="db" data-d="matematica" onclick="sel(this)"><span>🔢</span>Matemática</button>
+        <button class="db" data-d="portugues"  onclick="sel(this)"><span>📖</span>Português</button>
+        <button class="db" data-d="ciencias"   onclick="sel(this)"><span>🔬</span>Ciências</button>
+        <button class="db" data-d="arte"        onclick="sel(this)"><span>🎨</span>Arte</button>
+        <button class="db" data-d="edfisica"    onclick="sel(this)"><span>⚽</span>Ed. Física</button>
+        <button class="db" data-d="geografia"   onclick="sel(this)"><span>🌎</span>Geografia</button>
+        <button class="db" data-d="historia"    onclick="sel(this)"><span>🏛️</span>História</button>
+        <button class="db" data-d="ingles"      onclick="sel(this)"><span>🇬🇧</span>Inglês</button>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="lbl">🔢 Quantidade de Atividades</div>
+      <div class="qty-grid">
+        <button class="qb on" data-q="1" onclick="selQty(this)">1</button>
+        <button class="qb" data-q="3" onclick="selQty(this)">3</button>
+        <button class="qb" data-q="5" onclick="selQty(this)">5</button>
+        <button class="qb" data-q="10" onclick="selQty(this)">10 🚀</button>
+      </div>
+    </div>
+    <div class="sec"><button class="btn-gen" id="genBtn" onclick="generate()">✨ Gerar Atividade</button></div>
+  </aside>
+  <main class="main">
+    <div class="empty" id="emptyState"><div class="big">🌸</div><h2>Pronta para criar algo especial?</h2><p>Preencha os dados ao lado e clique em Gerar Atividade!</p><div style="font-size:26px;margin-top:5px">🦋 🌈 ⭐</div></div>
+    <div id="topbar" style="display:none;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap">
+      <span id="topbarInfo" style="font-family:'Baloo 2',cursive;font-size:14px;font-weight:700;color:#C2185B"></span>
+      <div style="display:flex;gap:8px">
+        <button onclick="printAll()" style="padding:9px 18px;border:none;border-radius:9px;background:linear-gradient(135deg,#E75480,#C2185B);color:#fff;font-family:Nunito,sans-serif;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 3px 10px rgba(231,84,128,.35)">🖨️ Imprimir Tudo em 1 PDF</button>
+        <button onclick="clearAll()" style="padding:9px 14px;border:2px solid #FFCDD2;border-radius:9px;background:#FFF0F0;color:#E57373;font-family:Nunito,sans-serif;font-size:13px;font-weight:800;cursor:pointer">🗑️ Limpar Tudo</button>
+      </div>
+    </div>
+    <div class="grid" id="grid" style="display:none"></div>
+  </main>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════
+   ACTIVITY ENGINE — Rich visual worksheets
+   Inspired by real school activity sheets
+══════════════════════════════════════════════════ */
+
+let disc = null, logo = null, acts = [], qty = 1;
+try { acts = JSON.parse(localStorage.getItem('adap_v9') || '[]'); } catch(e) {}
+
+const DM = {
+  matematica:{name:'Matemática',emoji:'🔢'},portugues:{name:'Português',emoji:'📖'},
+  ciencias:{name:'Ciências',emoji:'🔬'},arte:{name:'Arte',emoji:'🎨'},
+  edfisica:{name:'Ed. Física',emoji:'⚽'},geografia:{name:'Geografia',emoji:'🌎'},
+  historia:{name:'História',emoji:'🏛️'},ingles:{name:'Língua Inglesa',emoji:'🇬🇧'}
+};
+
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+function sel(b){document.querySelectorAll('.db').forEach(x=>x.classList.remove('on'));b.classList.add('on');disc=b.dataset.d;}
+function selQty(b){document.querySelectorAll('.qb').forEach(x=>x.classList.remove('on'));b.classList.add('on');qty=parseInt(b.dataset.q);}
+function toast(m,t='ok'){const el=document.getElementById('toast');el.textContent=m;el.className=`toast ${t} on`;setTimeout(()=>el.classList.remove('on'),4000);}
+function handleLogo(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{logo=ev.target.result;document.getElementById('logoArea').innerHTML=`<img src="${logo}" style="max-width:100%;max-height:76px;object-fit:contain">`;document.getElementById('remBtn').style.display='inline-block';toast('✅ Logo carregada!');};r.readAsDataURL(f);}
+function remLogo(){logo=null;document.getElementById('logoArea').innerHTML='<span style="font-size:24px">🏫</span><span style="font-size:11px;color:#bbb;font-weight:700">Clique para enviar</span>';document.getElementById('remBtn').style.display='none';document.getElementById('logoIn').value='';}
+
+/* ══ LETTERHEAD HTML ══ */
+function lh(a){
+  const logoCell = a.logo
+    ? `<img src="${a.logo}" style="width:80px;height:80px;object-fit:contain;border-radius:50%;border:3px solid #F48FB1;display:block;margin:0 auto">`
+    : `<div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#E75480,#F48FB1);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto">🌸</div>`;
+  return `
+<table style="width:100%;border-collapse:collapse;border:2px solid #444;font-family:Nunito,sans-serif">
+  <tr>
+    <td style="width:100px;border-right:2px solid #444;text-align:center;padding:8px;background:#FFF5F8;vertical-align:middle">${logoCell}</td>
+    <td style="text-align:center;padding:8px 14px;vertical-align:middle">
+      <div style="font-family:'Baloo 2',cursive;font-size:14px;font-weight:800;color:#C2185B;text-transform:uppercase;line-height:1.2">${a.school}</div>
+      <div style="font-size:9.5px;font-weight:700;color:#666;margin-top:2px">Ensino Fundamental · Educação Especial Inclusiva</div>
+      <div style="font-size:9.5px;font-style:italic;color:#999;margin-top:1px"><em>Educando com amor para um futuro melhor 🌸</em></div>
+      <div style="font-family:'Baloo 2',cursive;font-size:16px;font-weight:800;color:#E75480;margin-top:6px">Atividade de ${a.dName}</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="padding:0;border-top:2px solid #444">
+      <table width="100%" style="border-collapse:collapse">
+        <tr>
+          <td style="padding:6px 11px;border-right:2px solid #444;font-size:11px;font-weight:700;width:48%"><span style="font-size:9px;color:#999;display:block">PROFESSOR(A):</span>${a.teacher||'________________________'}</td>
+          <td style="padding:6px 11px;border-right:2px solid #444;font-size:11px;font-weight:700;width:27%;text-align:center"><span style="font-size:9px;color:#999;display:block">Visto EEB&nbsp;&nbsp;&nbsp;DATA:</span>${a.date||'___/___/____'}</td>
+          <td style="padding:6px 11px;font-size:11px;font-weight:700;text-align:center"><span style="font-size:9px;color:#999;display:block">TURMA:</span>${a.turma||'__________'}</td>
+        </tr>
+        <tr style="border-top:2px solid #444">
+          <td colspan="3" style="padding:6px 11px;font-size:11px;font-weight:700"><span style="font-size:9px;color:#999;display:block">ALUNO(A):</span>${a.student||'_____________________________________________'}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>`;
+}
+
+/* ══ SHARED STYLES for activity content ══ */
+const CSS = `
+<style>
+  *{box-sizing:border-box}
+  body{font-family:Nunito,sans-serif;padding:22px;max-width:760px;margin:0 auto;color:#2D2D2D;background:#fff}
+  table{border-collapse:collapse}
+  .page{margin-bottom:36px;page-break-after:always}
+  .page:last-child{page-break-after:auto}
+  .act-title{font-family:'Baloo 2',cursive;font-size:15px;font-weight:800;color:#C2185B;text-transform:uppercase;text-align:center;margin:16px 0 12px;border:2px solid #F48FB1;border-radius:8px;padding:6px 12px;background:#FFF0F5;display:inline-block;width:100%}
+  .instrucao{font-size:13px;font-weight:700;color:#333;margin:10px 0 14px;line-height:1.6}
+  .instrucao b{color:#C2185B}
+  .box-resp{border:2px solid #ddd;border-radius:6px;padding:10px 14px;margin:6px 0;min-height:36px;background:#fafafa}
+  .caixa-grande{border:2px solid #ddd;border-radius:8px;min-height:120px;width:100%;margin:8px 0;background:#fafafa}
+  .linha{border:none;border-bottom:2px solid #bbb;width:100%;display:block;margin:6px 0;height:22px}
+  .multipla{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px;font-weight:600}
+  .multipla .op{width:18px;height:18px;border:2px solid #999;border-radius:3px;flex-shrink:0;display:inline-block}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+  .celula{border:2px solid #ddd;border-radius:8px;padding:10px;text-align:center;background:#fafafa}
+  .celula img{max-width:100%;max-height:70px}
+  .celula .nome{font-size:11px;font-weight:700;color:#555;margin-top:5px}
+  .celula .linha-nome{border-bottom:2px solid #bbb;width:80%;margin:6px auto 0;height:18px}
+  .ligar-table{width:100%;border-collapse:collapse;margin:10px 0}
+  .ligar-table td{padding:8px 12px;font-size:12.5px;font-weight:700;vertical-align:middle;border:none}
+  .ligar-esq{text-align:right;width:42%;border-right:none}
+  .ligar-meio{width:16%;text-align:center;vertical-align:middle}
+  .ligar-dir{text-align:left;width:42%;border-left:none}
+  .pontilhado{border-top:2px dotted #F48FB1;width:100%;display:block;margin-top:14px}
+  .seq-item{border:2px solid #F48FB1;border-radius:8px;padding:8px;text-align:center;position:relative}
+  .seq-num{width:28px;height:28px;border:2px solid #C2185B;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#C2185B;margin:0 auto 6px;background:#FFF0F5}
+  .destaque{background:#FFF0F5;border:2px solid #F48FB1;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13px;font-weight:700}
+  .cheer{background:linear-gradient(135deg,#FFF0F5,#FFE4EF);border:2px solid #C2185B;border-radius:10px;padding:12px;text-align:center;margin-top:14px}
+  .cheer p{font-family:'Baloo 2',cursive;font-size:14px;font-weight:700;color:#C2185B}
+  .pbtn{position:fixed;top:14px;right:14px;padding:10px 20px;background:linear-gradient(135deg,#E75480,#C2185B);color:#fff;border:none;border-radius:9px;font-family:Nunito,sans-serif;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(231,84,128,.4);z-index:99}
+  .ws-table{border-collapse:collapse;margin:10px auto}
+  .ws-table td{width:30px;height:30px;text-align:center;border:1px solid #ddd;font-size:13px;font-weight:700}
+  .ws-table .dest{background:#FCE4EC;color:#C2185B;font-weight:800}
+  .quadro-palavras{background:#E3F2FD;border:2px solid #90CAF9;border-radius:8px;padding:10px 14px;margin:8px 0;display:flex;flex-wrap:wrap;gap:8px}
+  .palavra-tag{background:#BBDEFB;border:1.5px solid #64B5F6;border-radius:20px;padding:3px 12px;font-size:12px;font-weight:700;color:#1565C0}
+  @media print{.pbtn{display:none}@page{margin:10mm}body{padding:0}}
+</style>`;
+
+/* ══════════════════════
+   ACTIVITY BUILDERS
+══════════════════════ */
+
+function buildMatematica(tema, a){
+  const T = cap(tema);
+  const tpl = pick([0,1,2,3]);
+
+  if(tpl===0){ // Sequência + contagem
+    return `<div class="page">
+${lh(a)}
+<div class="act-title">🔢 Atividade de Matemática — ${T}</div>
+<p class="instrucao"><b>1. SEQUÊNCIA NUMÉRICA:</b> Complete os números que faltam na sequência:</p>
+<div class="destaque" style="font-size:22px;letter-spacing:8px;text-align:center">
+  1 &nbsp; ___ &nbsp; 3 &nbsp; ___ &nbsp; 5 &nbsp; ___ &nbsp; 7 &nbsp; ___ &nbsp; 9 &nbsp; ___
+</div>
+<p class="instrucao" style="margin-top:14px"><b>2. CONTANDO ${T.toUpperCase()}:</b> Olhe os grupos e escreva quantos há em cada um:</p>
+<div class="grid3">
+  <div class="celula"><div style="font-size:28px">🐾🐾🐾</div><div class="nome">Quantos? ___</div></div>
+  <div class="celula"><div style="font-size:28px">🐾🐾🐾🐾🐾</div><div class="nome">Quantos? ___</div></div>
+  <div class="celula"><div style="font-size:28px">🐾🐾</div><div class="nome">Quantos? ___</div></div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>3. SOMA:</b> Resolva as continhas usando os dedos ou palitos para ajudar:</p>
+<div class="grid2">
+  <div class="celula" style="font-size:18px;font-weight:800">2 + 3 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">4 + 1 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">1 + 1 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">3 + 2 = ___</div>
+</div>
+<div class="cheer"><p>🌟 Você conseguiu! Matemática é divertida com ${T}! 💕</p></div>
+</div>`;
+  }
+  if(tpl===1){ // Formas geométricas
+    return `<div class="page">
+${lh(a)}
+<div class="act-title">📐 Formas Geométricas com ${T}</div>
+<p class="instrucao"><b>1. IDENTIFIQUE AS FORMAS:</b> Ligue cada forma ao seu nome correto:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq"><svg width="50" height="50"><circle cx="25" cy="25" r="20" fill="none" stroke="#E75480" stroke-width="3"/></svg></td><td class="ligar-meio"><span class="pontilhado"></span></td><td class="ligar-dir">QUADRADO</td></tr>
+  <tr><td class="ligar-esq"><svg width="50" height="50"><rect x="5" y="5" width="40" height="40" fill="none" stroke="#E75480" stroke-width="3"/></svg></td><td class="ligar-meio"><span class="pontilhado"></span></td><td class="ligar-dir">TRIÂNGULO</td></tr>
+  <tr><td class="ligar-esq"><svg width="50" height="50"><polygon points="25,5 45,45 5,45" fill="none" stroke="#E75480" stroke-width="3"/></svg></td><td class="ligar-meio"><span class="pontilhado"></span></td><td class="ligar-dir">CÍRCULO</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. CONTE AS FORMAS:</b></p>
+<div class="destaque">
+  <div style="font-size:24px;text-align:center;margin-bottom:8px">⬜⬜⬛⬜🔺🔺⬜🔵🔺🔵🔵⬜</div>
+  Quadrados: ___ &nbsp;&nbsp; Triângulos: ___ &nbsp;&nbsp; Círculos: ___
+</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE:</b> Desenhe 2 círculos, 3 triângulos e 1 quadrado na caixa abaixo:</p>
+<div class="caixa-grande" style="min-height:100px"></div>
+<div class="cheer"><p>🎉 Parabéns! Você conhece muito bem as formas geométricas!</p></div>
+</div>`;
+  }
+  if(tpl===2){ // Maior menor igual
+    return `<div class="page">
+${lh(a)}
+<div class="act-title">🔢 Maior, Menor ou Igual? — ${T}</div>
+<p class="instrucao"><b>1. COMPARE OS NÚMEROS:</b> Escreva &gt; (maior), &lt; (menor) ou = (igual) no espaço:</p>
+<div class="grid2">
+  <div class="celula" style="font-size:20px;font-weight:800">5 ___ 3</div>
+  <div class="celula" style="font-size:20px;font-weight:800">2 ___ 7</div>
+  <div class="celula" style="font-size:20px;font-weight:800">4 ___ 4</div>
+  <div class="celula" style="font-size:20px;font-weight:800">8 ___ 6</div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>2. ORDENE:</b> Coloque os números em ordem do menor para o maior:</p>
+<div class="destaque" style="font-size:18px;text-align:center">
+  7 &nbsp; 2 &nbsp; 9 &nbsp; 1 &nbsp; 5<br><br>
+  ___ &nbsp; ___ &nbsp; ___ &nbsp; ___ &nbsp; ___
+</div>
+<p class="instrucao" style="margin-top:14px"><b>3. MARQUE</b> com um X o número maior em cada par:</p>
+<div class="grid3">
+  <div class="celula" style="font-size:20px;font-weight:800">3 &nbsp; ou &nbsp; 6<br><br>( ) &nbsp;&nbsp;&nbsp; ( )</div>
+  <div class="celula" style="font-size:20px;font-weight:800">8 &nbsp; ou &nbsp; 4<br><br>( ) &nbsp;&nbsp;&nbsp; ( )</div>
+  <div class="celula" style="font-size:20px;font-weight:800">1 &nbsp; ou &nbsp; 9<br><br>( ) &nbsp;&nbsp;&nbsp; ( )</div>
+</div>
+<div class="cheer"><p>⭐ Você é ótimo com números! Continue assim!</p></div>
+</div>`;
+  }
+  // tpl===3: Subtração e problemas visuais
+  return `<div class="page">
+${lh(a)}
+<div class="act-title">🔢 Subtração com ${T}</div>
+<p class="instrucao"><b>1. SUBTRAÇÃO:</b> Resolva as continhas. Use os dedos para ajudar!</p>
+<div class="grid2">
+  <div class="celula" style="font-size:18px;font-weight:800">5 − 2 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">8 − 3 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">6 − 4 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">10 − 5 = ___</div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>2. PROBLEMA:</b> Leia e resolva:</p>
+<div class="destaque">João tinha <b>8 ${tema}</b>. Ele deu <b>3</b> para a professora.<br>
+Quantos ${tema} João ficou? <br><br>
+8 − 3 = ___ &nbsp;&nbsp; Resposta: João ficou com ___ ${tema}.
+</div>
+<p class="instrucao" style="margin-top:14px"><b>3. COMPLETE</b> a tabuada do 2:</p>
+<div class="destaque" style="font-size:15px">
+  2 × 1 = ___ &nbsp;&nbsp;&nbsp; 2 × 2 = ___ &nbsp;&nbsp;&nbsp; 2 × 3 = ___<br>
+  2 × 4 = ___ &nbsp;&nbsp;&nbsp; 2 × 5 = ___
+</div>
+<div class="cheer"><p>💪 Você arrasoou na matemática hoje! Parabéns!</p></div>
+</div>`;
+}
+
+function buildPortugues(tema, a){
+  const T = cap(tema);
+  const tpl = pick([0,1,2]);
+
+  if(tpl===0){ // Leitura e escrita
+    const letras = T.slice(0,5).toUpperCase().split('').join(' ');
+    return `<div class="page">
+${lh(a)}
+<div class="act-title">📖 Português — ${T}</div>
+<p class="instrucao"><b>1. PINTE AS LETRAS</b> que formam a palavra <b>${T.toUpperCase()}</b>:</p>
+<div class="destaque" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+  ${['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','Z'].map(l=>`<div style="width:42px;height:42px;border:2px solid #F48FB1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;${T.toUpperCase().includes(l)?'background:#FCE4EC;color:#C2185B;':''}">${l}</div>`).join('')}
+</div>
+<p class="instrucao" style="margin-top:14px"><b>2. COMPLETE</b> as sílabas que faltam:</p>
+<div class="grid2">
+  <div class="celula"><div style="font-size:22px;font-weight:800;color:#C2185B">A — NI — ___</div><div class="nome">(animal)</div></div>
+  <div class="celula"><div style="font-size:22px;font-weight:800;color:#C2185B">PLA — ___</div><div class="nome">(planta)</div></div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>3. COPIE</b> a frase abaixo com letra bonita:</p>
+<div class="destaque" style="font-size:16px;text-align:center">"${T} é muito especial para mim."</div>
+<span class="linha"></span><span class="linha"></span>
+<p class="instrucao" style="margin-top:10px"><b>4. ESCREVA</b> o nome do seu ${tema} favorito:</p>
+<div class="box-resp" style="min-height:44px"></div>
+<div class="cheer"><p>📚 Muito bem! Você leu e escreveu com capricho!</p></div>
+</div>`;
+  }
+  if(tpl===1){ // Vogais e consoantes
+    return `<div class="page">
+${lh(a)}
+<div class="act-title">📖 Vogais e Consoantes — ${T}</div>
+<p class="instrucao"><b>1. CIRCULE</b> as vogais na palavra <b>${T.toUpperCase()}</b>:<br>As vogais são: A, E, I, O, U</p>
+<div class="destaque" style="font-size:28px;letter-spacing:10px;text-align:center">${T.toUpperCase().split('').join(' &nbsp; ')}</div>
+<p class="instrucao" style="margin-top:14px"><b>2. CLASSIFIQUE:</b> Escreva cada letra no lugar certo:</p>
+<div class="grid2">
+  <div class="celula"><div style="font-family:'Baloo 2',cursive;font-size:14px;color:#C2185B;margin-bottom:6px">VOGAIS</div><span class="linha"></span><span class="linha"></span></div>
+  <div class="celula"><div style="font-family:'Baloo 2',cursive;font-size:14px;color:#C2185B;margin-bottom:6px">CONSOANTES</div><span class="linha"></span><span class="linha"></span></div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>3. COMPLETE</b> as palavras com a vogal correta (A, E, I, O, U):</p>
+<div class="destaque" style="font-size:18px">
+  C___SA &nbsp;&nbsp;&nbsp; P___TA &nbsp;&nbsp;&nbsp; L___VRO<br><br>
+  B___LA &nbsp;&nbsp;&nbsp; M___SA &nbsp;&nbsp;&nbsp; S___L
+</div>
+<p class="instrucao" style="margin-top:12px"><b>4. DESENHE</b> e escreva o nome de 2 coisas que começam com a letra <b>${T[0].toUpperCase()}</b>:</p>
+<div class="grid2">
+  <div class="caixa-grande" style="min-height:80px"></div>
+  <div class="caixa-grande" style="min-height:80px"></div>
+</div>
+<div class="cheer"><p>🌟 Parabéns! Você conhece muito bem as letras!</p></div>
+</div>`;
+  }
+  // tpl===2: Frases e pontuação
+  return `<div class="page">
+${lh(a)}
+<div class="act-title">📝 Frases sobre ${T}</div>
+<p class="instrucao"><b>1. LEIA</b> as frases e marque ✔ se é VERDADEIRA ou ✘ se é FALSA:</p>
+${[`${T} é um ser vivo.`,`${T} precisa de água para viver.`,`${T} não existe na natureza.`,`${T} é importante para o meio ambiente.`].map(f=>`
+<div class="multipla">( &nbsp;✔&nbsp; ) &nbsp; ( &nbsp;✘&nbsp; ) &nbsp; "${f}"</div>`).join('')}
+<p class="instrucao" style="margin-top:14px"><b>2. ORGANIZE</b> as palavras e forme uma frase:</p>
+<div class="destaque" style="font-size:14px">
+  <b>Palavras:</b> &nbsp; BONITO &nbsp;/&nbsp; É &nbsp;/&nbsp; ${T.toUpperCase()} &nbsp;/&nbsp; MUITO<br><br>
+  Frase: ___________________________________________
+</div>
+<p class="instrucao" style="margin-top:14px"><b>3. COMPLETE</b> as frases com as palavras do quadro:</p>
+<div class="quadro-palavras">
+  ${['grande','pequeno','colorido','bonito','especial'].map(p=>`<span class="palavra-tag">${p}</span>`).join('')}
+</div>
+<div class="box-resp">O ${tema} é muito <b>_____________</b>.</div>
+<div class="box-resp">Eu acho o ${tema} muito <b>_____________</b>.</div>
+<p class="instrucao" style="margin-top:12px"><b>4. ESCREVA</b> uma frase sua sobre ${tema}:</p>
+<span class="linha"></span><span class="linha"></span>
+<div class="cheer"><p>✏️ Que escrita linda! Você está evoluindo muito!</p></div>
+</div>`;
+}
+
+function buildCiencias(tema, a){
+  const T = cap(tema);
+  return `<div class="page">
+${lh(a)}
+<div class="act-title">🔬 Ciências — ${T}</div>
+<p class="instrucao"><b>1. OBSERVE E RESPONDA:</b> Complete as informações sobre <b>${T}</b>:</p>
+<div class="grid2">
+  <div class="celula"><b style="color:#C2185B">Onde vive?</b><span class="linha"></span></div>
+  <div class="celula"><b style="color:#C2185B">O que come?</b><span class="linha"></span></div>
+  <div class="celula"><b style="color:#C2185B">Cor principal:</b><span class="linha"></span></div>
+  <div class="celula"><b style="color:#C2185B">Tamanho:</b><span class="linha"></span></div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>2. LIGUE</b> o ser vivo à sua característica:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🌿 Planta</td><td class="ligar-meio">···</td><td class="ligar-dir">Produz o próprio alimento com a luz do sol</td></tr>
+  <tr><td class="ligar-esq">🐾 Animal</td><td class="ligar-meio">···</td><td class="ligar-dir">Depende de outros para se alimentar</td></tr>
+  <tr><td class="ligar-esq">🍄 Fungo</td><td class="ligar-meio">···</td><td class="ligar-dir">Se alimenta de matéria em decomposição</td></tr>
+</table>
+<p class="instrucao" style="margin-top:14px"><b>3. MARQUE</b> com ✔ o que <b>${T}</b> precisa para sobreviver:</p>
+<div class="grid3">
+  <div class="multipla">( ) Água</div>
+  <div class="multipla">( ) Luz solar</div>
+  <div class="multipla">( ) Alimento</div>
+  <div class="multipla">( ) Ar puro</div>
+  <div class="multipla">( ) Abrigo</div>
+  <div class="multipla">( ) Afeto</div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>4. DESENHE</b> ${T} no espaço abaixo e identifique suas partes:</p>
+<div class="caixa-grande" style="min-height:110px"></div>
+<div class="cheer"><p>🔬 Incrível! Você é um cientista nato! Continue explorando!</p></div>
+</div>`;
+}
+
+function buildArte(tema, a){
+  const T = cap(tema);
+  const cores = [
+    {nome:'VERMELHO',hex:'#E53935'},{nome:'AZUL',hex:'#1E88E5'},
+    {nome:'AMARELO',hex:'#FDD835'},{nome:'VERDE',hex:'#43A047'},
+    {nome:'ROSA',hex:'#E91E63'},{nome:'LARANJA',hex:'#FB8C00'}
+  ];
+  return `<div class="page">
+${lh(a)}
+<div class="act-title">🎨 Arte — ${T}</div>
+<p class="instrucao"><b>1. PINTE AS FORMAS</b> de acordo com a legenda de cores:</p>
+<div class="destaque" style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center">
+  ${cores.map((c,i)=>`<div style="display:flex;align-items:center;gap:5px"><div style="width:22px;height:22px;background:${c.hex};border-radius:4px;border:1px solid #ccc"></div><span style="font-size:12px;font-weight:700">${i+1} - ${c.nome}</span></div>`).join('')}
+</div>
+<div class="caixa-grande" style="min-height:130px;position:relative">
+  <div style="position:absolute;inset:10px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center">
+    <svg width="70" height="70"><circle cx="35" cy="35" r="28" fill="none" stroke="#ddd" stroke-width="2"/><text x="35" y="70" text-anchor="middle" font-size="10" fill="#999">1</text></svg>
+    <svg width="70" height="70"><rect x="10" y="10" width="50" height="50" fill="none" stroke="#ddd" stroke-width="2"/><text x="35" y="70" text-anchor="middle" font-size="10" fill="#999">2</text></svg>
+    <svg width="70" height="70"><polygon points="35,5 65,60 5,60" fill="none" stroke="#ddd" stroke-width="2"/><text x="35" y="70" text-anchor="middle" font-size="10" fill="#999">3</text></svg>
+    <svg width="70" height="70"><polygon points="35,5 65,30 50,65 20,65 5,30" fill="none" stroke="#ddd" stroke-width="2"/><text x="35" y="70" text-anchor="middle" font-size="10" fill="#999">4</text></svg>
+  </div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>2. CRIE SEU DESENHO:</b> Desenhe <b>${T}</b> usando as cores que você mais gosta:</p>
+<div class="caixa-grande" style="min-height:120px"></div>
+<p class="instrucao" style="margin-top:10px"><b>3. COMPLETE:</b> Meu desenho tem as cores: ___________________________</p>
+<p class="instrucao">O que eu quis mostrar com meu desenho: ___________________________</p>
+<div class="cheer"><p>🎨 Sua arte é única! Você é um artista incrível!</p></div>
+</div>`;
+}
+
+function buildEdFisica(tema, a){
+  const T = cap(tema);
+  const brincadeiras = [
+    {nome:'Pular Corda',emoji:'🪢'},
+    {nome:'Pega-Pega',emoji:'🏃'},
+    {nome:'Amarelinha',emoji:'⬛'},
+    {nome:'Bambolê',emoji:'⭕'},
+    {nome:'Jogo da Velha',emoji:'✖️'},
+    {nome:'Bolinha de Gude',emoji:'🔵'},
+    {nome:'Pipa',emoji:'🪁'},
+    {nome:'Esconde-Esconde',emoji:'🙈'},
+    {nome:'Cantiga de Roda',emoji:'🎵'},
+  ];
+  const sorted = [...brincadeiras].sort(()=>Math.random()-.5).slice(0,6);
+  return `<div class="page">
+${lh(a)}
+<div class="act-title">⚽ Ed. Física — ${T}</div>
+<p class="instrucao"><b>1. USANDO O BANCO DE PALAVRAS,</b> escreva o nome de cada brincadeira embaixo da imagem:</p>
+<div class="quadro-palavras">${sorted.map(b=>`<span class="palavra-tag">${b.nome}</span>`).join('')}</div>
+<div class="grid3">
+  ${sorted.map(b=>`<div class="celula"><div style="font-size:36px">${b.emoji}</div><div class="celula linha-nome" style="margin-top:8px;width:100%"></div></div>`).join('')}
+</div>
+<p class="instrucao" style="margin-top:14px"><b>2. MARQUE ✔</b> as brincadeiras que você já praticou:</p>
+<div class="grid3">
+  ${['Pular Corda','Pega-Pega','Amarelinha','Bambolê','Futebol','Natação'].map(b=>`<div class="multipla">( ) ${b}</div>`).join('')}
+</div>
+<p class="instrucao" style="margin-top:14px"><b>3. RESPONDA:</b></p>
+<div class="box-resp">Minha brincadeira favorita é: ___________________________</div>
+<div class="box-resp" style="margin-top:8px">Por que você gosta? ___________________________</div>
+<p class="instrucao" style="margin-top:14px"><b>4. JOGO DA VELHA:</b> Jogue com seu colega ou professor!</p>
+<div style="display:flex;justify-content:center;margin:10px 0">
+  <table style="border-collapse:collapse">
+    ${[0,1,2].map(r=>`<tr>${[0,1,2].map(c=>`<td style="width:60px;height:60px;border:3px solid #444;text-align:center;vertical-align:middle;font-size:24px">&nbsp;</td>`).join('')}</tr>`).join('')}
+  </table>
+</div>
+<div class="cheer"><p>💪 Atividade física é saúde! Você arrasou!</p></div>
+</div>`;
+}
+
+function buildGeografia(tema, a){
+  const T = cap(tema);
+  return `<div class="page">
+${lh(a)}
+<div class="act-title">🌎 Geografia — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> cada meio de comunicação ao que ele faz:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">📺 Televisão</td><td class="ligar-meio">···</td><td class="ligar-dir">Mostra imagens e notícias em casa</td></tr>
+  <tr><td class="ligar-esq">📻 Rádio</td><td class="ligar-meio">···</td><td class="ligar-dir">Transmite sons, músicas e notícias</td></tr>
+  <tr><td class="ligar-esq">📰 Jornal</td><td class="ligar-meio">···</td><td class="ligar-dir">Traz notícias escritas e impressas</td></tr>
+  <tr><td class="ligar-esq">📱 Celular</td><td class="ligar-meio">···</td><td class="ligar-dir">Liga para pessoas e acessa a internet</td></tr>
+</table>
+<p class="instrucao" style="margin-top:14px"><b>2. COMPLETE:</b> Escreva o nome correto para cada imagem usando o quadro:</p>
+<div class="quadro-palavras">
+  ${['Campo','Cidade','Rio','Montanha','Floresta','Praia'].map(p=>`<span class="palavra-tag">${p}</span>`).join('')}
+</div>
+<div class="grid3">
+  <div class="celula"><div style="font-size:36px">🏙️</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:36px">🌾</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:36px">🏔️</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:36px">🌊</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:36px">🌿</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:36px">💧</div><span class="linha"></span></div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>3. RESPONDA:</b></p>
+<div class="box-resp">Eu moro em: ___________________________ (cidade/campo/etc.)</div>
+<div class="box-resp" style="margin-top:8px">Perto de onde moro tem: ___________________________</div>
+<p class="instrucao" style="margin-top:12px"><b>4. DESENHE</b> o lugar onde você mora:</p>
+<div class="caixa-grande" style="min-height:100px"></div>
+<div class="cheer"><p>🌎 Você conhece muito bem o seu mundo! Incrível!</p></div>
+</div>`;
+}
+
+function buildHistoria(tema, a){
+  const T = cap(tema);
+  return `<div class="page">
+${lh(a)}
+<div class="act-title">🏛️ História — ${T}</div>
+<p class="instrucao"><b>1. NUMERE</b> os acontecimentos na ordem correta (de 1 a 4):</p>
+<div class="grid2">
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">As pessoas aprenderam a plantar alimentos</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Os primeiros humanos viviam em cavernas</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Surgiram as primeiras cidades e vilas</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">A escrita foi criada para guardar informações</div></div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>2. LIGUE</b> o período histórico à sua característica:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">Pré-História</td><td class="ligar-meio">···</td><td class="ligar-dir">Surgimento dos computadores e internet</td></tr>
+  <tr><td class="ligar-esq">Idade Média</td><td class="ligar-meio">···</td><td class="ligar-dir">Tempo dos castelos e cavaleiros</td></tr>
+  <tr><td class="ligar-esq">Idade Contemporânea</td><td class="ligar-meio">···</td><td class="ligar-dir">Época das cavernas e pinturas rupestres</td></tr>
+</table>
+<p class="instrucao" style="margin-top:14px"><b>3. ANTES E AGORA:</b> Desenhe como era e como é hoje:</p>
+<div class="grid2">
+  <div class="celula">
+    <div style="font-family:'Baloo 2',cursive;font-size:14px;color:#C2185B;margin-bottom:6px">⏮️ ANTES</div>
+    <div class="caixa-grande" style="min-height:80px"></div>
+  </div>
+  <div class="celula">
+    <div style="font-family:'Baloo 2',cursive;font-size:14px;color:#C2185B;margin-bottom:6px">⏭️ AGORA</div>
+    <div class="caixa-grande" style="min-height:80px"></div>
+  </div>
+</div>
+<div class="cheer"><p>🏛️ Você é um verdadeiro historiador! Continue aprendendo!</p></div>
+</div>`;
+}
+
+function buildIngles(tema, a){
+  const T = cap(tema);
+  const tpl = pick([0,1]);
+  if(tpl===0){ // Números e cores
+    const nums = [{n:1,w:'ONE'},{n:2,w:'TWO'},{n:3,w:'THREE'},{n:4,w:'FOUR'},{n:5,w:'FIVE'},{n:6,w:'SIX'},{n:7,w:'SEVEN'},{n:8,w:'EIGHT'},{n:9,w:'NINE'},{n:10,w:'TEN'}];
+    const cores = [{pt:'Vermelho',en:'RED',hex:'#E53935'},{pt:'Azul',en:'BLUE',hex:'#1E88E5'},{pt:'Amarelo',en:'YELLOW',hex:'#FDD835'},{pt:'Verde',en:'GREEN',hex:'#43A047'},{pt:'Rosa',en:'PINK',hex:'#E91E63'},{pt:'Laranja',en:'ORANGE',hex:'#FB8C00'}];
+    return `<div class="page">
+${lh(a)}
+<div class="act-title">🇬🇧 Língua Inglesa — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o número ao seu nome em inglês:</p>
+<div class="grid2">
+  <div>
+    ${nums.slice(0,5).map(n=>`<div style="display:flex;align-items:center;gap:12px;margin:6px 0;font-size:14px;font-weight:700"><div style="width:36px;height:36px;border:2px solid #F48FB1;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#FFF0F5;font-size:16px;font-weight:800">${n.n}</div><span class="pontilhado" style="flex:1"></span><span style="color:#C2185B">${n.w}</span></div>`).join('')}
+  </div>
+  <div>
+    ${nums.slice(5).map(n=>`<div style="display:flex;align-items:center;gap:12px;margin:6px 0;font-size:14px;font-weight:700"><div style="width:36px;height:36px;border:2px solid #F48FB1;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#FFF0F5;font-size:16px;font-weight:800">${n.n}</div><span class="pontilhado" style="flex:1"></span><span style="color:#C2185B">${n.w}</span></div>`).join('')}
+  </div>
+</div>
+<p class="instrucao" style="margin-top:14px"><b>2. ESCREVA</b> o nome da cor em inglês:</p>
+<div class="grid3">
+  ${cores.map(c=>`<div class="celula"><div style="width:50px;height:50px;background:${c.hex};border-radius:8px;margin:0 auto 6px;border:2px solid #ddd"></div><div class="nome">${c.pt}</div><span class="linha"></span></div>`).join('')}
+</div>
+<p class="instrucao" style="margin-top:14px"><b>3. COMPLETE</b> as somas em inglês:</p>
+<div class="grid2">
+  <div class="celula" style="font-size:14px;font-weight:800">2 (TWO) + 3 (THREE) = <span style="color:#C2185B">_______</span></div>
+  <div class="celula" style="font-size:14px;font-weight:800">4 (FOUR) + 1 (ONE) = <span style="color:#C2185B">_______</span></div>
+</div>
+<div class="cheer"><p>🇬🇧 Fantastic! You are learning English very well!</p></div>
+</div>`;
+  }
+  // tpl===1: Vocabulário temático
+  const itens = [
+    {emoji:'🐶',en:'DOG',pt:'Cachorro'},{emoji:'🐱',en:'CAT',pt:'Gato'},
+    {emoji:'🐦',en:'BIRD',pt:'Pássaro'},{emoji:'🐟',en:'FISH',pt:'Peixe'},
+    {emoji:'🐘',en:'ELEPHANT',pt:'Elefante'},{emoji:'🦁',en:'LION',pt:'Leão'}
+  ];
+  return `<div class="page">
+${lh(a)}
+<div class="act-title">🇬🇧 Inglês — Animals: ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o animal ao seu nome em inglês:</p>
+<table class="ligar-table">
+  ${itens.slice(0,3).map(i=>`<tr><td class="ligar-esq">${i.emoji} ${i.pt}</td><td class="ligar-meio">···</td><td class="ligar-dir">${i.en}</td></tr>`).join('')}
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. ESCOLHA</b> a alternativa correta para nomear cada animal:</p>
+<div class="grid3">
+  ${itens.slice(3).map(i=>`<div class="celula"><div style="font-size:36px">${i.emoji}</div>${['CAT','DOG','FISH','BIRD','ELEPHANT','LION'].sort(()=>Math.random()-.5).slice(0,3).map((op,idx)=>`<div class="multipla">( ) ${op}</div>`).join('')}</div>`).join('')}
+</div>
+<p class="instrucao" style="margin-top:14px"><b>3. COMPLETE</b> as frases em inglês usando o banco de palavras:</p>
+<div class="quadro-palavras">
+  ${['dog','cat','bird','fish'].map(w=>`<span class="palavra-tag">${w}</span>`).join('')}
+</div>
+<div class="box-resp">The ___________ can fly. 🐦</div>
+<div class="box-resp" style="margin-top:6px">I have a ___________ at home. 🐱</div>
+<p class="instrucao" style="margin-top:12px"><b>4. DESENHE</b> seu animal favorito e escreva o nome em inglês:</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<p class="instrucao">Name in English: ___________________________</p>
+<div class="cheer"><p>🇬🇧 Well done! You are amazing! 🌟</p></div>
+</div>`;
+}
+
+/* ══ DISPATCH ══ */
+function buildPages(a){
+  switch(a.disc){
+    case 'matematica': return buildMatematica(a.theme, a);
+    case 'portugues':  return buildPortugues(a.theme, a);
+    case 'ciencias':   return buildCiencias(a.theme, a);
+    case 'arte':       return buildArte(a.theme, a);
+    case 'edfisica':   return buildEdFisica(a.theme, a);
+    case 'geografia':  return buildGeografia(a.theme, a);
+    case 'historia':   return buildHistoria(a.theme, a);
+    case 'ingles':     return buildIngles(a.theme, a);
+    default:           return buildPortugues(a.theme, a);
+  }
+}
+
+/* ══ GENERATE ══ */
+function generate(){
+  const theme   = document.getElementById('theme').value.trim();
+  const school  = document.getElementById('school').value.trim() || 'Escola Especial';
+  const teacher = document.getElementById('teacher').value.trim();
+  const student = document.getElementById('student').value.trim();
+  const turma   = document.getElementById('turma').value.trim();
+  if(!theme){toast('⚠️ Escreva um tema!','warn');return;}
+  if(!disc) {toast('⚠️ Escolha uma disciplina!','warn');return;}
+  const dName = DM[disc].name;
+  const ltxt = document.getElementById('loaderTxt');
+  document.getElementById('loader').classList.add('on');
+  document.getElementById('genBtn').disabled=true;
+
+  let done = 0;
+  function next(){
+    if(done >= qty){
+      document.getElementById('loader').classList.remove('on');
+      document.getElementById('genBtn').disabled=false;
+      save(); render();
+      toast(`🎉 ${qty} atividade${qty>1?'s':''} gerada${qty>1?'s':''}!`);
+      return;
+    }
+    if(ltxt) ltxt.textContent = qty > 1 ? `Gerando ${done+1} de ${qty}...` : 'Gerando atividade...';
+    setTimeout(()=>{
+      try{
+        const now=new Date();
+        const date=`${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}/${now.getFullYear()}`;
+        const a={id:Date.now()+done,disc,dName,theme,school,teacher,student,turma,logo,date};
+        a.html = buildPages(a);
+        acts.unshift(a);
+      }catch(e){console.error(e);}
+      done++;
+      next();
+    }, done===0 ? 400 : 80);
+  }
+  next();
+}
+
+function save(){
+  try{localStorage.setItem('adap_v9',JSON.stringify(acts.map(a=>({...a,logo:a.logo?'__logo__':null,html:a.html?.slice(0,200)||''}))));}catch(e){}
+}
+function del(id){if(!confirm('Remover?'))return;acts=acts.filter(a=>a.id!==id);save();render();toast('🗑️ Removida!');}
+function render(){
+  const g=document.getElementById('grid'),e=document.getElementById('emptyState'),tb=document.getElementById('topbar');
+  if(!acts.length){e.style.display='flex';g.style.display='none';tb.style.display='none';return;}
+  e.style.display='none';g.style.display='grid';tb.style.display='flex';
+  document.getElementById('topbarInfo').textContent=`${acts.length} atividade${acts.length>1?'s':''} gerada${acts.length>1?'s':''}`;
+  g.innerHTML=acts.map(buildCard).join('');
+}
+function clearAll(){if(!confirm('Remover todas as atividades?'))return;acts=[];save();render();toast('🗑️ Tudo removido!');}
+function printAll(){
+  if(!acts.length){toast('⚠️ Nenhuma atividade gerada ainda.','warn');return;}
+  const allPages=acts.map(a=>buildPages({...a})).join('');
+  const w=window.open('','_blank','width=860,height=1100');
+  if(!w){toast('⚠️ Libere pop-ups para gerar o PDF!','warn');return;}
+  w.document.write(`<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<title>Atividades Adaptadas</title>
+${CSS}
+</head><body>
+<button class="pbtn" onclick="window.print()">🖨️ Imprimir / Salvar PDF (${acts.length} atividades)</button>
+${allPages}
+</body></html>`);
+  w.document.close();
+  toast(\`✅ \${acts.length} atividades abertas! Clique em "Imprimir / Salvar PDF".\`);
+}
+function buildCard(a){
+  return `<div class="card" id="card-${a.id}">
+    <div class="card-top">
+      <div class="card-meta"><span class="badge">${a.dName}</span><span class="ctitle">Tema: ${a.theme}</span></div>
+      <div class="card-btns">
+        <button class="btn-dl" onclick="openPrint(${a.id})">📥 Baixar PDF</button>
+        <button class="btn-x" onclick="del(${a.id})">✕</button>
+      </div>
+    </div>
+    <div class="pdf-wrap" id="prev-${a.id}" style="font-size:11px;color:#888;padding:12px 16px">
+      ✅ Atividade de <b>${a.dName}</b> sobre "<b>${a.theme}</b>" gerada em ${a.date}.<br>
+      Clique em <b>📥 Baixar PDF</b> para abrir a folha completa e imprimir.
+    </div>
+  </div>`;
+}
+
+function openPrint(id){
+  const a = acts.find(x=>x.id===id); if(!a)return;
+  // Rebuild in case logo was not stored
+  const fresh = {...a};
+  const pages = buildPages(fresh);
+  const w = window.open('','_blank','width=860,height=1100');
+  if(!w){toast('⚠️ Libere pop-ups para gerar o PDF!','warn');return;}
+  w.document.write(`<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<title>Atividade de ${a.dName} — ${a.theme}</title>
+${CSS}
+</head><body>
+<button class="pbtn" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+${pages}
+</body></html>`);
+  w.document.close();
+  toast('✅ Clique em "Imprimir / Salvar PDF" na nova janela!');
+}
+
+render();
+</script>
+</body>
+</html>
