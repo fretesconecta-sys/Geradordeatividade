@@ -237,622 +237,1305 @@ const CSS = `
    ACTIVITY BUILDERS
 ══════════════════════ */
 
+
+
 function buildMatematica(tema, a){
   const T = cap(tema);
-  const tpl = nextTpl('mat',4);
+  const tpl = nextTpl('mat',10);
+  const lha = lh(a);
 
-  if(tpl===0){ // Sequência + contagem
-    return `<div class="page">
-${lh(a)}
-<div class="act-title">🔢 Atividade de Matemática — ${T}</div>
-<p class="instrucao"><b>1. SEQUÊNCIA NUMÉRICA:</b> Complete os números que faltam na sequência:</p>
-<div class="destaque" style="font-size:22px;letter-spacing:8px;text-align:center">
-  1 &nbsp; ___ &nbsp; 3 &nbsp; ___ &nbsp; 5 &nbsp; ___ &nbsp; 7 &nbsp; ___ &nbsp; 9 &nbsp; ___
-</div>
-<p class="instrucao" style="margin-top:14px"><b>2. CONTANDO ${T.toUpperCase()}:</b> Olhe os grupos e escreva quantos há em cada um:</p>
+  const ts = [
+    // 0 - Sequência e contagem
+    `${lha}<div class="act-title">🔢 Sequência e Contagem — ${T}</div>
+<p class="instrucao"><b>1. COMPLETE</b> os números que faltam:</p>
+<div class="destaque" style="font-size:22px;letter-spacing:5px;text-align:center">1 ___ 3 ___ 5 ___ 7 ___ 9 ___</div>
+<p class="instrucao" style="margin-top:12px"><b>2. CONTE</b> e escreva quantos há em cada grupo:</p>
 <div class="grid3">
-  <div class="celula"><div style="font-size:28px">🐾🐾🐾</div><div class="nome">Quantos? ___</div></div>
-  <div class="celula"><div style="font-size:28px">🐾🐾🐾🐾🐾</div><div class="nome">Quantos? ___</div></div>
-  <div class="celula"><div style="font-size:28px">🐾🐾</div><div class="nome">Quantos? ___</div></div>
+  <div class="celula"><div style="font-size:26px">🌟🌟🌟</div><div class="nome">Quantos? ___</div></div>
+  <div class="celula"><div style="font-size:26px">🌟🌟🌟🌟🌟</div><div class="nome">Quantos? ___</div></div>
+  <div class="celula"><div style="font-size:26px">🌟🌟</div><div class="nome">Quantos? ___</div></div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>3. SOMA:</b> Resolva as continhas usando os dedos ou palitos para ajudar:</p>
+<p class="instrucao" style="margin-top:12px"><b>3. RESOLVA</b> as somas:</p>
 <div class="grid2">
   <div class="celula" style="font-size:18px;font-weight:800">2 + 3 = ___</div>
   <div class="celula" style="font-size:18px;font-weight:800">4 + 1 = ___</div>
-  <div class="celula" style="font-size:18px;font-weight:800">1 + 1 = ___</div>
-  <div class="celula" style="font-size:18px;font-weight:800">3 + 2 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">5 + 2 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">3 + 3 = ___</div>
 </div>
-<div class="cheer"><p>🌟 Você conseguiu! Matemática é divertida com ${T}! 💕</p></div>
-</div>`;
-  }
-  if(tpl===1){ // Formas geométricas
-    return `<div class="page">
-${lh(a)}
-<div class="act-title">📐 Formas Geométricas com ${T}</div>
-<p class="instrucao"><b>1. IDENTIFIQUE AS FORMAS:</b> Ligue cada forma ao seu nome correto:</p>
+<div class="cheer"><p>⭐ Você arrasou nos números! Parabéns!</p></div>`,
+
+    // 1 - Formas geométricas
+    `${lha}<div class="act-title">📐 Formas Geométricas — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> cada forma ao seu nome:</p>
 <table class="ligar-table">
-  <tr><td class="ligar-esq"><svg width="50" height="50"><circle cx="25" cy="25" r="20" fill="none" stroke="#E75480" stroke-width="3"/></svg></td><td class="ligar-meio"><span class="pontilhado"></span></td><td class="ligar-dir">QUADRADO</td></tr>
-  <tr><td class="ligar-esq"><svg width="50" height="50"><rect x="5" y="5" width="40" height="40" fill="none" stroke="#E75480" stroke-width="3"/></svg></td><td class="ligar-meio"><span class="pontilhado"></span></td><td class="ligar-dir">TRIÂNGULO</td></tr>
-  <tr><td class="ligar-esq"><svg width="50" height="50"><polygon points="25,5 45,45 5,45" fill="none" stroke="#E75480" stroke-width="3"/></svg></td><td class="ligar-meio"><span class="pontilhado"></span></td><td class="ligar-dir">CÍRCULO</td></tr>
+  <tr><td class="ligar-esq"><svg width="44" height="44"><circle cx="22" cy="22" r="18" fill="none" stroke="#E75480" stroke-width="3"/></svg></td><td class="ligar-meio">···</td><td class="ligar-dir">QUADRADO</td></tr>
+  <tr><td class="ligar-esq"><svg width="44" height="44"><rect x="6" y="6" width="32" height="32" fill="none" stroke="#E75480" stroke-width="3"/></svg></td><td class="ligar-meio">···</td><td class="ligar-dir">TRIÂNGULO</td></tr>
+  <tr><td class="ligar-esq"><svg width="44" height="44"><polygon points="22,4 40,40 4,40" fill="none" stroke="#E75480" stroke-width="3"/></svg></td><td class="ligar-meio">···</td><td class="ligar-dir">CÍRCULO</td></tr>
 </table>
-<p class="instrucao" style="margin-top:12px"><b>2. CONTE AS FORMAS:</b></p>
-<div class="destaque">
-  <div style="font-size:24px;text-align:center;margin-bottom:8px">⬜⬜⬛⬜🔺🔺⬜🔵🔺🔵🔵⬜</div>
-  Quadrados: ___ &nbsp;&nbsp; Triângulos: ___ &nbsp;&nbsp; Círculos: ___
-</div>
-<p class="instrucao" style="margin-top:12px"><b>3. DESENHE:</b> Desenhe 2 círculos, 3 triângulos e 1 quadrado na caixa abaixo:</p>
-<div class="caixa-grande" style="min-height:100px"></div>
-<div class="cheer"><p>🎉 Parabéns! Você conhece muito bem as formas geométricas!</p></div>
-</div>`;
-  }
-  if(tpl===2){ // Maior menor igual
-    return `<div class="page">
-${lh(a)}
-<div class="act-title">🔢 Maior, Menor ou Igual? — ${T}</div>
-<p class="instrucao"><b>1. COMPARE OS NÚMEROS:</b> Escreva &gt; (maior), &lt; (menor) ou = (igual) no espaço:</p>
+<p class="instrucao" style="margin-top:12px"><b>2. CONTE</b> as formas:</p>
+<div class="destaque" style="font-size:22px;text-align:center">⬜⬜⬛⬜🔺🔺⬜🔵🔺🔵🔵⬜</div>
+<div class="destaque">Quadrados: ___ &nbsp; Triângulos: ___ &nbsp; Círculos: ___</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> 2 círculos, 3 triângulos e 1 quadrado:</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<div class="cheer"><p>📐 Você conhece muito bem as formas!</p></div>`,
+
+    // 2 - Maior menor igual
+    `${lha}<div class="act-title">🔢 Maior, Menor ou Igual? — ${T}</div>
+<p class="instrucao"><b>1. ESCREVA</b> &gt;, &lt; ou = no espaço:</p>
 <div class="grid2">
   <div class="celula" style="font-size:20px;font-weight:800">5 ___ 3</div>
   <div class="celula" style="font-size:20px;font-weight:800">2 ___ 7</div>
   <div class="celula" style="font-size:20px;font-weight:800">4 ___ 4</div>
   <div class="celula" style="font-size:20px;font-weight:800">8 ___ 6</div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>2. ORDENE:</b> Coloque os números em ordem do menor para o maior:</p>
-<div class="destaque" style="font-size:18px;text-align:center">
-  7 &nbsp; 2 &nbsp; 9 &nbsp; 1 &nbsp; 5<br><br>
-  ___ &nbsp; ___ &nbsp; ___ &nbsp; ___ &nbsp; ___
-</div>
-<p class="instrucao" style="margin-top:14px"><b>3. MARQUE</b> com um X o número maior em cada par:</p>
+<p class="instrucao" style="margin-top:12px"><b>2. ORDENE</b> do menor para o maior:</p>
+<div class="destaque" style="font-size:18px;text-align:center">7 &nbsp; 2 &nbsp; 9 &nbsp; 1 &nbsp; 5<br><br>___ &nbsp; ___ &nbsp; ___ &nbsp; ___ &nbsp; ___</div>
+<p class="instrucao" style="margin-top:12px"><b>3. MARQUE</b> o número maior em cada par:</p>
 <div class="grid3">
-  <div class="celula" style="font-size:20px;font-weight:800">3 &nbsp; ou &nbsp; 6<br><br>( ) &nbsp;&nbsp;&nbsp; ( )</div>
-  <div class="celula" style="font-size:20px;font-weight:800">8 &nbsp; ou &nbsp; 4<br><br>( ) &nbsp;&nbsp;&nbsp; ( )</div>
-  <div class="celula" style="font-size:20px;font-weight:800">1 &nbsp; ou &nbsp; 9<br><br>( ) &nbsp;&nbsp;&nbsp; ( )</div>
+  <div class="celula" style="font-size:18px;font-weight:800">3 ou 6<br>( ) &nbsp; ( )</div>
+  <div class="celula" style="font-size:18px;font-weight:800">8 ou 4<br>( ) &nbsp; ( )</div>
+  <div class="celula" style="font-size:18px;font-weight:800">1 ou 9<br>( ) &nbsp; ( )</div>
 </div>
-<div class="cheer"><p>⭐ Você é ótimo com números! Continue assim!</p></div>
-</div>`;
-  }
-  // tpl===3: Subtração e problemas visuais
-  return `<div class="page">
-${lh(a)}
-<div class="act-title">🔢 Subtração com ${T}</div>
-<p class="instrucao"><b>1. SUBTRAÇÃO:</b> Resolva as continhas. Use os dedos para ajudar!</p>
+<div class="cheer"><p>💪 Você domina os números!</p></div>`,
+
+    // 3 - Subtração e problema
+    `${lha}<div class="act-title">🔢 Subtração — ${T}</div>
+<p class="instrucao"><b>1. RESOLVA</b> as subtrações:</p>
 <div class="grid2">
   <div class="celula" style="font-size:18px;font-weight:800">5 − 2 = ___</div>
   <div class="celula" style="font-size:18px;font-weight:800">8 − 3 = ___</div>
   <div class="celula" style="font-size:18px;font-weight:800">6 − 4 = ___</div>
   <div class="celula" style="font-size:18px;font-weight:800">10 − 5 = ___</div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>2. PROBLEMA:</b> Leia e resolva:</p>
-<div class="destaque">João tinha <b>8 ${tema}</b>. Ele deu <b>3</b> para a professora.<br>
-Quantos ${tema} João ficou? <br><br>
-8 − 3 = ___ &nbsp;&nbsp; Resposta: João ficou com ___ ${tema}.
+<p class="instrucao" style="margin-top:12px"><b>2. RESOLVA</b> o problema:</p>
+<div class="destaque">Havia <b>8 ${tema}</b>. Foram embora <b>3</b>. Quantos ficaram?<br><br>8 − 3 = ___ &nbsp;&nbsp; Resposta: ___</div>
+<p class="instrucao" style="margin-top:12px"><b>3. COMPLETE</b> a tabuada do 2:</p>
+<div class="destaque" style="font-size:15px">2×1=___ &nbsp; 2×2=___ &nbsp; 2×3=___ &nbsp; 2×4=___ &nbsp; 2×5=___</div>
+<div class="cheer"><p>🏆 Você é ótimo em matemática!</p></div>`,
+
+    // 4 - Dinheiro e medidas
+    `${lha}<div class="act-title">💰 Dinheiro e Medidas — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> a moeda ao seu valor:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🪙 Moeda 1 real</td><td class="ligar-meio">···</td><td class="ligar-dir">R$ 0,50</td></tr>
+  <tr><td class="ligar-esq">🪙 Moeda 50 cents</td><td class="ligar-meio">···</td><td class="ligar-dir">R$ 1,00</td></tr>
+  <tr><td class="ligar-esq">💵 Nota 5 reais</td><td class="ligar-meio">···</td><td class="ligar-dir">R$ 5,00</td></tr>
+  <tr><td class="ligar-esq">💵 Nota 10 reais</td><td class="ligar-meio">···</td><td class="ligar-dir">R$ 10,00</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. CALCULE:</b></p>
+<div class="destaque" style="font-size:13px">🍎 R$2,00 &nbsp; 🍌 R$1,00 &nbsp; 🍊 R$3,00<br><br>1 maçã + 1 banana = R$ ___ &nbsp;&nbsp; 1 laranja + 1 banana = R$ ___</div>
+<p class="instrucao" style="margin-top:12px"><b>3. COMPLETE:</b></p>
+<div class="grid2">
+  <div class="celula">1 metro = ___ cm</div>
+  <div class="celula">1 kg = ___ gramas</div>
+  <div class="celula">1 hora = ___ minutos</div>
+  <div class="celula">1 semana = ___ dias</div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>3. COMPLETE</b> a tabuada do 2:</p>
+<div class="cheer"><p>🌟 Você aprendeu sobre dinheiro e medidas!</p></div>`,
+
+    // 5 - Tabuada do 3
+    `${lha}<div class="act-title">🔢 Tabuada do 3 — ${T}</div>
+<p class="instrucao"><b>1. COMPLETE</b> a tabuada do 3:</p>
+<div class="destaque" style="font-size:16px;line-height:2">
+  3×1=___ &nbsp;&nbsp; 3×2=___ &nbsp;&nbsp; 3×3=___<br>
+  3×4=___ &nbsp;&nbsp; 3×5=___ &nbsp;&nbsp; 3×6=___<br>
+  3×7=___ &nbsp;&nbsp; 3×8=___ &nbsp;&nbsp; 3×9=___ &nbsp;&nbsp; 3×10=___
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. RESOLVA</b> usando a tabuada:</p>
+<div class="grid2">
+  <div class="celula" style="font-size:16px;font-weight:800">3 × 4 = ___</div>
+  <div class="celula" style="font-size:16px;font-weight:800">3 × 7 = ___</div>
+  <div class="celula" style="font-size:16px;font-weight:800">3 × 5 = ___</div>
+  <div class="celula" style="font-size:16px;font-weight:800">3 × 9 = ___</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>3. RESOLVA</b> o problema:</p>
+<div class="destaque">Temos 3 grupos com ${tema}. Cada grupo tem 4. Quantos ao total?<br>3 × 4 = ___ ${tema}</div>
+<div class="cheer"><p>✖️ A tabuada do 3 você já domina!</p></div>`,
+
+    // 6 - Pares e impares
+    `${lha}<div class="act-title">🔢 Números Pares e Ímpares — ${T}</div>
+<p class="instrucao"><b>1. CLASSIFIQUE</b> os números abaixo em Par ou Ímpar:</p>
+<div class="grid3">
+  ${[2,5,8,3,10,7].map(n=>`<div class="celula" style="font-size:18px;font-weight:800">${n}<br><span style="font-size:12px">_________</span></div>`).join('')}
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. CIRCULE</b> apenas os números PARES:</p>
+<div class="destaque" style="font-size:20px;letter-spacing:6px;text-align:center">1 &nbsp;2 &nbsp;3 &nbsp;4 &nbsp;5 &nbsp;6 &nbsp;7 &nbsp;8 &nbsp;9 &nbsp;10</div>
+<p class="instrucao" style="margin-top:12px"><b>3. ESCREVA</b> os 5 primeiros números pares e os 5 primeiros ímpares:</p>
+<div class="grid2">
+  <div class="celula"><b>Pares:</b><br>___ ___ ___ ___ ___</div>
+  <div class="celula"><b>Ímpares:</b><br>___ ___ ___ ___ ___</div>
+</div>
+<div class="cheer"><p>🎲 Você entendeu pares e ímpares! Incrível!</p></div>`,
+
+    // 7 - Horas e tempo
+    `${lha}<div class="act-title">⏰ Horas e Tempo — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o relógio ao horário correto:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🕕 Ponteiros no 6 e 12</td><td class="ligar-meio">···</td><td class="ligar-dir">3 horas</td></tr>
+  <tr><td class="ligar-esq">🕒 Ponteiros no 3 e 12</td><td class="ligar-meio">···</td><td class="ligar-dir">6 horas</td></tr>
+  <tr><td class="ligar-esq">🕛 Ponteiros no 12 e 12</td><td class="ligar-meio">···</td><td class="ligar-dir">12 horas</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE</b> com o horário da rotina:</p>
+<div class="box-resp">Acordo às ___ horas da manhã.</div>
+<div class="box-resp" style="margin-top:6px">Almoço às ___ horas do dia.</div>
+<div class="box-resp" style="margin-top:6px">Durmo às ___ horas da noite.</div>
+<p class="instrucao" style="margin-top:12px"><b>3. QUANTO TEMPO PASSOU?</b></p>
+<div class="destaque">Saí às 8h e cheguei às 10h. Quanto tempo levei?<br>10 − 8 = ___ horas</div>
+<div class="cheer"><p>⏰ Você sabe gerenciar o tempo! Parabéns!</p></div>`,
+
+    // 8 - Medidas de comprimento
+    `${lha}<div class="act-title">📏 Medindo — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o objeto à unidade certa de medida:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">📐 Régua</td><td class="ligar-meio">···</td><td class="ligar-dir">Medir peso (kg)</td></tr>
+  <tr><td class="ligar-esq">⚖️ Balança</td><td class="ligar-meio">···</td><td class="ligar-dir">Medir comprimento (cm)</td></tr>
+  <tr><td class="ligar-esq">🥤 Copo medidor</td><td class="ligar-meio">···</td><td class="ligar-dir">Medir volume (ml)</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. ESTIME</b> e depois meça com uma régua:</p>
+<div class="grid2">
+  <div class="celula">Meu lápis mede aprox. ___ cm<br>Medindo: ___ cm</div>
+  <div class="celula">Minha mão mede aprox. ___ cm<br>Medindo: ___ cm</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>3. COMPLETE</b> as conversões:</p>
 <div class="destaque" style="font-size:15px">
-  2 × 1 = ___ &nbsp;&nbsp;&nbsp; 2 × 2 = ___ &nbsp;&nbsp;&nbsp; 2 × 3 = ___<br>
-  2 × 4 = ___ &nbsp;&nbsp;&nbsp; 2 × 5 = ___
+  1 m = ___ cm &nbsp;&nbsp; 2 m = ___ cm &nbsp;&nbsp; 100 cm = ___ m
 </div>
-<div class="cheer"><p>💪 Você arrasoou na matemática hoje! Parabéns!</p></div>
-</div>`;
+<div class="cheer"><p>📏 Você aprendeu a medir muito bem!</p></div>`,
+
+    // 9 - Adição com reserva
+    `${lha}<div class="act-title">🔢 Adição com Dezenas — ${T}</div>
+<p class="instrucao"><b>1. RESOLVA</b> as adições:</p>
+<div class="grid2">
+  <div class="celula" style="font-size:18px;font-weight:800">12 + 5 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">20 + 8 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">15 + 4 = ___</div>
+  <div class="celula" style="font-size:18px;font-weight:800">30 + 7 = ___</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. DECOMPONHA</b> os números:</p>
+<div class="destaque" style="font-size:15px">
+  24 = ___ dezenas + ___ unidades<br>
+  37 = ___ dezenas + ___ unidades<br>
+  50 = ___ dezenas + ___ unidades
+</div>
+<p class="instrucao" style="margin-top:12px"><b>3. PROBLEMA:</b></p>
+<div class="destaque">Na caixa há 15 ${tema}. Chegaram mais 12. Quantos ao total?<br>15 + 12 = ___ ${tema}</div>
+<div class="cheer"><p>🌟 Dezenas e unidades dominadas! Muito bem!</p></div>`
+  ];
+
+  return `<div class="page">${ts[tpl]}</div>`;
 }
 
 function buildPortugues(tema, a){
   const T = cap(tema);
-  const tpl = nextTpl('por',3);
+  const tpl = nextTpl('por',10);
+  const lha = lh(a);
 
-  if(tpl===0){ // Leitura e escrita
-    const letras = T.slice(0,5).toUpperCase().split('').join(' ');
-    return `<div class="page">
-${lh(a)}
-<div class="act-title">📖 Português — ${T}</div>
-<p class="instrucao"><b>1. PINTE AS LETRAS</b> que formam a palavra <b>${T.toUpperCase()}</b>:</p>
-<div class="destaque" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-  ${['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','Z'].map(l=>`<div style="width:42px;height:42px;border:2px solid #F48FB1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;${T.toUpperCase().includes(l)?'background:#FCE4EC;color:#C2185B;':''}">${l}</div>`).join('')}
+  const ts = [
+    // 0 - Pintar letras
+    `${lha}<div class="act-title">📖 Letras de ${T}</div>
+<p class="instrucao"><b>1. PINTE</b> as letras que formam a palavra <b>${T.toUpperCase()}</b>:</p>
+<div class="destaque" style="display:flex;gap:7px;flex-wrap:wrap;justify-content:center">
+  ${['A','B','C','D','E','F','G','H','I','J','L','M','N','O','P','Q','R','S','T','U','V','X','Z'].map(l=>`<div style="width:36px;height:36px;border:2px solid #F48FB1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;${T.toUpperCase().includes(l)?'background:#FCE4EC;color:#C2185B;':''}">${l}</div>`).join('')}
 </div>
-<p class="instrucao" style="margin-top:14px"><b>2. COMPLETE</b> as sílabas que faltam:</p>
-<div class="grid2">
-  <div class="celula"><div style="font-size:22px;font-weight:800;color:#C2185B">A — NI — ___</div><div class="nome">(animal)</div></div>
-  <div class="celula"><div style="font-size:22px;font-weight:800;color:#C2185B">PLA — ___</div><div class="nome">(planta)</div></div>
-</div>
-<p class="instrucao" style="margin-top:14px"><b>3. COPIE</b> a frase abaixo com letra bonita:</p>
-<div class="destaque" style="font-size:16px;text-align:center">"${T} é muito especial para mim."</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COPIE</b> a frase:</p>
+<div class="destaque" style="font-size:15px;text-align:center">"${T} é muito especial!"</div>
 <span class="linha"></span><span class="linha"></span>
-<p class="instrucao" style="margin-top:10px"><b>4. ESCREVA</b> o nome do seu ${tema} favorito:</p>
-<div class="box-resp" style="min-height:44px"></div>
-<div class="cheer"><p>📚 Muito bem! Você leu e escreveu com capricho!</p></div>
-</div>`;
-  }
-  if(tpl===1){ // Vogais e consoantes
-    return `<div class="page">
-${lh(a)}
-<div class="act-title">📖 Vogais e Consoantes — ${T}</div>
-<p class="instrucao"><b>1. CIRCULE</b> as vogais na palavra <b>${T.toUpperCase()}</b>:<br>As vogais são: A, E, I, O, U</p>
-<div class="destaque" style="font-size:28px;letter-spacing:10px;text-align:center">${T.toUpperCase().split('').join(' &nbsp; ')}</div>
-<p class="instrucao" style="margin-top:14px"><b>2. CLASSIFIQUE:</b> Escreva cada letra no lugar certo:</p>
+<p class="instrucao" style="margin-top:10px"><b>3. ESCREVA</b> 3 palavras que rimam com <b>${tema}</b>:</p>
+<div class="grid3">
+  <div class="celula"><span class="linha"></span></div>
+  <div class="celula"><span class="linha"></span></div>
+  <div class="celula"><span class="linha"></span></div>
+</div>
+<div class="cheer"><p>📚 Que escrita linda! Você está arrasando!</p></div>`,
+
+    // 1 - Vogais e consoantes
+    `${lha}<div class="act-title">📖 Vogais e Consoantes — ${T}</div>
+<p class="instrucao"><b>1. CIRCULE</b> as vogais em <b>${T.toUpperCase()}</b>: (A E I O U)</p>
+<div class="destaque" style="font-size:26px;letter-spacing:10px;text-align:center">${T.toUpperCase().split('').join(' ')}</div>
+<p class="instrucao" style="margin-top:12px"><b>2. CLASSIFIQUE</b> as letras:</p>
 <div class="grid2">
-  <div class="celula"><div style="font-family:'Baloo 2',cursive;font-size:14px;color:#C2185B;margin-bottom:6px">VOGAIS</div><span class="linha"></span><span class="linha"></span></div>
-  <div class="celula"><div style="font-family:'Baloo 2',cursive;font-size:14px;color:#C2185B;margin-bottom:6px">CONSOANTES</div><span class="linha"></span><span class="linha"></span></div>
+  <div class="celula"><b style="color:#C2185B">VOGAIS</b><span class="linha"></span><span class="linha"></span></div>
+  <div class="celula"><b style="color:#C2185B">CONSOANTES</b><span class="linha"></span><span class="linha"></span></div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>3. COMPLETE</b> as palavras com a vogal correta (A, E, I, O, U):</p>
-<div class="destaque" style="font-size:18px">
-  C___SA &nbsp;&nbsp;&nbsp; P___TA &nbsp;&nbsp;&nbsp; L___VRO<br><br>
-  B___LA &nbsp;&nbsp;&nbsp; M___SA &nbsp;&nbsp;&nbsp; S___L
-</div>
-<p class="instrucao" style="margin-top:12px"><b>4. DESENHE</b> e escreva o nome de 2 coisas que começam com a letra <b>${T[0].toUpperCase()}</b>:</p>
-<div class="grid2">
-  <div class="caixa-grande" style="min-height:80px"></div>
-  <div class="caixa-grande" style="min-height:80px"></div>
-</div>
-<div class="cheer"><p>🌟 Parabéns! Você conhece muito bem as letras!</p></div>
-</div>`;
-  }
-  // tpl===2: Frases e pontuação
-  return `<div class="page">
-${lh(a)}
-<div class="act-title">📝 Frases sobre ${T}</div>
-<p class="instrucao"><b>1. LEIA</b> as frases e marque ✔ se é VERDADEIRA ou ✘ se é FALSA:</p>
-${[`${T} é um ser vivo.`,`${T} precisa de água para viver.`,`${T} não existe na natureza.`,`${T} é importante para o meio ambiente.`].map(f=>`
-<div class="multipla">( &nbsp;✔&nbsp; ) &nbsp; ( &nbsp;✘&nbsp; ) &nbsp; "${f}"</div>`).join('')}
-<p class="instrucao" style="margin-top:14px"><b>2. ORGANIZE</b> as palavras e forme uma frase:</p>
-<div class="destaque" style="font-size:14px">
-  <b>Palavras:</b> &nbsp; BONITO &nbsp;/&nbsp; É &nbsp;/&nbsp; ${T.toUpperCase()} &nbsp;/&nbsp; MUITO<br><br>
-  Frase: ___________________________________________
-</div>
-<p class="instrucao" style="margin-top:14px"><b>3. COMPLETE</b> as frases com as palavras do quadro:</p>
-<div class="quadro-palavras">
-  ${['grande','pequeno','colorido','bonito','especial'].map(p=>`<span class="palavra-tag">${p}</span>`).join('')}
-</div>
+<p class="instrucao" style="margin-top:12px"><b>3. COMPLETE</b> com a vogal correta:</p>
+<div class="destaque" style="font-size:17px">C___SA &nbsp; P___TA &nbsp; L___VRO &nbsp; B___LA &nbsp; M___SA</div>
+<p class="instrucao" style="margin-top:10px"><b>4. DESENHE</b> 2 coisas que começam com <b>${T[0].toUpperCase()}</b>:</p>
+<div class="grid2"><div class="caixa-grande" style="min-height:70px"></div><div class="caixa-grande" style="min-height:70px"></div></div>
+<div class="cheer"><p>🌟 Você conhece muito bem as letras!</p></div>`,
+
+    // 2 - Frases verdadeiro/falso
+    `${lha}<div class="act-title">📝 Frases sobre ${T}</div>
+<p class="instrucao"><b>1. MARQUE</b> ✔ Verdadeiro ou ✘ Falso:</p>
+${[`${T} é um ser vivo.`,`${T} precisa de água para viver.`,`${T} não existe na natureza.`,`${T} é importante para todos.`].map(f=>`<div class="multipla">(✔) &nbsp;(✘) &nbsp;"${f}"</div>`).join('')}
+<p class="instrucao" style="margin-top:12px"><b>2. ORGANIZE</b> as palavras e forme uma frase:</p>
+<div class="destaque" style="font-size:13px"><b>Palavras:</b> BONITO / É / ${T.toUpperCase()} / MUITO<br><br>Frase: ___________________________________________</div>
+<p class="instrucao" style="margin-top:12px"><b>3. COMPLETE</b> com as palavras do quadro:</p>
+<div class="quadro-palavras">${['grande','colorido','bonito','especial','incrível'].map(p=>`<span class="palavra-tag">${p}</span>`).join('')}</div>
 <div class="box-resp">O ${tema} é muito <b>_____________</b>.</div>
-<div class="box-resp">Eu acho o ${tema} muito <b>_____________</b>.</div>
-<p class="instrucao" style="margin-top:12px"><b>4. ESCREVA</b> uma frase sua sobre ${tema}:</p>
-<span class="linha"></span><span class="linha"></span>
-<div class="cheer"><p>✏️ Que escrita linda! Você está evoluindo muito!</p></div>
-</div>`;
+<div class="box-resp" style="margin-top:6px">Eu acho o ${tema} muito <b>_____________</b>.</div>
+<div class="cheer"><p>✏️ Você formou frases lindas!</p></div>`,
+
+    // 3 - Sílabas
+    `${lha}<div class="act-title">📖 Sílabas — ${T}</div>
+<p class="instrucao"><b>1. DIVIDA</b> em sílabas e conte quantas têm:</p>
+<div class="grid2">
+  <div class="celula"><b>CASA</b> → CA — SA<br>___ sílabas</div>
+  <div class="celula"><b>ESCOLA</b> → ___ — ___ — ___<br>___ sílabas</div>
+  <div class="celula"><b>GATO</b> → ___ — ___<br>___ sílabas</div>
+  <div class="celula"><b>${T.toUpperCase()}</b> → ___ — ___<br>___ sílabas</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE</b> com a sílaba que falta:</p>
+<div class="destaque" style="font-size:16px">BA — ___ — LA &nbsp;&nbsp; PA — ___ — TI — NHA &nbsp;&nbsp; MA — ___ — TA</div>
+<div class="quadro-palavras"><span class="palavra-tag">NA</span><span class="palavra-tag">LI</span><span class="palavra-tag">CA</span></div>
+<p class="instrucao" style="margin-top:12px"><b>3. ESCREVA</b> 3 palavras com 2 e 3 sílabas:</p>
+<div class="grid2">
+  <div class="celula"><b>2 sílabas:</b><span class="linha"></span><span class="linha"></span><span class="linha"></span></div>
+  <div class="celula"><b>3 sílabas:</b><span class="linha"></span><span class="linha"></span><span class="linha"></span></div>
+</div>
+<div class="cheer"><p>🎵 Você bateu o ritmo das sílabas!</p></div>`,
+
+    // 4 - Leitura e interpretação
+    `${lha}<div class="act-title">📖 Leitura — ${T}</div>
+<p class="instrucao"><b>LEIA</b> o texto com atenção:</p>
+<div class="destaque" style="font-size:13px;line-height:1.9">
+  Era uma vez um(a) <b>${tema}</b> que vivia feliz na floresta.<br>
+  Todo dia ${tema} acordava cedo, tomava café e saía para brincar.<br>
+  Os amigos do ${tema} eram muito divertidos e carinhosos.<br>
+  E assim, todos viveram felizes para sempre. 🌸
+</div>
+<p class="instrucao" style="margin-top:12px"><b>1. RESPONDA:</b></p>
+<div class="box-resp">Onde vivia o(a) ${tema}? ___________________________</div>
+<div class="box-resp" style="margin-top:6px">O que o(a) ${tema} fazia todo dia? ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Como eram os amigos? ___________________________</div>
+<p class="instrucao" style="margin-top:12px"><b>2. DESENHE</b> uma cena do texto:</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<div class="cheer"><p>📖 Você leu com muita atenção!</p></div>`,
+
+    // 5 - Alfabeto
+    `${lha}<div class="act-title">📖 O Alfabeto — ${T}</div>
+<p class="instrucao"><b>1. COMPLETE</b> o alfabeto com as letras que faltam:</p>
+<div class="destaque" style="font-size:16px;letter-spacing:4px;line-height:2.2">
+  A B ___ D E ___ G H ___ J ___ L M ___ O P ___ R S ___ U ___ W X ___ Z
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. ESCREVA</b> uma palavra para cada letra:</p>
+<div class="grid3">
+  ${['A','B','C','D','E','F'].map(l=>`<div class="celula"><b style="color:#C2185B">${l} —</b><span class="linha"></span></div>`).join('')}
+</div>
+<p class="instrucao" style="margin-top:12px"><b>3. COLOQUE</b> em ordem alfabética:</p>
+<div class="destaque" style="font-size:14px"><b>${tema.toUpperCase()}</b> &nbsp; CASA &nbsp; AMOR &nbsp; BOLA<br><br>___________ &nbsp; ___________ &nbsp; ___________ &nbsp; ___________</div>
+<div class="cheer"><p>🔤 O alfabeto é seu amigo! Muito bem!</p></div>`,
+
+    // 6 - Adivinhações e poesia
+    `${lha}<div class="act-title">📖 Adivinhações — ${T}</div>
+<p class="instrucao"><b>1. LEIA</b> e descubra a resposta:</p>
+<div class="destaque" style="font-size:13px;line-height:1.9">
+  Tenho folhas mas não sou uma árvore.<br>
+  Tenho páginas mas não sou um caderno.<br>
+  Guardo histórias e conhecimento.<br>
+  O que sou eu? <b>R: _______________</b>
+</div>
+<div class="destaque" style="font-size:13px;line-height:1.9;margin-top:8px">
+  Sou pequeno e pulo muito.<br>
+  Vivo na lagoa ou no jardim.<br>
+  Começo como girino e cresço cantando.<br>
+  O que sou eu? <b>R: _______________</b>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. CRIE</b> sua própria adivinhação sobre <b>${tema}</b>:</p>
+<span class="linha"></span><span class="linha"></span><span class="linha"></span>
+<b>Resposta: _______________</b>
+<div class="cheer"><p>🎭 Você tem talento para criar! Parabéns!</p></div>`,
+
+    // 7 - Pontuação
+    `${lha}<div class="act-title">📖 Pontuação — ${T}</div>
+<p class="instrucao"><b>1. COLOQUE</b> o sinal correto no final ( . ! ? ):</p>
+<div class="box-resp">Que lindo dia de sol ___</div>
+<div class="box-resp" style="margin-top:6px">Você já viu um ${tema} ___</div>
+<div class="box-resp" style="margin-top:6px">Hoje é segunda-feira ___</div>
+<div class="box-resp" style="margin-top:6px">Que susto ___</div>
+<p class="instrucao" style="margin-top:12px"><b>2. LIGUE</b> o sinal ao seu uso:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">.</td><td class="ligar-meio">···</td><td class="ligar-dir">Indica pergunta</td></tr>
+  <tr><td class="ligar-esq">!</td><td class="ligar-meio">···</td><td class="ligar-dir">Termina uma frase</td></tr>
+  <tr><td class="ligar-esq">?</td><td class="ligar-meio">···</td><td class="ligar-dir">Indica emoção ou surpresa</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>3. ESCREVA</b> uma frase com cada sinal de pontuação:</p>
+<span class="linha"></span><span class="linha"></span><span class="linha"></span>
+<div class="cheer"><p>🖊️ Você usa a pontuação como um escritor!</p></div>`,
+
+    // 8 - Plural e singular
+    `${lha}<div class="act-title">📖 Singular e Plural — ${T}</div>
+<p class="instrucao"><b>1. PASSE</b> para o plural:</p>
+<div class="grid2">
+  <div class="celula">gato → ___________</div>
+  <div class="celula">flor → ___________</div>
+  <div class="celula">peixe → ___________</div>
+  <div class="celula">${tema} → ___________</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. PASSE</b> para o singular:</p>
+<div class="grid2">
+  <div class="celula">casas → ___________</div>
+  <div class="celula">meninos → ___________</div>
+  <div class="celula">árvores → ___________</div>
+  <div class="celula">balões → ___________</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>3. COMPLETE</b> as frases com singular ou plural:</p>
+<div class="box-resp">Há muitos ___________ na floresta. (${tema})</div>
+<div class="box-resp" style="margin-top:6px">Só existe um ___________ naquele lugar. (${tema})</div>
+<div class="cheer"><p>📝 Você domina singular e plural!</p></div>`,
+
+    // 9 - Escrita criativa
+    `${lha}<div class="act-title">📖 Escrita Criativa — ${T}</div>
+<p class="instrucao"><b>1. COMPLETE</b> a história:</p>
+<div class="destaque" style="font-size:13px;line-height:2">
+  Um dia, apareceu um(a) <b>${tema}</b> muito ___________.<br>
+  Ele(a) foi até ___________ e encontrou ___________.<br>
+  Ficou muito ___________ e decidiu ___________.
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. ESCOLHA</b> um título para sua história:</p>
+<div class="grid2">
+  <div class="multipla">( ) A aventura do ${tema}</div>
+  <div class="multipla">( ) O ${tema} corajoso</div>
+  <div class="multipla">( ) O segredo do ${tema}</div>
+  <div class="multipla">( ) Outro: ___________</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> a cena principal da sua história:</p>
+<div class="caixa-grande" style="min-height:100px"></div>
+<div class="cheer"><p>✍️ Você é um escritor incrível!</p></div>`
+  ];
+
+  return `<div class="page">${ts[tpl]}</div>`;
 }
 
 function buildCiencias(tema, a){
   const T = cap(tema);
-  const tpl = nextTpl('cien',3);
-  if(tpl===0) return `<div class="page">
-${lh(a)}
-<div class="act-title">🔬 Ciências — ${T}</div>
-<p class="instrucao"><b>1. OBSERVE E RESPONDA:</b> Complete as informações sobre <b>${T}</b>:</p>
+  const tpl = nextTpl('cien',10);
+  const lha = lh(a);
+
+  const ts = [
+    `${lha}<div class="act-title">🔬 Observando ${T}</div>
+<p class="instrucao"><b>1. COMPLETE</b> as informações sobre <b>${T}</b>:</p>
 <div class="grid2">
   <div class="celula"><b style="color:#C2185B">Onde vive?</b><span class="linha"></span></div>
   <div class="celula"><b style="color:#C2185B">O que come?</b><span class="linha"></span></div>
   <div class="celula"><b style="color:#C2185B">Cor principal:</b><span class="linha"></span></div>
   <div class="celula"><b style="color:#C2185B">Tamanho:</b><span class="linha"></span></div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>2. LIGUE</b> o ser vivo à sua característica:</p>
+<p class="instrucao" style="margin-top:12px"><b>2. LIGUE</b> o ser vivo à sua característica:</p>
 <table class="ligar-table">
-  <tr><td class="ligar-esq">🌿 Planta</td><td class="ligar-meio">···</td><td class="ligar-dir">Produz alimento com a luz do sol</td></tr>
+  <tr><td class="ligar-esq">🌿 Planta</td><td class="ligar-meio">···</td><td class="ligar-dir">Produz alimento com luz solar</td></tr>
   <tr><td class="ligar-esq">🐾 Animal</td><td class="ligar-meio">···</td><td class="ligar-dir">Depende de outros para se alimentar</td></tr>
-  <tr><td class="ligar-esq">🍄 Fungo</td><td class="ligar-meio">···</td><td class="ligar-dir">Se alimenta de matéria em decomposição</td></tr>
+  <tr><td class="ligar-esq">🍄 Fungo</td><td class="ligar-meio">···</td><td class="ligar-dir">Alimenta-se de matéria em decomposição</td></tr>
 </table>
-<p class="instrucao" style="margin-top:14px"><b>3. MARQUE ✔</b> o que <b>${T}</b> precisa para sobreviver:</p>
-<div class="grid3">
-  <div class="multipla">( ) Água</div><div class="multipla">( ) Luz solar</div>
-  <div class="multipla">( ) Alimento</div><div class="multipla">( ) Ar puro</div>
-  <div class="multipla">( ) Abrigo</div><div class="multipla">( ) Afeto</div>
-</div>
-<p class="instrucao" style="margin-top:14px"><b>4. DESENHE</b> ${T} e identifique suas partes:</p>
-<div class="caixa-grande" style="min-height:110px"></div>
-<div class="cheer"><p>🔬 Incrível! Você é um cientista nato!</p></div>
-</div>`;
+<p class="instrucao" style="margin-top:12px"><b>3. MARQUE ✔</b> o que ${T} precisa:</p>
+<div class="grid3"><div class="multipla">( ) Água</div><div class="multipla">( ) Luz</div><div class="multipla">( ) Alimento</div><div class="multipla">( ) Ar</div><div class="multipla">( ) Abrigo</div><div class="multipla">( ) Afeto</div></div>
+<div class="cheer"><p>🔬 Você é um cientista incrível!</p></div>`,
 
-  if(tpl===1) return `<div class="page">
-${lh(a)}
-<div class="act-title">🔬 Cadeia Alimentar — ${T}</div>
-<p class="instrucao"><b>1. COMPLETE</b> a cadeia alimentar com as palavras do quadro:</p>
-<div class="quadro-palavras">
-  <span class="palavra-tag">Sol</span><span class="palavra-tag">Planta</span>
-  <span class="palavra-tag">Herbívoro</span><span class="palavra-tag">Carnívoro</span>
-</div>
-<div class="destaque" style="font-size:15px;text-align:center">
-  ☀️ ___________ → 🌿 ___________ → 🐇 ___________ → 🦊 ___________
-</div>
-<p class="instrucao" style="margin-top:14px"><b>2. MARQUE ✔</b> V (verdadeiro) ou F (falso):</p>
-<div class="box-resp">( ) As plantas produzem seu próprio alimento usando a luz do sol.</div>
-<div class="box-resp" style="margin-top:6px">( ) Os animais carnívoros comem apenas plantas.</div>
-<div class="box-resp" style="margin-top:6px">( ) A água é importante para todos os seres vivos.</div>
-<div class="box-resp" style="margin-top:6px">( ) ${T} faz parte do meio ambiente.</div>
-<p class="instrucao" style="margin-top:14px"><b>3. CLASSIFIQUE</b> os animais abaixo em Carnívoro, Herbívoro ou Onívoro:</p>
+    `${lha}<div class="act-title">🔬 Cadeia Alimentar — ${T}</div>
+<p class="instrucao"><b>1. COMPLETE</b> a cadeia alimentar:</p>
+<div class="quadro-palavras"><span class="palavra-tag">Sol</span><span class="palavra-tag">Planta</span><span class="palavra-tag">Herbívoro</span><span class="palavra-tag">Carnívoro</span></div>
+<div class="destaque" style="font-size:14px;text-align:center">☀️ ___________ → 🌿 ___________ → 🐇 ___________ → 🦊 ___________</div>
+<p class="instrucao" style="margin-top:12px"><b>2. CLASSIFIQUE</b> os animais:</p>
 <div class="grid3">
-  <div class="celula"><div style="font-size:30px">🦁</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:30px">🐄</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:30px">🐻</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:30px">🐰</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:30px">🦅</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:30px">🐷</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🦁</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🐄</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🐻</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🐰</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🦅</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🐷</div><span class="linha"></span></div>
 </div>
-<div class="cheer"><p>🌿 Você entendeu como a natureza funciona! Parabéns!</p></div>
-</div>`;
+<div class="cheer"><p>🌿 Você entendeu como a natureza funciona!</p></div>`,
 
-  return `<div class="page">
-${lh(a)}
-<div class="act-title">🔬 O Corpo Humano — ${T}</div>
+    `${lha}<div class="act-title">🔬 Corpo Humano — ${T}</div>
 <p class="instrucao"><b>1. LIGUE</b> o órgão à sua função:</p>
 <table class="ligar-table">
-  <tr><td class="ligar-esq">❤️ Coração</td><td class="ligar-meio">···</td><td class="ligar-dir">Filtra o ar que respiramos</td></tr>
-  <tr><td class="ligar-esq">🫁 Pulmão</td><td class="ligar-meio">···</td><td class="ligar-dir">Bombeia o sangue pelo corpo</td></tr>
-  <tr><td class="ligar-esq">🧠 Cérebro</td><td class="ligar-meio">···</td><td class="ligar-dir">Controla os movimentos e pensamentos</td></tr>
-  <tr><td class="ligar-esq">🦴 Osso</td><td class="ligar-meio">···</td><td class="ligar-dir">Sustenta e protege o corpo</td></tr>
+  <tr><td class="ligar-esq">❤️ Coração</td><td class="ligar-meio">···</td><td class="ligar-dir">Filtra o ar</td></tr>
+  <tr><td class="ligar-esq">🫁 Pulmão</td><td class="ligar-meio">···</td><td class="ligar-dir">Bombeia o sangue</td></tr>
+  <tr><td class="ligar-esq">🧠 Cérebro</td><td class="ligar-meio">···</td><td class="ligar-dir">Controla os movimentos</td></tr>
+  <tr><td class="ligar-esq">🦴 Ossos</td><td class="ligar-meio">···</td><td class="ligar-dir">Sustenta o corpo</td></tr>
 </table>
-<p class="instrucao" style="margin-top:14px"><b>2. COMPLETE</b> as frases com as palavras do quadro:</p>
-<div class="quadro-palavras">
-  <span class="palavra-tag">água</span><span class="palavra-tag">dormir</span>
-  <span class="palavra-tag">exercício</span><span class="palavra-tag">frutas</span>
-  <span class="palavra-tag">higiene</span>
-</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="quadro-palavras"><span class="palavra-tag">água</span><span class="palavra-tag">exercício</span><span class="palavra-tag">frutas</span><span class="palavra-tag">dormir</span></div>
 <div class="box-resp">Para ter saúde preciso praticar ___________ todos os dias.</div>
-<div class="box-resp" style="margin-top:6px">Comer ___________ e verduras faz bem para o corpo.</div>
-<div class="box-resp" style="margin-top:6px">Beber ___________ é essencial para todos os órgãos.</div>
-<p class="instrucao" style="margin-top:14px"><b>3. DESENHE</b> o contorno do seu corpo e marque 3 órgãos:</p>
-<div class="caixa-grande" style="min-height:110px"></div>
-<div class="cheer"><p>💪 Cuidar do corpo é se amar! Muito bem!</p></div>
-</div>`;
+<div class="box-resp" style="margin-top:6px">Comer ___________ faz bem para o corpo.</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> o corpo e marque 3 órgãos:</p>
+<div class="caixa-grande" style="min-height:95px"></div>
+<div class="cheer"><p>💪 Cuidar do corpo é se amar!</p></div>`,
+
+    `${lha}<div class="act-title">🔬 Estados da Água — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o estado ao exemplo:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">💧 Líquido</td><td class="ligar-meio">···</td><td class="ligar-dir">Vapor, nuvens</td></tr>
+  <tr><td class="ligar-esq">🧊 Sólido</td><td class="ligar-meio">···</td><td class="ligar-dir">Água, chuva, suco</td></tr>
+  <tr><td class="ligar-esq">💨 Gasoso</td><td class="ligar-meio">···</td><td class="ligar-dir">Gelo, neve, granizo</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="quadro-palavras"><span class="palavra-tag">ferver</span><span class="palavra-tag">congelar</span><span class="palavra-tag">evaporar</span><span class="palavra-tag">derreter</span></div>
+<div class="box-resp">Quando esquentamos a água ela começa a ___________.</div>
+<div class="box-resp" style="margin-top:6px">O gelo no sol começa a ___________.</div>
+<p class="instrucao" style="margin-top:12px"><b>3. MARQUE ✔</b> os bons usos da água:</p>
+<div class="grid2"><div class="multipla">( ) Beber</div><div class="multipla">( ) Tomar banho</div><div class="multipla">( ) Desperdiçar</div><div class="multipla">( ) Regar plantas</div></div>
+<div class="cheer"><p>💧 Água é vida! Você aprendeu muito!</p></div>`,
+
+    `${lha}<div class="act-title">🔬 As Plantas — ${T}</div>
+<p class="instrucao"><b>1. IDENTIFIQUE</b> as partes da planta e suas funções:</p>
+<div class="destaque" style="font-size:13px">
+  🍃 FOLHAS — servem para: ___________________________<br>
+  🌸 FLORES — servem para: ___________________________<br>
+  🌿 CAULE — serve para: ___________________________<br>
+  🌱 RAIZ — serve para: ___________________________
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="quadro-palavras"><span class="palavra-tag">sol</span><span class="palavra-tag">água</span><span class="palavra-tag">terra</span><span class="palavra-tag">ar</span></div>
+<div class="box-resp">Para crescer a planta precisa de ___________, ___________ e ___________.</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> uma planta completa com todas as partes:</p>
+<div class="caixa-grande" style="min-height:95px"></div>
+<div class="cheer"><p>🌱 Você sabe muito sobre plantas!</p></div>`,
+
+    `${lha}<div class="act-title">🔬 Animais Vertebrados — ${T}</div>
+<p class="instrucao"><b>1. CLASSIFIQUE</b> os animais:</p>
+<div class="quadro-palavras"><span class="palavra-tag">Mamífero</span><span class="palavra-tag">Ave</span><span class="palavra-tag">Réptil</span><span class="palavra-tag">Peixe</span><span class="palavra-tag">Anfíbio</span></div>
+<div class="grid3">
+  <div class="celula"><div style="font-size:28px">🐶</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🦅</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🐍</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🐟</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🐸</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🐘</div><span class="linha"></span></div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">Animais que têm penas são chamados de ___________.</div>
+<div class="box-resp" style="margin-top:6px">Animais que amamentam filhotes são ___________.</div>
+<div class="cheer"><p>🦁 Você conhece muito sobre os animais!</p></div>`,
+
+    `${lha}<div class="act-title">🔬 Sistema Solar — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o planeta à sua característica:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🔴 Marte</td><td class="ligar-meio">···</td><td class="ligar-dir">O maior planeta do sistema solar</td></tr>
+  <tr><td class="ligar-esq">🟡 Saturno</td><td class="ligar-meio">···</td><td class="ligar-dir">Planeta vermelho</td></tr>
+  <tr><td class="ligar-esq">🟠 Júpiter</td><td class="ligar-meio">···</td><td class="ligar-dir">Tem anéis ao redor</td></tr>
+  <tr><td class="ligar-esq">🔵 Netuno</td><td class="ligar-meio">···</td><td class="ligar-dir">Planeta mais distante do sol</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">O planeta onde vivemos é chamado ___________.</div>
+<div class="box-resp" style="margin-top:6px">O astro no centro do sistema solar é o ___________.</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> o sol e 3 planetas ao redor:</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<div class="cheer"><p>🌍 O universo é incrível e você também!</p></div>`,
+
+    `${lha}<div class="act-title">🔬 Reciclagem — ${T}</div>
+<p class="instrucao"><b>1. COLOQUE</b> cada material na lixeira certa:</p>
+<div class="destaque" style="font-size:13px">
+  🟡 Amarelo = Metal &nbsp;&nbsp; 🔵 Azul = Papel<br>
+  🔴 Vermelho = Plástico &nbsp;&nbsp; 🟢 Verde = Vidro
+</div>
+<div class="grid2">
+  <div class="celula">🥤 Lata de alumínio → lixeira ___</div>
+  <div class="celula">📰 Jornal velho → lixeira ___</div>
+  <div class="celula">🧴 Garrafa PET → lixeira ___</div>
+  <div class="celula">🫙 Pote de vidro → lixeira ___</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. MARQUE ✔</b> atitudes que ajudam o meio ambiente:</p>
+<div class="grid2"><div class="multipla">( ) Reciclar o lixo</div><div class="multipla">( ) Jogar lixo no chão</div><div class="multipla">( ) Economizar água</div><div class="multipla">( ) Desperdiçar energia</div></div>
+<div class="cheer"><p>♻️ Você cuida do planeta! Parabéns!</p></div>`,
+
+    `${lha}<div class="act-title">🔬 O Céu e o Clima — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o fenômeno ao que ele é:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">⛈️ Tempestade</td><td class="ligar-meio">···</td><td class="ligar-dir">Arco colorido após a chuva</td></tr>
+  <tr><td class="ligar-esq">🌈 Arco-íris</td><td class="ligar-meio">···</td><td class="ligar-dir">Chuva com raios e trovões</td></tr>
+  <tr><td class="ligar-esq">❄️ Neve</td><td class="ligar-meio">···</td><td class="ligar-dir">Água gelada que cai do céu</td></tr>
+  <tr><td class="ligar-esq">🌫️ Neblina</td><td class="ligar-meio">···</td><td class="ligar-dir">Nuvem baixa que cobre tudo</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE</b> o diário do tempo desta semana:</p>
+<div class="grid3">
+  ${['Seg','Ter','Qua','Qui','Sex'].map(d=>`<div class="celula"><b>${d}</b><div style="font-size:24px">___</div></div>`).join('')}
+</div>
+<div class="cheer"><p>🌤️ Você observa o mundo ao redor! Incrível!</p></div>`,
+
+    `${lha}<div class="act-title">🔬 Os 5 Sentidos — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o sentido ao órgão que o realiza:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">👁️ Visão</td><td class="ligar-meio">···</td><td class="ligar-dir">Nariz</td></tr>
+  <tr><td class="ligar-esq">👂 Audição</td><td class="ligar-meio">···</td><td class="ligar-dir">Olhos</td></tr>
+  <tr><td class="ligar-esq">👃 Olfato</td><td class="ligar-meio">···</td><td class="ligar-dir">Ouvidos</td></tr>
+  <tr><td class="ligar-esq">👅 Paladar</td><td class="ligar-meio">···</td><td class="ligar-dir">Pele e mãos</td></tr>
+  <tr><td class="ligar-esq">✋ Tato</td><td class="ligar-meio">···</td><td class="ligar-dir">Língua e boca</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. QUE SENTIDO VOCÊ USA</b> em cada situação?</p>
+<div class="box-resp">Ao ouvir música, uso o sentido da ___________.</div>
+<div class="box-resp" style="margin-top:6px">Ao sentir o cheiro de comida, uso ___________.</div>
+<div class="box-resp" style="margin-top:6px">Ao tocar em ${tema}, uso o sentido do ___________.</div>
+<div class="cheer"><p>🌟 Seus sentidos são incríveis! Parabéns!</p></div>`
+  ];
+
+  return `<div class="page">${ts[tpl]}</div>`;
 }
 
 function buildArte(tema, a){
   const T = cap(tema);
-  const tpl = nextTpl('arte',3);
-  const cores = [
-    {nome:'VERMELHO',hex:'#E53935'},{nome:'AZUL',hex:'#1E88E5'},
-    {nome:'AMARELO',hex:'#FDD835'},{nome:'VERDE',hex:'#43A047'},
-    {nome:'ROSA',hex:'#E91E63'},{nome:'LARANJA',hex:'#FB8C00'}
-  ];
+  const tpl = nextTpl('arte',10);
+  const lha = lh(a);
+  const cHex = ['#E53935','#1E88E5','#FDD835','#43A047','#E91E63','#FB8C00'];
+  const cNome = ['VERMELHO','AZUL','AMARELO','VERDE','ROSA','LARANJA'];
 
-  if(tpl===0) return `<div class="page">
-${lh(a)}
-<div class="act-title">🎨 Arte — Pinte com ${T}</div>
-<p class="instrucao"><b>1. PINTE AS FORMAS</b> de acordo com a legenda de cores:</p>
-<div class="destaque" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center">
-  ${cores.map((c,i)=>`<div style="display:flex;align-items:center;gap:5px"><div style="width:22px;height:22px;background:${c.hex};border-radius:4px;border:1px solid #ccc"></div><span style="font-size:12px;font-weight:700">${i+1} - ${c.nome}</span></div>`).join('')}
+  const ts = [
+    `${lha}<div class="act-title">🎨 Pinte com ${T}</div>
+<p class="instrucao"><b>1. PINTE</b> as formas de acordo com a legenda:</p>
+<div class="destaque" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+  ${cNome.map((n,i)=>`<div style="display:flex;align-items:center;gap:4px"><div style="width:18px;height:18px;background:${cHex[i]};border-radius:3px;border:1px solid #ccc"></div><span style="font-size:10px;font-weight:700">${i+1}-${n}</span></div>`).join('')}
 </div>
-<div class="caixa-grande" style="min-height:130px;position:relative">
-  <div style="position:absolute;inset:10px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center">
-    <svg width="70" height="70"><circle cx="35" cy="35" r="28" fill="none" stroke="#ddd" stroke-width="2"/><text x="35" y="70" text-anchor="middle" font-size="10" fill="#999">1</text></svg>
-    <svg width="70" height="70"><rect x="10" y="10" width="50" height="50" fill="none" stroke="#ddd" stroke-width="2"/><text x="35" y="70" text-anchor="middle" font-size="10" fill="#999">2</text></svg>
-    <svg width="70" height="70"><polygon points="35,5 65,60 5,60" fill="none" stroke="#ddd" stroke-width="2"/><text x="35" y="70" text-anchor="middle" font-size="10" fill="#999">3</text></svg>
-    <svg width="70" height="70"><polygon points="35,5 65,30 50,65 20,65 5,30" fill="none" stroke="#ddd" stroke-width="2"/><text x="35" y="70" text-anchor="middle" font-size="10" fill="#999">4</text></svg>
-  </div>
-</div>
-<p class="instrucao" style="margin-top:14px"><b>2. CRIE SEU DESENHO</b> sobre ${T} usando as cores que você mais gosta:</p>
-<div class="caixa-grande" style="min-height:120px"></div>
-<p class="instrucao" style="margin-top:10px"><b>3. COMPLETE:</b> Meu desenho tem as cores: ___________________________</p>
-<div class="cheer"><p>🎨 Sua arte é única! Você é um artista incrível!</p></div>
-</div>`;
+<div class="caixa-grande" style="min-height:110px;position:relative"><div style="position:absolute;inset:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center">
+  <svg width="62" height="62"><circle cx="31" cy="31" r="25" fill="none" stroke="#ddd" stroke-width="2"/><text x="31" y="66" text-anchor="middle" font-size="10" fill="#bbb">1</text></svg>
+  <svg width="62" height="62"><rect x="8" y="8" width="46" height="46" fill="none" stroke="#ddd" stroke-width="2"/><text x="31" y="66" text-anchor="middle" font-size="10" fill="#bbb">2</text></svg>
+  <svg width="62" height="62"><polygon points="31,4 57,56 5,56" fill="none" stroke="#ddd" stroke-width="2"/><text x="31" y="66" text-anchor="middle" font-size="10" fill="#bbb">3</text></svg>
+  <svg width="62" height="62"><polygon points="31,4 57,27 47,58 15,58 5,27" fill="none" stroke="#ddd" stroke-width="2"/><text x="31" y="66" text-anchor="middle" font-size="10" fill="#bbb">4</text></svg>
+</div></div>
+<p class="instrucao" style="margin-top:10px"><b>2. CRIE</b> seu desenho sobre ${T}:</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<div class="cheer"><p>🎨 Sua arte é única!</p></div>`,
 
-  if(tpl===1) return `<div class="page">
-${lh(a)}
-<div class="act-title">🎨 Colagem e Recorte — ${T}</div>
-<p class="instrucao"><b>1. ENCONTRE</b> a metade correta de cada desenho, recorte e cole para completar:</p>
+    `${lha}<div class="act-title">🎨 Colagem — ${T}</div>
+<p class="instrucao"><b>1. ENCONTRE</b> a metade correta e cole para completar:</p>
 <div class="grid2">
-  <div class="celula" style="min-height:90px"><div style="font-size:36px">🌸</div><div class="nome">Flor</div></div>
-  <div class="celula" style="min-height:90px"><div style="font-size:36px">🏠</div><div class="nome">Casa</div></div>
-  <div class="celula" style="min-height:90px"><div style="font-size:36px">🌳</div><div class="nome">Árvore</div></div>
-  <div class="celula" style="min-height:90px"><div style="font-size:36px">⭐</div><div class="nome">Estrela</div></div>
+  <div class="celula" style="min-height:75px"><div style="font-size:30px">🌸</div><div class="nome">Flor</div></div>
+  <div class="celula" style="min-height:75px"><div style="font-size:30px">🏠</div><div class="nome">Casa</div></div>
+  <div class="celula" style="min-height:75px"><div style="font-size:30px">🌳</div><div class="nome">Árvore</div></div>
+  <div class="celula" style="min-height:75px"><div style="font-size:30px">⭐</div><div class="nome">Estrela</div></div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>2. COLORA</b> o desenho abaixo de acordo com a legenda de números:</p>
-<div class="destaque" style="font-size:13px">
-  1 - AZUL &nbsp;&nbsp; 2 - VERMELHO &nbsp;&nbsp; 3 - AMARELO &nbsp;&nbsp; 4 - VERDE &nbsp;&nbsp; 5 - LARANJA
-</div>
-<div class="caixa-grande" style="min-height:120px;display:flex;align-items:center;justify-content:center">
-  <svg width="200" height="100">
-    <circle cx="50" cy="50" r="30" fill="none" stroke="#ddd" stroke-width="2"/><text x="50" y="55" text-anchor="middle" font-size="14" fill="#aaa">1</text>
-    <rect x="100" y="20" width="60" height="60" fill="none" stroke="#ddd" stroke-width="2"/><text x="130" y="55" text-anchor="middle" font-size="14" fill="#aaa">2</text>
-    <polygon points="175,20 200,70 150,70" fill="none" stroke="#ddd" stroke-width="2"/><text x="175" y="55" text-anchor="middle" font-size="14" fill="#aaa">3</text>
+<p class="instrucao" style="margin-top:12px"><b>2. COLORA</b> de acordo com a legenda numérica:</p>
+<div class="destaque" style="font-size:12px">1-AZUL &nbsp; 2-VERMELHO &nbsp; 3-AMARELO &nbsp; 4-VERDE</div>
+<div class="caixa-grande" style="min-height:90px;display:flex;align-items:center;justify-content:center">
+  <svg width="180" height="80">
+    <circle cx="40" cy="40" r="25" fill="none" stroke="#ddd" stroke-width="2"/><text x="40" y="45" text-anchor="middle" font-size="13" fill="#aaa">1</text>
+    <rect x="85" y="15" width="46" height="46" fill="none" stroke="#ddd" stroke-width="2"/><text x="108" y="43" text-anchor="middle" font-size="13" fill="#aaa">2</text>
+    <polygon points="157,8 175,58 139,58" fill="none" stroke="#ddd" stroke-width="2"/><text x="157" y="45" text-anchor="middle" font-size="13" fill="#aaa">3</text>
   </svg>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>3. CRIE</b> um desenho livre sobre ${T} no espaço abaixo:</p>
-<div class="caixa-grande" style="min-height:100px"></div>
-<div class="cheer"><p>✂️ Você criou algo lindo! A arte está em você!</p></div>
-</div>`;
+<div class="cheer"><p>✂️ Você criou algo lindo!</p></div>`,
 
-  return `<div class="page">
-${lh(a)}
-<div class="act-title">🎨 Cores Primárias e Secundárias — ${T}</div>
-<p class="instrucao"><b>1. LIGUE</b> as cores primárias para descobrir as cores secundárias:</p>
+    `${lha}<div class="act-title">🎨 Cores Primárias — ${T}</div>
+<p class="instrucao"><b>1. COMPLETE</b> a mistura de cores:</p>
 <table class="ligar-table">
-  <tr><td class="ligar-esq">🔴 Vermelho + 🔵 Azul</td><td class="ligar-meio">→</td><td class="ligar-dir">🟡 Amarelo</td></tr>
-  <tr><td class="ligar-esq">🔵 Azul + 🟡 Amarelo</td><td class="ligar-meio">→</td><td class="ligar-dir">🟣 Roxo / Violeta</td></tr>
-  <tr><td class="ligar-esq">🔴 Vermelho + 🟡 Amarelo</td><td class="ligar-meio">→</td><td class="ligar-dir">🟢 Verde</td></tr>
+  <tr><td class="ligar-esq">🔴 Vermelho + 🔵 Azul</td><td class="ligar-meio">→</td><td class="ligar-dir">___________</td></tr>
+  <tr><td class="ligar-esq">🔵 Azul + 🟡 Amarelo</td><td class="ligar-meio">→</td><td class="ligar-dir">___________</td></tr>
+  <tr><td class="ligar-esq">🔴 Vermelho + 🟡 Amarelo</td><td class="ligar-meio">→</td><td class="ligar-dir">___________</td></tr>
 </table>
-<p class="instrucao" style="margin-top:14px"><b>2. PINTE</b> os espaços com as cores corretas:</p>
-<div class="grid3">
-  ${cores.map(c=>`<div class="celula"><div style="width:50px;height:50px;border-radius:50%;border:2px solid #ddd;margin:0 auto"></div><div class="nome">${c.nome}</div></div>`).join('')}
+<p class="instrucao" style="margin-top:12px"><b>2. PINTE</b> os círculos com as cores corretas:</p>
+<div class="grid3">${cNome.map((n,i)=>`<div class="celula"><div style="width:44px;height:44px;border-radius:50%;border:2px solid #ddd;margin:0 auto"></div><div class="nome">${n}</div></div>`).join('')}</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> um arco-íris e escreva os nomes das cores:</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<div class="cheer"><p>🌈 O mundo fica mais bonito com suas cores!</p></div>`,
+
+    `${lha}<div class="act-title">🎨 Autorretrato — ${T}</div>
+<p class="instrucao"><b>1. DESENHE</b> seu rosto no espelho:</p>
+<div style="width:160px;height:160px;border-radius:50%;border:3px solid #F48FB1;margin:0 auto;background:#fafafa"></div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE</b> sobre você:</p>
+<div class="box-resp">Minha cor de cabelo é: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Minha cor de olhos é: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">O que mais gosto em mim: ___________________________</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DECORE</b> seu autorretrato com as cores favoritas! 🖍️</p>
+<div class="cheer"><p>🌟 Você é único e especial!</p></div>`,
+
+    `${lha}<div class="act-title">🎨 Arte com Natureza — ${T}</div>
+<p class="instrucao"><b>1. IDENTIFIQUE</b> os materiais de cada tipo de arte:</p>
+<div class="grid2">
+  <div class="celula"><b>🖼️ Pintura</b><br><span style="font-size:11px">Usa: ___________________________</span></div>
+  <div class="celula"><b>✂️ Escultura</b><br><span style="font-size:11px">Usa: ___________________________</span></div>
+  <div class="celula"><b>📸 Fotografia</b><br><span style="font-size:11px">Usa: ___________________________</span></div>
+  <div class="celula"><b>🎭 Teatro</b><br><span style="font-size:11px">Usa: ___________________________</span></div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>3. DESENHE</b> um arco-íris com todas as cores e escreva os nomes:</p>
-<div class="caixa-grande" style="min-height:110px"></div>
-<div class="cheer"><p>🌈 O mundo é mais bonito com suas cores! Parabéns!</p></div>
-</div>`;
+<p class="instrucao" style="margin-top:12px"><b>2. CRIE</b> uma obra usando elementos da natureza:</p>
+<div class="caixa-grande" style="min-height:100px"></div>
+<p class="instrucao" style="margin-top:8px"><b>3. TÍTULO</b> da sua obra: ___________________________</p>
+<div class="cheer"><p>🌿 Arte e natureza juntas!</p></div>`,
+
+    `${lha}<div class="act-title">🎨 Texturas — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o material à sua textura:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🪵 Madeira</td><td class="ligar-meio">···</td><td class="ligar-dir">Macia e fofa</td></tr>
+  <tr><td class="ligar-esq">🧶 Algodão</td><td class="ligar-meio">···</td><td class="ligar-dir">Lisa e fria</td></tr>
+  <tr><td class="ligar-esq">🪨 Pedra</td><td class="ligar-meio">···</td><td class="ligar-dir">Áspera e dura</td></tr>
+  <tr><td class="ligar-esq">🫧 Vidro</td><td class="ligar-meio">···</td><td class="ligar-dir">Grossa e dura</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. CRIE</b> um padrão de texturas no quadro:</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESCREVA</b> a textura de ${tema}:</p>
+<span class="linha"></span>
+<div class="cheer"><p>✋ Você sentiu a arte com as mãos!</p></div>`,
+
+    `${lha}<div class="act-title">🎨 Artistas Famosos — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o artista ao estilo de arte:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🎨 Tarsila do Amaral</td><td class="ligar-meio">···</td><td class="ligar-dir">Arte abstrata com formas geométricas</td></tr>
+  <tr><td class="ligar-esq">🖌️ Cândido Portinari</td><td class="ligar-meio">···</td><td class="ligar-dir">Pinturas do povo brasileiro</td></tr>
+  <tr><td class="ligar-esq">🌻 Vincent Van Gogh</td><td class="ligar-meio">···</td><td class="ligar-dir">Pinceladas fortes e cores vivas</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. PINTE</b> ao estilo de Tarsila do Amaral (formas simples e coloridas):</p>
+<div class="caixa-grande" style="min-height:95px"></div>
+<p class="instrucao" style="margin-top:8px"><b>3. MEU ARTISTA FAVORITO:</b> ___________________________</p>
+<div class="cheer"><p>🖼️ Você tem o espírito de um grande artista!</p></div>`,
+
+    `${lha}<div class="act-title">🎨 Dobraduras — ${T}</div>
+<p class="instrucao"><b>1. SIGA</b> os passos para dobrar um barquinho:</p>
+<div class="grid3">
+  <div class="celula"><div style="font-size:28px">📄</div><div class="nome">1. Dobre ao meio</div></div>
+  <div class="celula"><div style="font-size:28px">📐</div><div class="nome">2. Dobre as pontas</div></div>
+  <div class="celula"><div style="font-size:28px">⛵</div><div class="nome">3. Abra o barco!</div></div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. DECORE</b> seu barco com desenhos e cores!</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<p class="instrucao" style="margin-top:10px"><b>3. ONDE</b> seu barco vai viajar? Escreva:</p>
+<span class="linha"></span><span class="linha"></span>
+<div class="cheer"><p>⛵ Sua criatividade não tem limites!</p></div>`,
+
+    `${lha}<div class="act-title">🎨 Mosaico — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> a técnica de arte ao que ela usa:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🎨 Pintura</td><td class="ligar-meio">···</td><td class="ligar-dir">Pedaços colados formando imagem</td></tr>
+  <tr><td class="ligar-esq">🪄 Mosaico</td><td class="ligar-meio">···</td><td class="ligar-dir">Dobrar papel para criar formas</td></tr>
+  <tr><td class="ligar-esq">✈️ Dobradura</td><td class="ligar-meio">···</td><td class="ligar-dir">Tinta sobre superfície</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. CRIE</b> um mosaico de ${T} com pedaços de papel colorido:</p>
+<div class="caixa-grande" style="min-height:100px"></div>
+<p class="instrucao" style="margin-top:10px"><b>3. QUANTAS CORES</b> você usou? ___</p>
+<div class="cheer"><p>🎭 Cada pedacinho é uma parte de você!</p></div>`,
+
+    `${lha}<div class="act-title">🎨 Música e Ritmo — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o instrumento ao grupo:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🥁 Bateria</td><td class="ligar-meio">···</td><td class="ligar-dir">Instrumento de corda</td></tr>
+  <tr><td class="ligar-esq">🎸 Violão</td><td class="ligar-meio">···</td><td class="ligar-dir">Instrumento de sopro</td></tr>
+  <tr><td class="ligar-esq">🎺 Trompete</td><td class="ligar-meio">···</td><td class="ligar-dir">Instrumento de percussão</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. CRIE</b> uma música sobre ${T}. Complete a letra:</p>
+<div class="destaque" style="font-size:13px;line-height:2">
+  ${T} é ___________, ${T} é ___________,<br>
+  Todo mundo gosta de ver ___________.
+</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> seu instrumento favorito:</p>
+<div class="caixa-grande" style="min-height:80px"></div>
+<div class="cheer"><p>🎵 Você tem muito talento musical!</p></div>`
+  ];
+
+  return `<div class="page">${ts[tpl]}</div>`;
 }
 
 function buildEdFisica(tema, a){
   const T = cap(tema);
-  const tpl = nextTpl('ef',3);
-  const brincadeiras = [
-    {nome:'Pular Corda',emoji:'🪢'},{nome:'Pega-Pega',emoji:'🏃'},
-    {nome:'Amarelinha',emoji:'⬛'},{nome:'Bambolê',emoji:'⭕'},
-    {nome:'Jogo da Velha',emoji:'✖️'},{nome:'Bolinha de Gude',emoji:'🔵'},
-    {nome:'Pipa',emoji:'🪁'},{nome:'Esconde-Esconde',emoji:'🙈'},
-    {nome:'Cantiga de Roda',emoji:'🎵'},
+  const tpl = nextTpl('ef',10);
+  const lha = lh(a);
+  const br6 = [
+    {n:'Pular Corda',e:'🪢'},{n:'Pega-Pega',e:'🏃'},{n:'Amarelinha',e:'⬛'},
+    {n:'Bambolê',e:'⭕'},{n:'Esconde-Esconde',e:'🙈'},{n:'Cantiga de Roda',e:'🎵'}
   ];
-  const sorted = [...brincadeiras].sort(()=>Math.random()-.5).slice(0,6);
 
-  if(tpl===0) return `<div class="page">
-${lh(a)}
-<div class="act-title">⚽ Ed. Física — Brincadeiras</div>
-<p class="instrucao"><b>USANDO O BANCO DE PALAVRAS,</b> escreva o nome de cada brincadeira embaixo da imagem:</p>
-<div class="quadro-palavras">${sorted.map(b=>`<span class="palavra-tag">${b.nome}</span>`).join('')}</div>
-<div class="grid3">
-  ${sorted.map(b=>`<div class="celula"><div style="font-size:36px">${b.emoji}</div><div class="celula linha-nome" style="margin-top:8px;width:100%"></div></div>`).join('')}
-</div>
-<p class="instrucao" style="margin-top:14px"><b>MARQUE ✔</b> as brincadeiras que você já praticou:</p>
-<div class="grid3">
-  ${['Pular Corda','Pega-Pega','Amarelinha','Bambolê','Futebol','Natação'].map(b=>`<div class="multipla">( ) ${b}</div>`).join('')}
-</div>
-<p class="instrucao" style="margin-top:12px"><b>RESPONDA:</b></p>
-<div class="box-resp">Minha brincadeira favorita é: ___________________________</div>
-<div class="cheer"><p>💪 Atividade física é saúde! Você arrasou!</p></div>
-</div>`;
+  const ts = [
+    `${lha}<div class="act-title">⚽ Brincadeiras — ${T}</div>
+<p class="instrucao"><b>ESCREVA</b> o nome de cada brincadeira usando o banco de palavras:</p>
+<div class="quadro-palavras">${br6.map(b=>`<span class="palavra-tag">${b.n}</span>`).join('')}</div>
+<div class="grid3">${br6.map(b=>`<div class="celula"><div style="font-size:32px">${b.e}</div><span class="linha" style="margin-top:7px"></span></div>`).join('')}</div>
+<p class="instrucao" style="margin-top:12px"><b>MARQUE ✔</b> as que você já praticou:</p>
+<div class="grid3">${['Pular Corda','Pega-Pega','Amarelinha','Bambolê','Futebol','Natação'].map(b=>`<div class="multipla">( ) ${b}</div>`).join('')}</div>
+<div class="box-resp" style="margin-top:8px">Minha brincadeira favorita: ___________________________</div>
+<div class="cheer"><p>💪 Atividade física é saúde!</p></div>`,
 
-  if(tpl===1) return `<div class="page">
-${lh(a)}
-<div class="act-title">⚽ Ed. Física — Esportes com ${T}</div>
-<p class="instrucao"><b>1. LIGUE</b> o esporte ao material que ele usa:</p>
+    `${lha}<div class="act-title">⚽ Esportes — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o esporte ao material que usa:</p>
 <table class="ligar-table">
-  <tr><td class="ligar-esq">⚽ Futebol</td><td class="ligar-meio">···</td><td class="ligar-dir">🏓 Raquete e bolinha</td></tr>
+  <tr><td class="ligar-esq">⚽ Futebol</td><td class="ligar-meio">···</td><td class="ligar-dir">🥽 Óculos e maiô</td></tr>
   <tr><td class="ligar-esq">🏊 Natação</td><td class="ligar-meio">···</td><td class="ligar-dir">⚽ Bola e chuteira</td></tr>
-  <tr><td class="ligar-esq">🏓 Tênis de Mesa</td><td class="ligar-meio">···</td><td class="ligar-dir">🥽 Óculos e maiô</td></tr>
+  <tr><td class="ligar-esq">🏓 Tênis de Mesa</td><td class="ligar-meio">···</td><td class="ligar-dir">🏓 Raquete e bolinha</td></tr>
   <tr><td class="ligar-esq">🤸 Ginástica</td><td class="ligar-meio">···</td><td class="ligar-dir">🩰 Collant e colchonete</td></tr>
 </table>
-<p class="instrucao" style="margin-top:14px"><b>2. COMPLETE</b> com as palavras do quadro:</p>
-<div class="quadro-palavras">
-  <span class="palavra-tag">saúde</span><span class="palavra-tag">amigos</span>
-  <span class="palavra-tag">corpo</span><span class="palavra-tag">divertido</span>
-  <span class="palavra-tag">energia</span>
-</div>
-<div class="box-resp">Praticar esportes faz bem para a ___________.</div>
-<div class="box-resp" style="margin-top:6px">O esporte me dá ___________ e disposição.</div>
-<div class="box-resp" style="margin-top:6px">Jogar com ___________ é muito ___________!</div>
-<p class="instrucao" style="margin-top:14px"><b>3. DESENHE</b> você praticando seu esporte favorito:</p>
-<div class="caixa-grande" style="min-height:100px"></div>
-<p class="instrucao">Meu esporte favorito é: ___________________________</p>
-<div class="cheer"><p>🏅 Você é um campeão! Continue se movimentando!</p></div>
-</div>`;
+<p class="instrucao" style="margin-top:12px"><b>2. MARQUE ✔</b> quais você já praticou:</p>
+<div class="grid3">${['Futebol','Natação','Ginástica','Vôlei','Basquete','Corrida'].map(b=>`<div class="multipla">( ) ${b}</div>`).join('')}</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> você praticando seu esporte favorito:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>🏅 Você é um campeão!</p></div>`,
 
-  return `<div class="page">
-${lh(a)}
-<div class="act-title">⚽ Jogo da Velha + Movimento — ${T}</div>
+    `${lha}<div class="act-title">⚽ Jogo da Velha + Movimentos</div>
 <p class="instrucao"><b>1. JOGO DA VELHA:</b> Jogue com seu colega ou professor!</p>
-<div style="display:flex;justify-content:center;margin:10px 0">
-  <table style="border-collapse:collapse">
-    ${[0,1,2].map(r=>`<tr>${[0,1,2].map(c=>`<td style="width:70px;height:70px;border:3px solid #444;text-align:center;vertical-align:middle;font-size:28px">&nbsp;</td>`).join('')}</tr>`).join('')}
-  </table>
+<div style="display:flex;justify-content:center;margin:8px 0">
+  <table style="border-collapse:collapse">${[0,1,2].map(r=>`<tr>${[0,1,2].map(c=>`<td style="width:62px;height:62px;border:3px solid #444;text-align:center;font-size:24px">&nbsp;</td>`).join('')}</tr>`).join('')}</table>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>2. SEQUÊNCIA DE MOVIMENTOS:</b> Siga a sequência abaixo:</p>
+<p class="instrucao" style="margin-top:12px"><b>2. SEQUÊNCIA DE MOVIMENTOS:</b></p>
 <div class="grid3">
-  <div class="celula"><div style="font-size:32px">🙌</div><div class="nome">5 palmas</div></div>
-  <div class="celula"><div style="font-size:32px">🦘</div><div class="nome">3 pulos</div></div>
-  <div class="celula"><div style="font-size:32px">🤸</div><div class="nome">2 agachamentos</div></div>
-  <div class="celula"><div style="font-size:32px">💃</div><div class="nome">Gire 1 vez</div></div>
-  <div class="celula"><div style="font-size:32px">🤲</div><div class="nome">Espreguice!</div></div>
-  <div class="celula"><div style="font-size:32px">😄</div><div class="nome">Sorria!</div></div>
+  <div class="celula"><div style="font-size:26px">🙌</div><div class="nome">5 palmas</div></div>
+  <div class="celula"><div style="font-size:26px">🦘</div><div class="nome">3 pulos</div></div>
+  <div class="celula"><div style="font-size:26px">🤸</div><div class="nome">2 agachamentos</div></div>
+  <div class="celula"><div style="font-size:26px">💃</div><div class="nome">Gire 1 vez</div></div>
+  <div class="celula"><div style="font-size:26px">🤲</div><div class="nome">Espreguice!</div></div>
+  <div class="celula"><div style="font-size:26px">😄</div><div class="nome">Sorria!</div></div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>3. RESPONDA:</b></p>
-<div class="box-resp">Como você se sente depois de se movimentar? ___________________________</div>
-<div class="box-resp" style="margin-top:6px">Qual movimento foi mais difícil? ___________________________</div>
-<div class="cheer"><p>🤸 Seu corpo é incrível! Continue se cuidando!</p></div>
-</div>`;
+<div class="box-resp" style="margin-top:8px">Como me senti: ___________________________</div>
+<div class="cheer"><p>🤸 Seu corpo é incrível!</p></div>`,
+
+    `${lha}<div class="act-title">⚽ Higiene e Saúde — ${T}</div>
+<p class="instrucao"><b>1. MARQUE ✔</b> os hábitos saudáveis:</p>
+<div class="grid2"><div class="multipla">( ) Escovar os dentes</div><div class="multipla">( ) Tomar banho todo dia</div><div class="multipla">( ) Comer muitos doces</div><div class="multipla">( ) Dormir bem</div><div class="multipla">( ) Lavar as mãos</div><div class="multipla">( ) Ficar muito tempo na TV</div></div>
+<p class="instrucao" style="margin-top:12px"><b>2. LIGUE</b> o hábito ao momento:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🪥 Escovar dentes</td><td class="ligar-meio">···</td><td class="ligar-dir">Antes de dormir e após refeições</td></tr>
+  <tr><td class="ligar-esq">🧼 Lavar as mãos</td><td class="ligar-meio">···</td><td class="ligar-dir">Antes de comer e após o banheiro</td></tr>
+  <tr><td class="ligar-esq">🛁 Tomar banho</td><td class="ligar-meio">···</td><td class="ligar-dir">Todos os dias</td></tr>
+</table>
+<div class="box-resp" style="margin-top:10px">Para ter saúde eu preciso: ___________________________</div>
+<div class="cheer"><p>🌸 Cuidar de si mesmo é muito importante!</p></div>`,
+
+    `${lha}<div class="act-title">⚽ Alongamento e Postura — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o benefício ao exercício:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🏃 Correr</td><td class="ligar-meio">···</td><td class="ligar-dir">Aumenta a flexibilidade</td></tr>
+  <tr><td class="ligar-esq">🧘 Alongar</td><td class="ligar-meio">···</td><td class="ligar-dir">Fortalece o coração</td></tr>
+  <tr><td class="ligar-esq">🤸 Ginástica</td><td class="ligar-meio">···</td><td class="ligar-dir">Melhora equilíbrio e coordenação</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. MARQUE ✔</b> as boas posturas:</p>
+<div class="grid2"><div class="multipla">( ) Sentar com as costas retas</div><div class="multipla">( ) Ficar curvado ao ler</div><div class="multipla">( ) Colocar os pés no chão</div><div class="multipla">( ) Deitar para estudar</div></div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> você fazendo um alongamento:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>🌟 Postura e saúde andam juntas!</p></div>`,
+
+    `${lha}<div class="act-title">⚽ Olimpíadas — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> a medalha à colocação:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🥇 Ouro</td><td class="ligar-meio">···</td><td class="ligar-dir">3º lugar</td></tr>
+  <tr><td class="ligar-esq">🥈 Prata</td><td class="ligar-meio">···</td><td class="ligar-dir">1º lugar</td></tr>
+  <tr><td class="ligar-esq">🥉 Bronze</td><td class="ligar-meio">···</td><td class="ligar-dir">2º lugar</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">Um esporte olímpico que conheço: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Um atleta brasileiro famoso: ___________________________</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> você recebendo uma medalha de ouro:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>🥇 Você já é um campeão para nós!</p></div>`,
+
+    `${lha}<div class="act-title">⚽ Jogos Cooperativos — ${T}</div>
+<p class="instrucao"><b>1. MARQUE ✔</b> atitudes que mostram trabalho em equipe:</p>
+<div class="grid2"><div class="multipla">( ) Ajudar o colega que caiu</div><div class="multipla">( ) Não deixar ninguém jogar</div><div class="multipla">( ) Comemorar junto</div><div class="multipla">( ) Brigar quando perde</div></div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="quadro-palavras"><span class="palavra-tag">respeito</span><span class="palavra-tag">amizade</span><span class="palavra-tag">cooperação</span><span class="palavra-tag">alegria</span></div>
+<div class="box-resp">Jogar em equipe exige ___________ e ___________.</div>
+<div class="box-resp" style="margin-top:6px">O mais importante em um jogo é: ___________________________</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> você e seus amigos brincando juntos:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>🤝 Juntos somos mais fortes!</p></div>`,
+
+    `${lha}<div class="act-title">⚽ Regras dos Jogos — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o jogo à sua regra principal:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">⚽ Futebol</td><td class="ligar-meio">···</td><td class="ligar-dir">Não pode usar as mãos</td></tr>
+  <tr><td class="ligar-esq">🏀 Basquete</td><td class="ligar-meio">···</td><td class="ligar-dir">Deve quicar a bola ao correr</td></tr>
+  <tr><td class="ligar-esq">🏐 Vôlei</td><td class="ligar-meio">···</td><td class="ligar-dir">Não pode deixar a bola cair</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. CRIE</b> uma regra para um jogo inventado por você:</p>
+<div class="box-resp">Nome do jogo: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Regra principal: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Quantos jogadores: ___________________________</div>
+<div class="cheer"><p>🎮 Você é um criador de jogos incrível!</p></div>`,
+
+    `${lha}<div class="act-title">⚽ Dança e Movimento — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o ritmo à dança:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🎵 Forró</td><td class="ligar-meio">···</td><td class="ligar-dir">Dança afro-brasileira</td></tr>
+  <tr><td class="ligar-esq">🎶 Samba</td><td class="ligar-meio">···</td><td class="ligar-dir">Dança nordestina a dois</td></tr>
+  <tr><td class="ligar-esq">💃 Capoeira</td><td class="ligar-meio">···</td><td class="ligar-dir">Arte marcial brasileira</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">Minha dança favorita é: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Dançar faz bem porque: ___________________________</div>
+<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> alguém dançando:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>💃 Seu corpo é feito para dançar!</p></div>`,
+
+    `${lha}<div class="act-title">⚽ Alimentação Saudável — ${T}</div>
+<p class="instrucao"><b>1. CLASSIFIQUE</b> os alimentos em saudáveis ou não saudáveis:</p>
+<div class="grid3">
+  <div class="celula"><div style="font-size:28px">🥦</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🍕</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🍎</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🍬</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🥕</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🥤</div><span class="linha"></span></div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. MONTE</b> um cardápio saudável para um dia:</p>
+<div class="box-resp">Café da manhã: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Almoço: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Jantar: ___________________________</div>
+<div class="cheer"><p>🥗 Você sabe cuidar bem da saúde!</p></div>`
+  ];
+
+  return `<div class="page">${ts[tpl]}</div>`;
 }
 
 function buildGeografia(tema, a){
   const T = cap(tema);
-  const tpl = nextTpl('geo',3);
+  const tpl = nextTpl('geo',10);
+  const lha = lh(a);
 
-  if(tpl===0) return `<div class="page">
-${lh(a)}
-<div class="act-title">🌎 Geografia — Meios de Comunicação</div>
-<p class="instrucao"><b>1. LIGUE</b> cada meio de comunicação ao que ele faz:</p>
+  const ts = [
+    `${lha}<div class="act-title">🌎 Meios de Comunicação — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> cada meio ao que ele faz:</p>
 <table class="ligar-table">
-  <tr><td class="ligar-esq">📺 Televisão</td><td class="ligar-meio">···</td><td class="ligar-dir">Transmite sons, músicas e notícias</td></tr>
-  <tr><td class="ligar-esq">📻 Rádio</td><td class="ligar-meio">···</td><td class="ligar-dir">Mostra imagens e notícias em casa</td></tr>
-  <tr><td class="ligar-esq">📰 Jornal</td><td class="ligar-meio">···</td><td class="ligar-dir">Liga para pessoas e acessa a internet</td></tr>
-  <tr><td class="ligar-esq">📱 Celular</td><td class="ligar-meio">···</td><td class="ligar-dir">Traz notícias escritas e impressas</td></tr>
+  <tr><td class="ligar-esq">📺 Televisão</td><td class="ligar-meio">···</td><td class="ligar-dir">Transmite sons e músicas</td></tr>
+  <tr><td class="ligar-esq">📻 Rádio</td><td class="ligar-meio">···</td><td class="ligar-dir">Mostra imagens e notícias</td></tr>
+  <tr><td class="ligar-esq">📰 Jornal</td><td class="ligar-meio">···</td><td class="ligar-dir">Liga para pessoas distantes</td></tr>
+  <tr><td class="ligar-esq">📱 Celular</td><td class="ligar-meio">···</td><td class="ligar-dir">Traz notícias escritas</td></tr>
 </table>
-<p class="instrucao" style="margin-top:14px"><b>2. COMPLETE:</b> Escreva o nome correto usando o quadro:</p>
-<div class="quadro-palavras">
-  ${['Campo','Cidade','Rio','Montanha','Floresta','Praia'].map(p=>`<span class="palavra-tag">${p}</span>`).join('')}
-</div>
-<div class="grid3">
-  <div class="celula"><div style="font-size:36px">🏙️</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:36px">🌾</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:36px">🏔️</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:36px">🌊</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:36px">🌿</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:36px">💧</div><span class="linha"></span></div>
-</div>
-<p class="instrucao" style="margin-top:12px"><b>3. DESENHE</b> o lugar onde você mora:</p>
-<div class="caixa-grande" style="min-height:90px"></div>
-<div class="cheer"><p>🌎 Você conhece muito bem o seu mundo! Incrível!</p></div>
-</div>`;
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE</b> com o nome do lugar:</p>
+<div class="quadro-palavras">${['Campo','Cidade','Rio','Montanha','Floresta','Praia'].map(p=>`<span class="palavra-tag">${p}</span>`).join('')}</div>
+<div class="grid3"><div class="celula"><div style="font-size:30px">🏙️</div><span class="linha"></span></div><div class="celula"><div style="font-size:30px">🌾</div><span class="linha"></span></div><div class="celula"><div style="font-size:30px">🏔️</div><span class="linha"></span></div><div class="celula"><div style="font-size:30px">🌊</div><span class="linha"></span></div><div class="celula"><div style="font-size:30px">🌿</div><span class="linha"></span></div><div class="celula"><div style="font-size:30px">💧</div><span class="linha"></span></div></div>
+<div class="cheer"><p>🌎 Você conhece muito bem o mundo!</p></div>`,
 
-  if(tpl===1) return `<div class="page">
-${lh(a)}
-<div class="act-title">🌎 Meios de Transporte — ${T}</div>
-<p class="instrucao"><b>1. CLASSIFIQUE</b> os meios de transporte em Terrestre, Aéreo ou Aquático:</p>
-<div class="grid3">
-  <div class="celula"><div style="font-size:32px">🚗</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:32px">✈️</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:32px">⛵</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:32px">🚂</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:32px">🚁</div><span class="linha"></span></div>
-  <div class="celula"><div style="font-size:32px">🚢</div><span class="linha"></span></div>
-</div>
-<p class="instrucao" style="margin-top:14px"><b>2. COMPLETE</b> as frases com os meios de transporte:</p>
+    `${lha}<div class="act-title">🌎 Meios de Transporte — ${T}</div>
+<p class="instrucao"><b>1. CLASSIFIQUE</b> em Terrestre, Aéreo ou Aquático:</p>
+<div class="grid3"><div class="celula"><div style="font-size:28px">🚗</div><span class="linha"></span></div><div class="celula"><div style="font-size:28px">✈️</div><span class="linha"></span></div><div class="celula"><div style="font-size:28px">⛵</div><span class="linha"></span></div><div class="celula"><div style="font-size:28px">🚂</div><span class="linha"></span></div><div class="celula"><div style="font-size:28px">🚁</div><span class="linha"></span></div><div class="celula"><div style="font-size:28px">🚢</div><span class="linha"></span></div></div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
 <div class="box-resp">Para viajar pelo mar eu uso: ___________________________</div>
-<div class="box-resp" style="margin-top:6px">Para ir para a escola eu vou de: ___________________________</div>
-<div class="box-resp" style="margin-top:6px">Para viajar muito longe e rápido eu uso: ___________________________</div>
-<p class="instrucao" style="margin-top:14px"><b>3. MARQUE ✔</b> quais meios de transporte você já usou:</p>
-<div class="grid3">
-  ${['Carro','Ônibus','Avião','Barco','Metrô','Bicicleta'].map(t=>`<div class="multipla">( ) ${t}</div>`).join('')}
-</div>
-<div class="cheer"><p>✈️ O mundo é grande e você já conhece muito dele!</p></div>
-</div>`;
+<div class="box-resp" style="margin-top:6px">Para ir rápido pelo ar eu uso: ___________________________</div>
+<p class="instrucao" style="margin-top:10px"><b>3. MARQUE ✔</b> quais você já usou:</p>
+<div class="grid3">${['Carro','Ônibus','Avião','Barco','Metrô','Bicicleta'].map(t=>`<div class="multipla">( ) ${t}</div>`).join('')}</div>
+<div class="cheer"><p>✈️ O mundo é grande e você já conhece muito!</p></div>`,
 
-  return `<div class="page">
-${lh(a)}
-<div class="act-title">🌎 O Brasil e suas Regiões — ${T}</div>
+    `${lha}<div class="act-title">🌎 Regiões do Brasil — ${T}</div>
 <p class="instrucao"><b>1. LIGUE</b> cada região ao que ela é conhecida:</p>
 <table class="ligar-table">
-  <tr><td class="ligar-esq">Norte</td><td class="ligar-meio">···</td><td class="ligar-dir">Maior floresta tropical do mundo</td></tr>
-  <tr><td class="ligar-esq">Nordeste</td><td class="ligar-meio">···</td><td class="ligar-dir">Belas praias e festas juninas</td></tr>
-  <tr><td class="ligar-esq">Centro-Oeste</td><td class="ligar-meio">···</td><td class="ligar-dir">Capital do Brasil — Brasília</td></tr>
-  <tr><td class="ligar-esq">Sudeste</td><td class="ligar-meio">···</td><td class="ligar-dir">Maior região industrial do país</td></tr>
-  <tr><td class="ligar-esq">Sul</td><td class="ligar-meio">···</td><td class="ligar-dir">Clima mais frio e influência europeia</td></tr>
+  <tr><td class="ligar-esq">Norte</td><td class="ligar-meio">···</td><td class="ligar-dir">Maior floresta tropical</td></tr>
+  <tr><td class="ligar-esq">Nordeste</td><td class="ligar-meio">···</td><td class="ligar-dir">Praias e festas juninas</td></tr>
+  <tr><td class="ligar-esq">Centro-Oeste</td><td class="ligar-meio">···</td><td class="ligar-dir">Capital — Brasília</td></tr>
+  <tr><td class="ligar-esq">Sudeste</td><td class="ligar-meio">···</td><td class="ligar-dir">Maior região industrial</td></tr>
+  <tr><td class="ligar-esq">Sul</td><td class="ligar-meio">···</td><td class="ligar-dir">Clima frio, influência europeia</td></tr>
 </table>
-<p class="instrucao" style="margin-top:14px"><b>2. COMPLETE</b> com o nome correto:</p>
+<p class="instrucao" style="margin-top:10px"><b>2. COMPLETE:</b></p>
 <div class="box-resp">A capital do Brasil é: ___________________________</div>
 <div class="box-resp" style="margin-top:6px">Eu moro na região: ___________________________</div>
-<div class="box-resp" style="margin-top:6px">O rio mais famoso do Brasil é o: ___________________________</div>
-<p class="instrucao" style="margin-top:14px"><b>3. DESENHE</b> algo típico da sua região:</p>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> algo típico da sua região:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>🗺️ Você conhece muito bem o Brasil!</p></div>`,
+
+    `${lha}<div class="act-title">🌎 Clima e Estações — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> a estação ao que acontece:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">☀️ Verão</td><td class="ligar-meio">···</td><td class="ligar-dir">Árvores perdem as folhas</td></tr>
+  <tr><td class="ligar-esq">🍂 Outono</td><td class="ligar-meio">···</td><td class="ligar-dir">Dias quentes e calor intenso</td></tr>
+  <tr><td class="ligar-esq">❄️ Inverno</td><td class="ligar-meio">···</td><td class="ligar-dir">Flores desabrocham</td></tr>
+  <tr><td class="ligar-esq">🌸 Primavera</td><td class="ligar-meio">···</td><td class="ligar-dir">Dias frios e geadas</td></tr>
+</table>
+<p class="instrucao" style="margin-top:10px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">Minha estação favorita é: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">No verão eu gosto de: ___________________________</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> a estação que você mais gosta:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>🌸 Você conhece bem as estações!</p></div>`,
+
+    `${lha}<div class="act-title">🌎 Pontos Cardeais — ${T}</div>
+<p class="instrucao"><b>1. COMPLETE</b> os pontos cardeais:</p>
+<div class="destaque" style="text-align:center;font-size:14px">
+  ⬆️ Norte = ___ &nbsp;&nbsp;&nbsp; ⬇️ Sul = ___<br>
+  ➡️ Leste = ___ &nbsp;&nbsp;&nbsp; ⬅️ Oeste = ___
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. LIGUE</b> o ponto à sua dica:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">⬆️ Norte</td><td class="ligar-meio">···</td><td class="ligar-dir">Onde o sol se põe</td></tr>
+  <tr><td class="ligar-esq">⬇️ Sul</td><td class="ligar-meio">···</td><td class="ligar-dir">Onde o sol nasce</td></tr>
+  <tr><td class="ligar-esq">➡️ Leste</td><td class="ligar-meio">···</td><td class="ligar-dir">Direção do Polo Norte</td></tr>
+  <tr><td class="ligar-esq">⬅️ Oeste</td><td class="ligar-meio">···</td><td class="ligar-dir">Direção do Polo Sul</td></tr>
+</table>
+<div class="box-resp" style="margin-top:10px">O sol nasce no ___________ e se põe no ___________.</div>
+<div class="cheer"><p>🧭 Você nunca vai se perder!</p></div>`,
+
+    `${lha}<div class="act-title">🌎 Continentes — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o continente à sua característica:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🌎 América do Sul</td><td class="ligar-meio">···</td><td class="ligar-dir">Maior continente do mundo</td></tr>
+  <tr><td class="ligar-esq">🌍 África</td><td class="ligar-meio">···</td><td class="ligar-dir">Onde fica o Brasil</td></tr>
+  <tr><td class="ligar-esq">🌏 Ásia</td><td class="ligar-meio">···</td><td class="ligar-dir">Berço da humanidade</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">O Brasil fica no continente: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">O oceano que banha o Brasil é: ___________________________</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> um mapa simples do Brasil:</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<div class="cheer"><p>🌎 Você tem o mundo na palma da mão!</p></div>`,
+
+    `${lha}<div class="act-title">🌎 Campo e Cidade — ${T}</div>
+<p class="instrucao"><b>1. CLASSIFIQUE</b> cada item em Campo ou Cidade:</p>
+<div class="grid3">
+  <div class="celula"><div style="font-size:28px">🏢</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🐄</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🚌</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🌾</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🏥</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:28px">🚜</div><span class="linha"></span></div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">No campo as pessoas trabalham com: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Na cidade as pessoas trabalham com: ___________________________</div>
+<p class="instrucao" style="margin-top:10px"><b>3. Você prefere morar no campo ou na cidade? Por quê?</b></p>
+<span class="linha"></span><span class="linha"></span>
+<div class="cheer"><p>🌳 Ambos têm belezas únicas!</p></div>`,
+
+    `${lha}<div class="act-title">🌎 Recursos Naturais — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o recurso ao seu uso:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">💧 Água</td><td class="ligar-meio">···</td><td class="ligar-dir">Gerar energia elétrica</td></tr>
+  <tr><td class="ligar-esq">🌿 Plantas</td><td class="ligar-meio">···</td><td class="ligar-dir">Beber, cozinhar, higiene</td></tr>
+  <tr><td class="ligar-esq">☀️ Sol</td><td class="ligar-meio">···</td><td class="ligar-dir">Fazer remédios e alimentos</td></tr>
+  <tr><td class="ligar-esq">⚡ Energia solar</td><td class="ligar-meio">···</td><td class="ligar-dir">Aquecer e iluminar a Terra</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. MARQUE ✔</b> atitudes que preservam os recursos naturais:</p>
+<div class="grid2"><div class="multipla">( ) Economizar água</div><div class="multipla">( ) Desmatar florestas</div><div class="multipla">( ) Plantar árvores</div><div class="multipla">( ) Poluir os rios</div></div>
+<div class="box-resp" style="margin-top:8px">Uma coisa que faço para preservar a natureza: ___________________________</div>
+<div class="cheer"><p>🌿 Você cuida do nosso planeta!</p></div>`,
+
+    `${lha}<div class="act-title">🌎 Mapas e Localização — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o elemento do mapa ao seu significado:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🗺️ Legenda</td><td class="ligar-meio">···</td><td class="ligar-dir">Indica o Norte no mapa</td></tr>
+  <tr><td class="ligar-esq">🧭 Rosa dos ventos</td><td class="ligar-meio">···</td><td class="ligar-dir">Explica os símbolos do mapa</td></tr>
+  <tr><td class="ligar-esq">📏 Escala</td><td class="ligar-meio">···</td><td class="ligar-dir">Mostra a proporção real e no mapa</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. DESENHE</b> um mapa da sua casa até a escola:</p>
 <div class="caixa-grande" style="min-height:100px"></div>
-<div class="cheer"><p>🗺️ Parabéns! Você conhece muito bem o Brasil!</p></div>
-</div>`;
+<p class="instrucao" style="margin-top:8px"><b>3. MARQUE</b> no mapa um ponto de referência que você usa:</p>
+<div class="cheer"><p>🗺️ Você sabe se localizar muito bem!</p></div>`,
+
+    `${lha}<div class="act-title">🌎 Preservação Ambiental — ${T}</div>
+<p class="instrucao"><b>1. CLASSIFIQUE</b> as atitudes em Preservação ou Degradação:</p>
+<div class="grid2">
+  <div class="celula">🌳 Plantar árvores<br>→ ___________</div>
+  <div class="celula">🗑️ Jogar lixo no rio<br>→ ___________</div>
+  <div class="celula">♻️ Reciclar o lixo<br>→ ___________</div>
+  <div class="celula">🔥 Queimar florestas<br>→ ___________</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">Posso ajudar o meio ambiente: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Se eu cortar uma árvore, devo plantar: ___________________________</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> uma floresta saudável:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>🌳 Cada árvore plantada é um futuro melhor!</p></div>`
+  ];
+
+  return `<div class="page">${ts[tpl]}</div>`;
 }
 
 function buildHistoria(tema, a){
   const T = cap(tema);
-  const tpl = nextTpl('his',3);
+  const tpl = nextTpl('his',10);
+  const lha = lh(a);
 
-  if(tpl===0) return `<div class="page">
-${lh(a)}
-<div class="act-title">🏛️ História — Linha do Tempo</div>
-<p class="instrucao"><b>1. NUMERE</b> os acontecimentos na ordem correta (de 1 a 4):</p>
+  const ts = [
+    `${lha}<div class="act-title">🏛️ Linha do Tempo — ${T}</div>
+<p class="instrucao"><b>1. NUMERE</b> os acontecimentos em ordem (1 a 4):</p>
 <div class="grid2">
-  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">As pessoas aprenderam a plantar alimentos</div></div>
-  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Os primeiros humanos viviam em cavernas</div></div>
-  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Surgiram as primeiras cidades e vilas</div></div>
-  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">A escrita foi criada para guardar informações</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Pessoas aprenderam a plantar alimentos</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Primeiros humanos viviam em cavernas</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Surgiram as primeiras cidades</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">A escrita foi criada</div></div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>2. LIGUE</b> o período à sua característica:</p>
+<p class="instrucao" style="margin-top:12px"><b>2. LIGUE</b> o período à sua característica:</p>
 <table class="ligar-table">
-  <tr><td class="ligar-esq">Pré-História</td><td class="ligar-meio">···</td><td class="ligar-dir">Tempo dos castelos e cavaleiros</td></tr>
-  <tr><td class="ligar-esq">Idade Média</td><td class="ligar-meio">···</td><td class="ligar-dir">Época das cavernas e pinturas rupestres</td></tr>
-  <tr><td class="ligar-esq">Idade Contemporânea</td><td class="ligar-meio">···</td><td class="ligar-dir">Surgimento dos computadores e internet</td></tr>
+  <tr><td class="ligar-esq">Pré-História</td><td class="ligar-meio">···</td><td class="ligar-dir">Tempo dos castelos</td></tr>
+  <tr><td class="ligar-esq">Idade Média</td><td class="ligar-meio">···</td><td class="ligar-dir">Época das cavernas</td></tr>
+  <tr><td class="ligar-esq">Contemporânea</td><td class="ligar-meio">···</td><td class="ligar-dir">Computadores e internet</td></tr>
 </table>
-<p class="instrucao" style="margin-top:14px"><b>3. ANTES E AGORA:</b> Desenhe como era e como é hoje:</p>
-<div class="grid2">
-  <div class="celula"><div style="font-family:'Baloo 2',cursive;font-size:14px;color:#C2185B;margin-bottom:6px">⏮️ ANTES</div><div class="caixa-grande" style="min-height:80px"></div></div>
-  <div class="celula"><div style="font-family:'Baloo 2',cursive;font-size:14px;color:#C2185B;margin-bottom:6px">⏭️ AGORA</div><div class="caixa-grande" style="min-height:80px"></div></div>
-</div>
-<div class="cheer"><p>🏛️ Você é um verdadeiro historiador! Continue aprendendo!</p></div>
-</div>`;
+<p class="instrucao" style="margin-top:10px"><b>3. ANTES E AGORA:</b></p>
+<div class="grid2"><div class="celula"><b style="color:#C2185B">⏮️ ANTES</b><div class="caixa-grande" style="min-height:65px"></div></div><div class="celula"><b style="color:#C2185B">⏭️ AGORA</b><div class="caixa-grande" style="min-height:65px"></div></div></div>
+<div class="cheer"><p>🏛️ Você é um verdadeiro historiador!</p></div>`,
 
-  if(tpl===1) return `<div class="page">
-${lh(a)}
-<div class="act-title">🏛️ Família e Memória — ${T}</div>
+    `${lha}<div class="act-title">🏛️ Minha Família — ${T}</div>
 <p class="instrucao"><b>1. COMPLETE</b> a árvore genealógica:</p>
 <div class="destaque" style="text-align:center;font-size:13px">
-  <div style="margin-bottom:8px">
-    🧓 Avô: _______________ &nbsp;&nbsp;&nbsp; 👵 Avó: _______________
-  </div>
-  <div style="margin-bottom:8px">
-    👨 Pai: _______________ &nbsp;&nbsp;&nbsp; 👩 Mãe: _______________
-  </div>
-  <div>
-    👤 EU: _______________ &nbsp;&nbsp;&nbsp; 👫 Irmão/Irmã: _______________
-  </div>
+  🧓 Avô: _______________ &nbsp;&nbsp; 👵 Avó: _______________<br><br>
+  👨 Pai/Responsável: _______________ &nbsp;&nbsp; 👩 Mãe/Responsável: _______________<br><br>
+  👤 EU: _______________ &nbsp;&nbsp; 👫 Irmão/Irmã: _______________
 </div>
-<p class="instrucao" style="margin-top:14px"><b>2. RESPONDA:</b></p>
-<div class="box-resp">O nome do meu pai/responsável é: ___________________________</div>
-<div class="box-resp" style="margin-top:6px">Uma coisa que aprendi com minha família: ___________________________</div>
-<div class="box-resp" style="margin-top:6px">Uma tradição da minha família é: ___________________________</div>
-<p class="instrucao" style="margin-top:14px"><b>3. DESENHE</b> sua família:</p>
-<div class="caixa-grande" style="min-height:100px"></div>
-<div class="cheer"><p>💖 Família é nossa maior história! Você é especial!</p></div>
-</div>`;
+<p class="instrucao" style="margin-top:12px"><b>2. RESPONDA:</b></p>
+<div class="box-resp">Uma coisa que aprendi com minha família: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Uma tradição da minha família: ___________________________</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> sua família:</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<div class="cheer"><p>💖 Família é nossa maior história!</p></div>`,
 
-  return `<div class="page">
-${lh(a)}
-<div class="act-title">🏛️ Símbolos do Brasil — ${T}</div>
+    `${lha}<div class="act-title">🏛️ Símbolos do Brasil — ${T}</div>
 <p class="instrucao"><b>1. LIGUE</b> o símbolo ao seu significado:</p>
 <table class="ligar-table">
-  <tr><td class="ligar-esq">🟢🟡 Bandeira</td><td class="ligar-meio">···</td><td class="ligar-dir">Toca em eventos importantes do país</td></tr>
-  <tr><td class="ligar-esq">🦅 Armas Nacionais</td><td class="ligar-meio">···</td><td class="ligar-dir">Representa o país com suas cores e estrelas</td></tr>
-  <tr><td class="ligar-esq">🎵 Hino Nacional</td><td class="ligar-meio">···</td><td class="ligar-dir">Símbolo oficial com ramos de café e tabaco</td></tr>
+  <tr><td class="ligar-esq">🟢🟡 Bandeira</td><td class="ligar-meio">···</td><td class="ligar-dir">Toca em eventos importantes</td></tr>
+  <tr><td class="ligar-esq">🦅 Armas Nacionais</td><td class="ligar-meio">···</td><td class="ligar-dir">Representa o país</td></tr>
+  <tr><td class="ligar-esq">🎵 Hino Nacional</td><td class="ligar-meio">···</td><td class="ligar-dir">Símbolo com ramos de café</td></tr>
 </table>
-<p class="instrucao" style="margin-top:14px"><b>2. COMPLETE:</b></p>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
 <div class="box-resp">As cores da bandeira do Brasil são: ___________________________</div>
 <div class="box-resp" style="margin-top:6px">O Brasil foi descoberto em: ___________________________</div>
-<div class="box-resp" style="margin-top:6px">Um herói brasileiro que eu conheço: ___________________________</div>
-<p class="instrucao" style="margin-top:14px"><b>3. DESENHE</b> a bandeira do Brasil com as cores certas:</p>
-<div class="caixa-grande" style="min-height:100px"></div>
-<div class="cheer"><p>🇧🇷 Que orgulho do Brasil e de você! Parabéns!</p></div>
-</div>`;
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> a bandeira do Brasil:</p>
+<div class="caixa-grande" style="min-height:90px"></div>
+<div class="cheer"><p>🇧🇷 Que orgulho do Brasil e de você!</p></div>`,
+
+    `${lha}<div class="act-title">🏛️ Festas e Tradições — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> a festa ao seu mês:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🎃 Finados</td><td class="ligar-meio">···</td><td class="ligar-dir">Junho</td></tr>
+  <tr><td class="ligar-esq">🎆 Carnaval</td><td class="ligar-meio">···</td><td class="ligar-dir">Fevereiro/Março</td></tr>
+  <tr><td class="ligar-esq">🎉 Festa Junina</td><td class="ligar-meio">···</td><td class="ligar-dir">Novembro</td></tr>
+  <tr><td class="ligar-esq">🎄 Natal</td><td class="ligar-meio">···</td><td class="ligar-dir">Dezembro</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">Minha festa favorita é: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">O que fazemos nessa festa: ___________________________</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> sua festa favorita:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>🎉 As festas fazem parte da nossa história!</p></div>`,
+
+    `${lha}<div class="act-title">🏛️ Povos do Brasil — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o povo à sua contribuição:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🪶 Indígenas</td><td class="ligar-meio">···</td><td class="ligar-dir">Língua portuguesa e religião</td></tr>
+  <tr><td class="ligar-esq">⚓ Portugueses</td><td class="ligar-meio">···</td><td class="ligar-dir">Conhecimento das florestas</td></tr>
+  <tr><td class="ligar-esq">🌍 Africanos</td><td class="ligar-meio">···</td><td class="ligar-dir">Música, dança e culinária</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="quadro-palavras"><span class="palavra-tag">diversidade</span><span class="palavra-tag">cultura</span><span class="palavra-tag">respeito</span></div>
+<div class="box-resp">O Brasil é um país de grande ___________ cultural.</div>
+<div class="box-resp" style="margin-top:6px">Devemos ter ___________ por todas as culturas.</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> algo da cultura brasileira:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>🌍 O Brasil é rico em história e culturas!</p></div>`,
+
+    `${lha}<div class="act-title">🏛️ Descobrimento do Brasil — ${T}</div>
+<p class="instrucao"><b>1. NUMERE</b> os fatos em ordem:</p>
+<div class="grid2">
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Pedro Álvares Cabral chega ao Brasil</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Os portugueses saem de Portugal</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Os portugueses encontram os indígenas</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">Uma carta é escrita sobre a nova terra</div></div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">O Brasil foi descoberto em: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Quem descobriu o Brasil: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Os primeiros habitantes do Brasil: ___________________________</div>
+<div class="cheer"><p>⚓ Você conhece a história do Brasil!</p></div>`,
+
+    `${lha}<div class="act-title">🏛️ Proclamação da República — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o evento à sua data:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">⚓ Descobrimento do Brasil</td><td class="ligar-meio">···</td><td class="ligar-dir">7 de setembro de 1822</td></tr>
+  <tr><td class="ligar-esq">👑 Independência do Brasil</td><td class="ligar-meio">···</td><td class="ligar-dir">15 de novembro de 1889</td></tr>
+  <tr><td class="ligar-esq">🇧🇷 Proclamação da República</td><td class="ligar-meio">···</td><td class="ligar-dir">22 de abril de 1500</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">O Dia da Independência do Brasil é comemorado em: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Quem proclamou a independência: ___________________________</div>
+<div class="cheer"><p>🎆 Você conhece datas importantes do Brasil!</p></div>`,
+
+    `${lha}<div class="act-title">🏛️ Heróis do Brasil — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o herói ao que ele fez:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">🌹 Zumbi dos Palmares</td><td class="ligar-meio">···</td><td class="ligar-dir">Lutou pela independência do Brasil</td></tr>
+  <tr><td class="ligar-esq">⚔️ Tiradentes</td><td class="ligar-meio">···</td><td class="ligar-dir">Lutou pelos direitos dos escravizados</td></tr>
+  <tr><td class="ligar-esq">💊 Oswaldo Cruz</td><td class="ligar-meio">···</td><td class="ligar-dir">Combateu doenças no Brasil</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. RESPONDA:</b></p>
+<div class="box-resp">Um herói brasileiro que eu admiro: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Por que essa pessoa é importante: ___________________________</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> seu herói favorito:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>⭐ Você também pode ser um herói!</p></div>`,
+
+    `${lha}<div class="act-title">🏛️ Evolução dos Transportes — ${T}</div>
+<p class="instrucao"><b>1. NUMERE</b> os transportes do mais antigo ao mais moderno:</p>
+<div class="grid2">
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">✈️ Avião</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">🚂 Trem a vapor</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">🐎 Cavalo e carroça</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">🚀 Foguete</div></div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. ANTES E AGORA:</b></p>
+<div class="grid2"><div class="celula"><b style="color:#C2185B">⏮️ Antigamente</b><span class="linha"></span><span class="linha"></span></div><div class="celula"><b style="color:#C2185B">⏭️ Hoje</b><span class="linha"></span><span class="linha"></span></div></div>
+<div class="box-resp" style="margin-top:8px">O transporte do futuro será: ___________________________</div>
+<div class="cheer"><p>🚀 O futuro dos transportes é incrível!</p></div>`,
+
+    `${lha}<div class="act-title">🏛️ Evolução da Comunicação — ${T}</div>
+<p class="instrucao"><b>1. NUMERE</b> do mais antigo ao mais moderno:</p>
+<div class="grid2">
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">📱 Smartphone</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">📜 Carta escrita à mão</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">☎️ Telefone fixo</div></div>
+  <div class="seq-item"><div class="seq-num">( )</div><div style="font-size:13px;font-weight:700">📺 Televisão</div></div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">Antes da internet as pessoas se comunicavam por: ___________________________</div>
+<div class="box-resp" style="margin-top:6px">Hoje me comunico principalmente usando: ___________________________</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> a comunicação do futuro:</p>
+<div class="caixa-grande" style="min-height:85px"></div>
+<div class="cheer"><p>📡 A comunicação sempre vai evoluir!</p></div>`
+  ];
+
+  return `<div class="page">${ts[tpl]}</div>`;
 }
 
 function buildIngles(tema, a){
   const T = cap(tema);
-  const tpl = nextTpl('ing',2);
-  if(tpl===0){ // Números e cores
-    const nums = [{n:1,w:'ONE'},{n:2,w:'TWO'},{n:3,w:'THREE'},{n:4,w:'FOUR'},{n:5,w:'FIVE'},{n:6,w:'SIX'},{n:7,w:'SEVEN'},{n:8,w:'EIGHT'},{n:9,w:'NINE'},{n:10,w:'TEN'}];
-    const cores = [{pt:'Vermelho',en:'RED',hex:'#E53935'},{pt:'Azul',en:'BLUE',hex:'#1E88E5'},{pt:'Amarelo',en:'YELLOW',hex:'#FDD835'},{pt:'Verde',en:'GREEN',hex:'#43A047'},{pt:'Rosa',en:'PINK',hex:'#E91E63'},{pt:'Laranja',en:'ORANGE',hex:'#FB8C00'}];
-    return `<div class="page">
-${lh(a)}
-<div class="act-title">🇬🇧 Língua Inglesa — ${T}</div>
-<p class="instrucao"><b>1. LIGUE</b> o número ao seu nome em inglês:</p>
+  const tpl = nextTpl('ing',10);
+  const lha = lh(a);
+  const nums = [{n:1,w:'ONE'},{n:2,w:'TWO'},{n:3,w:'THREE'},{n:4,w:'FOUR'},{n:5,w:'FIVE'},
+                {n:6,w:'SIX'},{n:7,w:'SEVEN'},{n:8,w:'EIGHT'},{n:9,w:'NINE'},{n:10,w:'TEN'}];
+  const coresEn = [{pt:'Vermelho',en:'RED',hex:'#E53935'},{pt:'Azul',en:'BLUE',hex:'#1E88E5'},
+    {pt:'Amarelo',en:'YELLOW',hex:'#FDD835'},{pt:'Verde',en:'GREEN',hex:'#43A047'},
+    {pt:'Rosa',en:'PINK',hex:'#E91E63'},{pt:'Laranja',en:'ORANGE',hex:'#FB8C00'}];
+
+  const ts = [
+    `${lha}<div class="act-title">🇬🇧 Numbers — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o número ao nome em inglês:</p>
 <div class="grid2">
-  <div>
-    ${nums.slice(0,5).map(n=>`<div style="display:flex;align-items:center;gap:12px;margin:6px 0;font-size:14px;font-weight:700"><div style="width:36px;height:36px;border:2px solid #F48FB1;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#FFF0F5;font-size:16px;font-weight:800">${n.n}</div><span class="pontilhado" style="flex:1"></span><span style="color:#C2185B">${n.w}</span></div>`).join('')}
-  </div>
-  <div>
-    ${nums.slice(5).map(n=>`<div style="display:flex;align-items:center;gap:12px;margin:6px 0;font-size:14px;font-weight:700"><div style="width:36px;height:36px;border:2px solid #F48FB1;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#FFF0F5;font-size:16px;font-weight:800">${n.n}</div><span class="pontilhado" style="flex:1"></span><span style="color:#C2185B">${n.w}</span></div>`).join('')}
-  </div>
+  <div>${nums.slice(0,5).map(n=>`<div style="display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px;font-weight:700"><div style="width:32px;height:32px;border:2px solid #F48FB1;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#FFF0F5;font-weight:800">${n.n}</div><span style="flex:1;border-bottom:2px dotted #F48FB1"></span><span style="color:#C2185B">${n.w}</span></div>`).join('')}</div>
+  <div>${nums.slice(5).map(n=>`<div style="display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px;font-weight:700"><div style="width:32px;height:32px;border:2px solid #F48FB1;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#FFF0F5;font-weight:800">${n.n}</div><span style="flex:1;border-bottom:2px dotted #F48FB1"></span><span style="color:#C2185B">${n.w}</span></div>`).join('')}</div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>2. ESCREVA</b> o nome da cor em inglês:</p>
+<p class="instrucao" style="margin-top:12px"><b>2. WRITE</b> the color name in English:</p>
+<div class="grid3">${coresEn.map(c=>`<div class="celula"><div style="width:42px;height:42px;background:${c.hex};border-radius:8px;margin:0 auto 5px;border:2px solid #ddd"></div><div class="nome">${c.pt}</div><span class="linha"></span></div>`).join('')}</div>
+<div class="cheer"><p>🇬🇧 Fantastic! You are learning very well!</p></div>`,
+
+    `${lha}<div class="act-title">🇬🇧 Animals — ${T}</div>
+<p class="instrucao"><b>1. WRITE</b> the animal name in English:</p>
+<div class="quadro-palavras"><span class="palavra-tag">DOG</span><span class="palavra-tag">CAT</span><span class="palavra-tag">BIRD</span><span class="palavra-tag">FISH</span><span class="palavra-tag">LION</span><span class="palavra-tag">ELEPHANT</span></div>
 <div class="grid3">
-  ${cores.map(c=>`<div class="celula"><div style="width:50px;height:50px;background:${c.hex};border-radius:8px;margin:0 auto 6px;border:2px solid #ddd"></div><div class="nome">${c.pt}</div><span class="linha"></span></div>`).join('')}
+  <div class="celula"><div style="font-size:32px">🐶</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🐱</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🐦</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🐟</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🦁</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🐘</div><span class="linha"></span></div>
 </div>
-<p class="instrucao" style="margin-top:14px"><b>3. COMPLETE</b> as somas em inglês:</p>
-<div class="grid2">
-  <div class="celula" style="font-size:14px;font-weight:800">2 (TWO) + 3 (THREE) = <span style="color:#C2185B">_______</span></div>
-  <div class="celula" style="font-size:14px;font-weight:800">4 (FOUR) + 1 (ONE) = <span style="color:#C2185B">_______</span></div>
-</div>
-<div class="cheer"><p>🇬🇧 Fantastic! You are learning English very well!</p></div>
-</div>`;
-  }
-  // tpl===1: Vocabulário temático
-  const itens = [
-    {emoji:'🐶',en:'DOG',pt:'Cachorro'},{emoji:'🐱',en:'CAT',pt:'Gato'},
-    {emoji:'🐦',en:'BIRD',pt:'Pássaro'},{emoji:'🐟',en:'FISH',pt:'Peixe'},
-    {emoji:'🐘',en:'ELEPHANT',pt:'Elefante'},{emoji:'🦁',en:'LION',pt:'Leão'}
-  ];
-  return `<div class="page">
-${lh(a)}
-<div class="act-title">🇬🇧 Inglês — Animals: ${T}</div>
-<p class="instrucao"><b>1. LIGUE</b> o animal ao seu nome em inglês:</p>
-<table class="ligar-table">
-  ${itens.slice(0,3).map(i=>`<tr><td class="ligar-esq">${i.emoji} ${i.pt}</td><td class="ligar-meio">···</td><td class="ligar-dir">${i.en}</td></tr>`).join('')}
-</table>
-<p class="instrucao" style="margin-top:12px"><b>2. ESCOLHA</b> a alternativa correta para nomear cada animal:</p>
-<div class="grid3">
-  ${itens.slice(3).map(i=>`<div class="celula"><div style="font-size:36px">${i.emoji}</div>${['CAT','DOG','FISH','BIRD','ELEPHANT','LION'].sort(()=>Math.random()-.5).slice(0,3).map((op,idx)=>`<div class="multipla">( ) ${op}</div>`).join('')}</div>`).join('')}
-</div>
-<p class="instrucao" style="margin-top:14px"><b>3. COMPLETE</b> as frases em inglês usando o banco de palavras:</p>
-<div class="quadro-palavras">
-  ${['dog','cat','bird','fish'].map(w=>`<span class="palavra-tag">${w}</span>`).join('')}
-</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE</b> the sentences:</p>
 <div class="box-resp">The ___________ can fly. 🐦</div>
-<div class="box-resp" style="margin-top:6px">I have a ___________ at home. 🐱</div>
-<p class="instrucao" style="margin-top:12px"><b>4. DESENHE</b> seu animal favorito e escreva o nome em inglês:</p>
-<div class="caixa-grande" style="min-height:90px"></div>
-<p class="instrucao">Name in English: ___________________________</p>
-<div class="cheer"><p>🇬🇧 Well done! You are amazing! 🌟</p></div>
-</div>`;
+<div class="box-resp" style="margin-top:6px">The ___________ is the king of the jungle. 🦁</div>
+<div class="cheer"><p>🐾 Well done! You know many animals!</p></div>`,
+
+    `${lha}<div class="act-title">🇬🇧 Fruits — ${T}</div>
+<p class="instrucao"><b>1. WRITE</b> the fruit name in English:</p>
+<div class="quadro-palavras"><span class="palavra-tag">APPLE</span><span class="palavra-tag">BANANA</span><span class="palavra-tag">ORANGE</span><span class="palavra-tag">GRAPE</span><span class="palavra-tag">MANGO</span><span class="palavra-tag">WATERMELON</span></div>
+<div class="grid3">
+  <div class="celula"><div style="font-size:32px">🍎</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🍌</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🍊</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🍇</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🥭</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🍉</div><span class="linha"></span></div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. CIRCLE</b> the correct answer:</p>
+<div class="destaque" style="font-size:13px">🍎 = ( APPLE / ORANGE ) &nbsp;&nbsp; 🍌 = ( GRAPE / BANANA ) &nbsp;&nbsp; 🍇 = ( GRAPE / MANGO )</div>
+<div class="cheer"><p>🍎 Excellent! Fruits are yummy and healthy!</p></div>`,
+
+    `${lha}<div class="act-title">🇬🇧 Body Parts — ${T}</div>
+<p class="instrucao"><b>1. WRITE</b> the body part in English:</p>
+<div class="quadro-palavras"><span class="palavra-tag">HEAD</span><span class="palavra-tag">HAND</span><span class="palavra-tag">EYE</span><span class="palavra-tag">NOSE</span><span class="palavra-tag">MOUTH</span><span class="palavra-tag">EAR</span></div>
+<div class="grid2">
+  <div class="celula">Cabeça = ___________</div>
+  <div class="celula">Mão = ___________</div>
+  <div class="celula">Olho = ___________</div>
+  <div class="celula">Nariz = ___________</div>
+  <div class="celula">Boca = ___________</div>
+  <div class="celula">Orelha = ___________</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">I see with my ___________. 👁️</div>
+<div class="box-resp" style="margin-top:6px">I hear with my ___________. 👂</div>
+<div class="cheer"><p>👏 Amazing! You know your body in English!</p></div>`,
+
+    `${lha}<div class="act-title">🇬🇧 Days of the Week — ${T}</div>
+<p class="instrucao"><b>1. PUT</b> the days in the correct order (1-7):</p>
+<div class="destaque" style="display:flex;flex-wrap:wrap;gap:7px;justify-content:center">
+  ${['Wednesday','Friday','Monday','Sunday','Tuesday','Saturday','Thursday'].map(d=>`<div style="border:2px solid #F48FB1;border-radius:7px;padding:5px 10px;font-size:12px;font-weight:800;background:#FFF0F5">___ ${d}</div>`).join('')}
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">Today is ___________________________.</div>
+<div class="box-resp" style="margin-top:6px">Yesterday was ___________________________.</div>
+<div class="box-resp" style="margin-top:6px">My favorite day is ___________ because ___________________________.</div>
+<div class="cheer"><p>📅 Super! You know all the days of the week!</p></div>`,
+
+    `${lha}<div class="act-title">🇬🇧 Greetings — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o cumprimento ao momento certo:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">☀️ Good morning</td><td class="ligar-meio">···</td><td class="ligar-dir">À noite</td></tr>
+  <tr><td class="ligar-esq">🌤️ Good afternoon</td><td class="ligar-meio">···</td><td class="ligar-dir">De manhã</td></tr>
+  <tr><td class="ligar-esq">🌙 Good night</td><td class="ligar-meio">···</td><td class="ligar-dir">À tarde</td></tr>
+  <tr><td class="ligar-esq">👋 Hello / Hi</td><td class="ligar-meio">···</td><td class="ligar-dir">Qualquer hora</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE</b> the dialogue:</p>
+<div class="destaque" style="font-size:13px;line-height:2">
+  A: Good morning! How are you?<br>
+  B: I'm ___________, thank you! And you?<br>
+  A: I'm ___________, thanks!
+</div>
+<div class="box-resp" style="margin-top:8px">Meu cumprimento favorito: ___________________________</div>
+<div class="cheer"><p>👋 Hello, superstar! You are amazing!</p></div>`,
+
+    `${lha}<div class="act-title">🇬🇧 School Objects — ${T}</div>
+<p class="instrucao"><b>1. WRITE</b> the school object name in English:</p>
+<div class="quadro-palavras"><span class="palavra-tag">BOOK</span><span class="palavra-tag">PEN</span><span class="palavra-tag">PENCIL</span><span class="palavra-tag">RULER</span><span class="palavra-tag">ERASER</span><span class="palavra-tag">BACKPACK</span></div>
+<div class="grid3">
+  <div class="celula"><div style="font-size:32px">📚</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🖊️</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">✏️</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">📏</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">📐</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🎒</div><span class="linha"></span></div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">I write with a ___________.</div>
+<div class="box-resp" style="margin-top:6px">I carry my books in a ___________.</div>
+<div class="cheer"><p>🎒 Great job! Your classroom in English!</p></div>`,
+
+    `${lha}<div class="act-title">🇬🇧 Family Members — ${T}</div>
+<p class="instrucao"><b>1. WRITE</b> the family member name in English:</p>
+<div class="quadro-palavras"><span class="palavra-tag">MOTHER</span><span class="palavra-tag">FATHER</span><span class="palavra-tag">BROTHER</span><span class="palavra-tag">SISTER</span><span class="palavra-tag">GRANDMOTHER</span><span class="palavra-tag">GRANDFATHER</span></div>
+<div class="grid2">
+  <div class="celula">Mãe = ___________</div>
+  <div class="celula">Pai = ___________</div>
+  <div class="celula">Irmão = ___________</div>
+  <div class="celula">Irmã = ___________</div>
+  <div class="celula">Avó = ___________</div>
+  <div class="celula">Avô = ___________</div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">My ___________ name is ___________________________. (mother/father)</div>
+<div class="box-resp" style="margin-top:6px">I have ___________ brothers and ___________ sisters.</div>
+<div class="cheer"><p>👨‍👩‍👧 Your family in English!</p></div>`,
+
+    `${lha}<div class="act-title">🇬🇧 Food and Drinks — ${T}</div>
+<p class="instrucao"><b>1. WRITE</b> the food or drink name in English:</p>
+<div class="quadro-palavras"><span class="palavra-tag">WATER</span><span class="palavra-tag">MILK</span><span class="palavra-tag">BREAD</span><span class="palavra-tag">RICE</span><span class="palavra-tag">CAKE</span><span class="palavra-tag">JUICE</span></div>
+<div class="grid3">
+  <div class="celula"><div style="font-size:32px">💧</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🥛</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🍞</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🍚</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🎂</div><span class="linha"></span></div>
+  <div class="celula"><div style="font-size:32px">🧃</div><span class="linha"></span></div>
+</div>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">I drink ___________ every day. 💧</div>
+<div class="box-resp" style="margin-top:6px">My favorite food is ___________________________.</div>
+<div class="cheer"><p>🍎 Yummy! You know food in English!</p></div>`,
+
+    `${lha}<div class="act-title">🇬🇧 Weather and Seasons — ${T}</div>
+<p class="instrucao"><b>1. LIGUE</b> o tempo ao seu nome em inglês:</p>
+<table class="ligar-table">
+  <tr><td class="ligar-esq">☀️ Ensolarado</td><td class="ligar-meio">···</td><td class="ligar-dir">RAINY</td></tr>
+  <tr><td class="ligar-esq">🌧️ Chuvoso</td><td class="ligar-meio">···</td><td class="ligar-dir">SUNNY</td></tr>
+  <tr><td class="ligar-esq">❄️ Nevando</td><td class="ligar-meio">···</td><td class="ligar-dir">WINDY</td></tr>
+  <tr><td class="ligar-esq">💨 Ventoso</td><td class="ligar-meio">···</td><td class="ligar-dir">SNOWY</td></tr>
+</table>
+<p class="instrucao" style="margin-top:12px"><b>2. COMPLETE:</b></p>
+<div class="box-resp">Today the weather is ___________________________.</div>
+<div class="box-resp" style="margin-top:6px">My favorite season is ___________ because ___________________________.</div>
+<p class="instrucao" style="margin-top:10px"><b>3. DESENHE</b> o tempo que mais gosta:</p>
+<div class="caixa-grande" style="min-height:80px"></div>
+<div class="cheer"><p>🌤️ You are a weather expert!</p></div>`
+  ];
+
+  return `<div class="page">${ts[tpl]}</div>`;
 }
 
-/* ══ DISPATCH ══ */
+
 function buildPages(a){
   switch(a.disc){
     case 'matematica': return buildMatematica(a.theme, a);
